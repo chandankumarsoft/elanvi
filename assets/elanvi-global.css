@@ -1,0 +1,1039 @@
+﻿/* =================================================================
+   ELANVI GLOBAL COLOR + STYLE OVERRIDES
+   Applies Elanvi brand palette to all Shopify Horizon pages:
+   homepage, collections, product detail, cart, search, blog, etc.
+   ================================================================= */
+
+/* ---------------------------------------------------------------
+   SCHEME-1 (default / main)  — Warm Cream
+   --------------------------------------------------------------- */
+:root,
+.color-scheme-1 {
+  --color-background: #fdf9f8;
+  --color-background-rgb: 253, 249, 248;
+
+  --color-foreground: #23201b;
+  --color-foreground-rgb: 35, 32, 27;
+
+  --color-foreground-heading: #23201b;
+  --color-foreground-heading-rgb: 35, 32, 27;
+
+  --color-primary: #c89d6c;
+  --color-primary-rgb: 200, 157, 108;
+
+  --color-primary-hover: #b08857;
+  --color-primary-hover-rgb: 176, 136, 87;
+
+  --color-border: #D8D0C5;
+  --color-border-rgb: 228, 222, 213;
+
+  --color-shadow: #23201b;
+  --color-shadow-rgb: 35, 32, 27;
+
+  /* Primary Button — Brand Bronze */
+  --color-primary-button-background: #c89d6c;
+  --color-primary-button-text: #faf3ed;
+  --color-primary-button-border: #c89d6c;
+  --color-primary-button-hover-background: #b08857;
+  --color-primary-button-hover-text: #faf3ed;
+  --color-primary-button-hover-border: #b08857;
+
+  /* Secondary Button — Bronze outline */
+  --color-secondary-button-background: rgba(0, 0, 0, 0);
+  --color-secondary-button-text: #c89d6c;
+  --color-secondary-button-border: #c89d6c;
+  --color-secondary-button-hover-background: rgba(200, 157, 108, 0.08);
+  --color-secondary-button-hover-text: #b08857;
+  --color-secondary-button-hover-border: #b08857;
+
+  /* Inputs */
+  --color-input-background: #FFFFFF;
+  --color-input-text: #26201A;
+  --color-input-text-rgb: 38, 32, 26;
+  --color-input-border: #D8D0C5;
+  --color-input-hover-background: #F5F2EC;
+
+  /* Variant swatches / size selectors */
+  --color-variant-background: #FFFFFF;
+  --color-variant-text: #26201A;
+  --color-variant-text-rgb: 38, 32, 26;
+  --color-variant-border: #D8D0C5;
+  --color-variant-hover-background: #F5F2EC;
+  --color-variant-hover-text: #26201A;
+  --color-variant-hover-border: #A87840;
+  --color-selected-variant-background: #A87840;
+  --color-selected-variant-text: #FFFFFF;
+  --color-selected-variant-border: #A87840;
+  --color-selected-variant-hover-background: #8A6030;
+  --color-selected-variant-hover-text: #FFFFFF;
+  --color-selected-variant-hover-border: #8A6030;
+
+  /* Font — set via Horizon's variable chain so line-heights stay intact */
+  --font-heading--family: 'Times New Roman', 'Georgia', serif;
+  --font-heading--style: normal;
+
+  /* Button shape — use Horizon's own vars to avoid overriding structural UI buttons */
+  --style-border-radius-buttons-primary: 4px;
+  --style-border-radius-buttons-secondary: 4px;
+}
+
+/* ---------------------------------------------------------------
+   SCHEME-2 — Warm Light (slightly deeper cream)
+   --------------------------------------------------------------- */
+.color-scheme-2 {
+  --color-background: #ebe6e1;
+  --color-background-rgb: 235, 230, 225;
+
+  --color-foreground: #23201b;
+  --color-foreground-rgb: 35, 32, 27;
+
+  --color-foreground-heading: #23201b;
+  --color-foreground-heading-rgb: 35, 32, 27;
+
+  --color-primary: #c89d6c;
+  --color-primary-rgb: 200, 157, 108;
+
+  --color-primary-hover: #b08857;
+  --color-primary-hover-rgb: 176, 136, 87;
+
+  --color-border: #CFC8BA;
+  --color-border-rgb: 217, 210, 200;
+
+  --color-shadow: #23201b;
+  --color-shadow-rgb: 35, 32, 27;
+
+  --color-primary-button-background: #c89d6c;
+  --color-primary-button-text: #faf3ed;
+  --color-primary-button-border: #c89d6c;
+  --color-primary-button-hover-background: #b08857;
+  --color-primary-button-hover-text: #faf3ed;
+  --color-primary-button-hover-border: #b08857;
+
+  --color-secondary-button-background: rgba(0, 0, 0, 0);
+  --color-secondary-button-text: #c89d6c;
+  --color-secondary-button-border: #c89d6c;
+  --color-secondary-button-hover-background: rgba(200, 157, 108, 0.08);
+  --color-secondary-button-hover-text: #b08857;
+  --color-secondary-button-hover-border: #b08857;
+
+  --color-input-background: #FFFFFF;
+  --color-input-text: #26201A;
+  --color-input-text-rgb: 38, 32, 26;
+  --color-input-border: #CFC8BA;
+  --color-input-hover-background: #EDE8DF;
+
+  --color-variant-background: #FFFFFF;
+  --color-variant-text: #26201A;
+  --color-variant-text-rgb: 38, 32, 26;
+  --color-variant-border: #CFC8BA;
+  --color-variant-hover-background: #EDE8DF;
+  --color-variant-hover-text: #26201A;
+  --color-variant-hover-border: #A87840;
+  --color-selected-variant-background: #A87840;
+  --color-selected-variant-text: #FFFFFF;
+  --color-selected-variant-border: #A87840;
+  --color-selected-variant-hover-background: #8A6030;
+  --color-selected-variant-hover-text: #FFFFFF;
+  --color-selected-variant-hover-border: #8A6030;
+}
+
+/* ---------------------------------------------------------------
+   SCHEME-3 — Cream Card  (#E3DDD5)
+   --------------------------------------------------------------- */
+.color-scheme-3 {
+  --color-background: #fdf9f8;
+  --color-background-rgb: 253, 249, 248;
+
+  --color-foreground: #23201b;
+  --color-foreground-rgb: 35, 32, 27;
+
+  --color-foreground-heading: #23201b;
+  --color-foreground-heading-rgb: 35, 32, 27;
+
+  --color-primary: #c89d6c;
+  --color-primary-rgb: 200, 157, 108;
+
+  --color-primary-hover: #b08857;
+  --color-primary-hover-rgb: 176, 136, 87;
+
+  --color-border: #C9C0B2;
+  --color-border-rgb: 212, 204, 194;
+
+  --color-shadow: #23201b;
+  --color-shadow-rgb: 35, 32, 27;
+
+  --color-primary-button-background: #c89d6c;
+  --color-primary-button-text: #faf3ed;
+  --color-primary-button-border: #c89d6c;
+  --color-primary-button-hover-background: #b08857;
+  --color-primary-button-hover-text: #faf3ed;
+  --color-primary-button-hover-border: #b08857;
+
+  --color-secondary-button-background: rgba(0, 0, 0, 0);
+  --color-secondary-button-text: #c89d6c;
+  --color-secondary-button-border: #c89d6c;
+  --color-secondary-button-hover-background: rgba(200, 157, 108, 0.08);
+  --color-secondary-button-hover-text: #b08857;
+  --color-secondary-button-hover-border: #b08857;
+
+  --color-input-background: #fdf9f8;
+  --color-input-text: #23201b;
+  --color-input-text-rgb: 38, 32, 26;
+  --color-input-border: #C9C0B2;
+  --color-input-hover-background: #F5F2EC;
+
+  --color-variant-background: #EDE8DF;
+  --color-variant-text: #26201A;
+  --color-variant-text-rgb: 38, 32, 26;
+  --color-variant-border: #C9C0B2;
+  --color-variant-hover-background: #FFFFFF;
+  --color-variant-hover-text: #26201A;
+  --color-variant-hover-border: #A87840;
+  --color-selected-variant-background: #A87840;
+  --color-selected-variant-text: #FFFFFF;
+  --color-selected-variant-border: #A87840;
+  --color-selected-variant-hover-background: #8A6030;
+  --color-selected-variant-hover-text: #FFFFFF;
+  --color-selected-variant-hover-border: #8A6030;
+}
+
+/* ---------------------------------------------------------------
+   SCHEME-4 — Parchment White (#F5F2EC)
+   --------------------------------------------------------------- */
+.color-scheme-4 {
+  --color-background: #fefefb;
+  --color-background-rgb: 254, 254, 251;
+
+  --color-foreground: #23201b;
+  --color-foreground-rgb: 35, 32, 27;
+
+  --color-foreground-heading: #23201b;
+  --color-foreground-heading-rgb: 35, 32, 27;
+
+  --color-primary: #c89d6c;
+  --color-primary-rgb: 200, 157, 108;
+
+  --color-primary-hover: #b08857;
+  --color-primary-hover-rgb: 176, 136, 87;
+
+  --color-border: #D8D0C5;
+  --color-border-rgb: 228, 222, 213;
+
+  --color-shadow: #23201b;
+  --color-shadow-rgb: 35, 32, 27;
+
+  --color-primary-button-background: #c89d6c;
+  --color-primary-button-text: #faf3ed;
+  --color-primary-button-border: #c89d6c;
+  --color-primary-button-hover-background: #b08857;
+  --color-primary-button-hover-text: #faf3ed;
+  --color-primary-button-hover-border: #b08857;
+
+  --color-secondary-button-background: rgba(0, 0, 0, 0);
+  --color-secondary-button-text: #c89d6c;
+  --color-secondary-button-border: #c89d6c;
+  --color-secondary-button-hover-background: rgba(200, 157, 108, 0.08);
+  --color-secondary-button-hover-text: #b08857;
+  --color-secondary-button-hover-border: #b08857;
+
+  --color-input-background: #FFFFFF;
+  --color-input-text: #26201A;
+  --color-input-text-rgb: 38, 32, 26;
+  --color-input-border: #D8D0C5;
+  --color-input-hover-background: #EDE8DF;
+
+  --color-variant-background: #FFFFFF;
+  --color-variant-text: #26201A;
+  --color-variant-text-rgb: 38, 32, 26;
+  --color-variant-border: #D8D0C5;
+  --color-variant-hover-background: #EDE8DF;
+  --color-variant-hover-text: #26201A;
+  --color-variant-hover-border: #A87840;
+  --color-selected-variant-background: #A87840;
+  --color-selected-variant-text: #FFFFFF;
+  --color-selected-variant-border: #A87840;
+  --color-selected-variant-hover-background: #8A6030;
+  --color-selected-variant-hover-text: #FFFFFF;
+  --color-selected-variant-hover-border: #8A6030;
+}
+
+/* ---------------------------------------------------------------
+   SCHEME-5 — Dark / Rich Brown  (#26201A)
+   --------------------------------------------------------------- */
+.color-scheme-5 {
+  --color-background: #26201A;
+  --color-background-rgb: 38, 32, 26;
+
+  --color-foreground: #EDE8DF;
+  --color-foreground-rgb: 237, 232, 223;
+
+  --color-foreground-heading: #FFFFFF;
+  --color-foreground-heading-rgb: 255, 255, 255;
+
+  --color-primary: #A87840;
+  --color-primary-rgb: 168, 120, 64;
+
+  --color-primary-hover: #C49050;
+  --color-primary-hover-rgb: 196, 144, 80;
+
+  --color-border: rgba(237, 232, 223, 0.18);
+  --color-border-rgb: 237, 232, 223;
+
+  --color-shadow: #000000;
+  --color-shadow-rgb: 0, 0, 0;
+
+  --color-primary-button-background: #A87840;
+  --color-primary-button-text: #FFFFFF;
+  --color-primary-button-border: #A87840;
+  --color-primary-button-hover-background: #C49050;
+  --color-primary-button-hover-text: #FFFFFF;
+  --color-primary-button-hover-border: #C49050;
+
+  --color-secondary-button-background: rgba(0, 0, 0, 0);
+  --color-secondary-button-text: #C49050;
+  --color-secondary-button-border: #C49050;
+  --color-secondary-button-hover-background: rgba(168, 120, 64, 0.15);
+  --color-secondary-button-hover-text: #FFFFFF;
+  --color-secondary-button-hover-border: #C49050;
+
+  --color-input-background: rgba(237, 232, 223, 0.08);
+  --color-input-text: #EDE8DF;
+  --color-input-text-rgb: 237, 232, 223;
+  --color-input-border: rgba(237, 232, 223, 0.25);
+  --color-input-hover-background: rgba(237, 232, 223, 0.12);
+
+  --color-variant-background: rgba(237, 232, 223, 0.08);
+  --color-variant-text: #EDE8DF;
+  --color-variant-text-rgb: 237, 232, 223;
+  --color-variant-border: rgba(237, 232, 223, 0.2);
+  --color-variant-hover-background: rgba(237, 232, 223, 0.14);
+  --color-variant-hover-text: #FFFFFF;
+  --color-variant-hover-border: #A87840;
+  --color-selected-variant-background: #A87840;
+  --color-selected-variant-text: #FFFFFF;
+  --color-selected-variant-border: #A87840;
+  --color-selected-variant-hover-background: #C49050;
+  --color-selected-variant-hover-text: #FFFFFF;
+  --color-selected-variant-hover-border: #C49050;
+}
+
+/* ---------------------------------------------------------------
+   SCHEME-6 — Transparent / Overlay (used for some header/banner areas)
+   --------------------------------------------------------------- */
+.color-scheme-6 {
+  --color-background: transparent;
+
+  --color-foreground: #26201A;
+  --color-foreground-rgb: 38, 32, 26;
+
+  --color-foreground-heading: #26201A;
+  --color-foreground-heading-rgb: 38, 32, 26;
+
+  --color-primary: #A87840;
+  --color-primary-rgb: 168, 120, 64;
+
+  --color-primary-hover: #8A6030;
+  --color-primary-hover-rgb: 138, 96, 48;
+
+  --color-border: #D8D0C5;
+  --color-border-rgb: 228, 222, 213;
+
+  --color-shadow: #26201A;
+  --color-shadow-rgb: 38, 32, 26;
+
+  --color-primary-button-background: #A87840;
+  --color-primary-button-text: #FFFFFF;
+  --color-primary-button-border: #A87840;
+  --color-primary-button-hover-background: #8A6030;
+  --color-primary-button-hover-text: #FFFFFF;
+  --color-primary-button-hover-border: #8A6030;
+
+  --color-secondary-button-background: rgba(0, 0, 0, 0);
+  --color-secondary-button-text: #A87840;
+  --color-secondary-button-border: #A87840;
+  --color-secondary-button-hover-background: rgba(168, 120, 64, 0.08);
+  --color-secondary-button-hover-text: #8A6030;
+  --color-secondary-button-hover-border: #8A6030;
+
+  --color-input-background: #FFFFFF;
+  --color-input-text: #26201A;
+  --color-input-text-rgb: 38, 32, 26;
+  --color-input-border: #D8D0C5;
+  --color-input-hover-background: #F5F2EC;
+
+  --color-variant-background: #FFFFFF;
+  --color-variant-text: #26201A;
+  --color-variant-text-rgb: 38, 32, 26;
+  --color-variant-border: #D8D0C5;
+  --color-variant-hover-background: #F5F2EC;
+  --color-variant-hover-text: #26201A;
+  --color-variant-hover-border: #A87840;
+  --color-selected-variant-background: #A87840;
+  --color-selected-variant-text: #FFFFFF;
+  --color-selected-variant-border: #A87840;
+  --color-selected-variant-hover-background: #8A6030;
+  --color-selected-variant-hover-text: #FFFFFF;
+  --color-selected-variant-hover-border: #8A6030;
+}
+
+/* ---------------------------------------------------------------
+   BODY + BASE  — ensure Elanvi palette applies globally
+   --------------------------------------------------------------- */
+body {
+  background-color: #EDE8DF;
+  color: #3A3428;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------------------------------------------------------------
+   LINKS — use Elanvi gold for accent links
+   --------------------------------------------------------------- */
+a:not([class]) {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+a:not([class]):hover {
+  color: #A87840;
+}
+
+/* ---------------------------------------------------------------
+   PRICE + BADGE ACCENTS
+   --------------------------------------------------------------- */
+.price__current,
+.price-item--regular,
+.price-item--sale {
+  color: #26201A;
+}
+
+.price-item--sale {
+  color: #A87840;
+}
+
+.badge {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: 9999px;
+}
+
+/* ---------------------------------------------------------------
+   PRODUCT CARDS
+   --------------------------------------------------------------- */
+.product-card,
+.card,
+.card-wrapper {
+  background-color: #FFFFFF;
+  border-color: #D8D0C5;
+}
+
+.card__heading,
+.product-card__title {
+  color: #26201A;
+  font-family: 'Times New Roman', 'Georgia', serif;
+}
+
+/* Add to Cart / Buy buttons on product card */
+.card__button .button,
+.product-form__submit,
+.quick-add__submit {
+  background-color: #A87840 !important;
+  border-color: #A87840 !important;
+  color: #FFFFFF !important;
+  border-radius: 4px !important;
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  transition: background-color 0.2s ease, transform 0.2s ease !important;
+}
+
+.card__button .button:hover,
+.product-form__submit:hover,
+.quick-add__submit:hover {
+  background-color: #8A6030 !important;
+  border-color: #8A6030 !important;
+}
+
+/* ---------------------------------------------------------------
+   COLLECTION PAGE
+   --------------------------------------------------------------- */
+/* Collection banner / hero */
+.collection__banner,
+.collection-hero {
+  background-color: #E8E2D8;
+}
+
+.collection__title,
+.collection-hero__title {
+  color: #26201A;
+  font-family: 'Times New Roman', 'Georgia', serif;
+}
+
+/* Filter / sort bar */
+.facets-wrapper,
+.facets__header,
+.sort-by {
+  background-color: #EDE8DF;
+  border-color: #D8D0C5;
+}
+
+.facets__label,
+.facets__heading {
+  color: #26201A;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.8125rem;
+}
+
+/* Active filter / selected facet pill */
+.facets__pill,
+.active-facets__button {
+  background-color: #A87840;
+  color: #FFFFFF;
+  border-color: #A87840;
+  border-radius: 9999px;
+}
+
+.facets__pill:hover,
+.active-facets__button:hover {
+  background-color: #8A6030;
+  border-color: #8A6030;
+}
+
+/* Remove active facet x-button */
+.active-facets__button-remove svg {
+  fill: #FFFFFF;
+}
+
+/* Pagination */
+.pagination__list a,
+.pagination__list button {
+  color: #3A3428;
+  border-color: #D8D0C5;
+}
+
+.pagination__list a:hover,
+.pagination__list button:hover,
+.pagination__list [aria-current] a {
+  background-color: #A87840;
+  color: #FFFFFF;
+  border-color: #A87840;
+}
+
+/* ---------------------------------------------------------------
+   PRODUCT DETAIL PAGE
+   --------------------------------------------------------------- */
+.product__title {
+  color: #26201A;
+  font-family: 'Times New Roman', 'Georgia', serif;
+}
+
+.product__description,
+.product__text {
+  color: #46403A;
+  line-height: 1.7;
+}
+
+/* Breadcrumbs */
+.breadcrumbs__item,
+.breadcrumbs a {
+  color: #524A42;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.breadcrumbs a:hover {
+  color: #A87840;
+}
+
+.breadcrumbs__separator {
+  color: #A87840;
+}
+
+/* Quantity selector */
+.quantity {
+  border-color: #D8D0C5;
+  background-color: #FFFFFF;
+  border-radius: 9999px;
+}
+
+.quantity__button {
+  color: #26201A;
+}
+.quantity__button:hover {
+  color: #A87840;
+}
+
+.quantity__input {
+  color: #26201A;
+  background: transparent;
+}
+
+/* Variant picker buttons */
+.variant-picker__option-label,
+.product-form__input label {
+  color: #26201A;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Media / gallery */
+.product-media-gallery__item {
+  background-color: #E3DDD5;
+}
+
+/* Thumbnail strip */
+.product-media-gallery__thumbnail {
+  border-color: #D8D0C5;
+  background-color: #EDE8DF;
+}
+
+.product-media-gallery__thumbnail.is-active,
+.product-media-gallery__thumbnail:hover {
+  border-color: #A87840;
+}
+
+/* ---------------------------------------------------------------
+   CART PAGE / DRAWER
+   --------------------------------------------------------------- */
+.cart__title,
+.cart-drawer__title {
+  color: #26201A;
+  font-family: 'Times New Roman', 'Georgia', serif;
+}
+
+.cart__item,
+.cart-item {
+  border-color: #D8D0C5;
+}
+
+.cart__item-name,
+.cart-item__name {
+  color: #26201A;
+  font-family: 'Times New Roman', 'Georgia', serif;
+}
+
+.cart-item__price,
+.cart__item-price {
+  color: #A87840;
+  font-weight: 600;
+}
+
+.cart__subtotal,
+.totals__subtotal {
+  color: #26201A;
+  font-family: 'Times New Roman', 'Georgia', serif;
+}
+
+.cart__cta,
+.cart__checkout-button {
+  background-color: #A87840;
+  border-color: #A87840;
+  color: #FFFFFF;
+  border-radius: 4px;
+}
+
+.cart__cta:hover,
+.cart__checkout-button:hover {
+  background-color: #8A6030;
+  border-color: #8A6030;
+}
+
+/* ---------------------------------------------------------------
+   HEADER (Horizon's own header — complement Elanvi header)
+   --------------------------------------------------------------- */
+.header {
+  background-color: rgba(237, 232, 223, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom-color: #D8D0C5;
+}
+
+.header__heading-link,
+.header__heading {
+  color: #26201A;
+  font-family: 'Times New Roman', 'Georgia', serif;
+}
+
+.header__menu-item,
+.header__menu-item > a {
+  color: #3A3428;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 500;
+}
+
+.header__menu-item > a:hover,
+.header__menu-item.menu-item--active > a {
+  color: #A87840;
+}
+
+.header__icon svg,
+.header__icon .icon {
+  fill: #3A3428;
+  color: #3A3428;
+}
+
+.header__icon:hover svg,
+.header__icon:hover .icon {
+  fill: #A87840;
+  color: #A87840;
+}
+
+/* Cart icon badge */
+.cart-count-bubble {
+  background-color: #A87840;
+  color: #FFFFFF;
+}
+
+/* ---------------------------------------------------------------
+   FOOTER
+   --------------------------------------------------------------- */
+footer,
+.footer {
+  background-color: #26201A;
+  color: #EDE8DF;
+  border-top-color: #3A3428;
+}
+
+.footer__heading,
+.footer__title {
+  color: #EDE8DF;
+  font-family: 'Times New Roman', 'Georgia', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.8125rem;
+}
+
+.footer a,
+.footer__link {
+  color: rgba(237, 232, 223, 0.7);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s ease;
+}
+
+.footer a:hover,
+.footer__link:hover {
+  color: #A87840;
+}
+
+.footer__newsletter-form .field__input,
+.footer .newsletter-form__field-wrapper .field__input {
+  background-color: rgba(237, 232, 223, 0.08);
+  border-color: rgba(237, 232, 223, 0.2);
+  color: #EDE8DF;
+  border-radius: 9999px;
+}
+
+.footer__newsletter-form .field__input::placeholder {
+  color: rgba(237, 232, 223, 0.5);
+}
+
+.footer .button--primary,
+.footer .newsletter-form__button {
+  background-color: #A87840;
+  border-color: #A87840;
+  color: #FFFFFF;
+  border-radius: 4px;
+}
+
+.footer .button--primary:hover,
+.footer .newsletter-form__button:hover {
+  background-color: #C49050;
+  border-color: #C49050;
+}
+
+/* ---------------------------------------------------------------
+   ANNOUNCEMENT BAR
+   --------------------------------------------------------------- */
+.announcement-bar {
+  background-color: #26201A;
+  color: #EDE8DF;
+}
+
+.announcement-bar__message,
+.announcement-bar a {
+  color: #C49050;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+/* ---------------------------------------------------------------
+   SEARCH PAGE
+   --------------------------------------------------------------- */
+.search__form .field__input {
+  background-color: #FFFFFF;
+  border-color: #D8D0C5;
+  color: #26201A;
+  border-radius: 9999px;
+  font-size: 1rem;
+}
+
+.search-page-input__submit,
+.search__button {
+  background-color: #A87840;
+  border-color: #A87840;
+  color: #FFFFFF;
+  border-radius: 4px;
+}
+
+/* ---------------------------------------------------------------
+   FORM ELEMENTS — Global
+   --------------------------------------------------------------- */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="search"],
+textarea,
+select {
+  background-color: #FFFFFF;
+  border-color: #D8D0C5;
+  color: #26201A;
+  transition: border-color 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #A87840;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(168, 120, 64, 0.2);
+}
+
+/* ---------------------------------------------------------------
+   POPOVER / DROPDOWN MENUS
+   --------------------------------------------------------------- */
+.popover,
+.dropdown-menu,
+.header__submenu {
+  background-color: #F5F2EC;
+  border-color: #D8D0C5;
+  box-shadow: 0 8px 24px rgba(38, 32, 26, 0.12);
+}
+
+.popover a,
+.dropdown-menu a,
+.header__submenu a {
+  color: #3A3428;
+}
+
+.popover a:hover,
+.dropdown-menu a:hover,
+.header__submenu a:hover {
+  color: #A87840;
+  background-color: #E8E2D8;
+}
+
+/* ---------------------------------------------------------------
+   UTILITY — Scrollbar styling
+   --------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E8E2D8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #A87840;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b08857;
+}
+
+/* ---------------------------------------------------------------
+   SELECTION
+   --------------------------------------------------------------- */
+::selection {
+  background-color: rgba(200, 157, 108, 0.25);
+  color: #23201b;
+}
+
+/* =================================================================
+   ELANVI BRAND COLOR OVERRIDES
+   Ensures all hardcoded legacy hex values use the new palette.
+   Applied last so they take precedence over component defaults.
+   ================================================================= */
+
+/* Body */
+body {
+  background-color: #fdf9f8;
+  color: #23201b;
+}
+
+/* Accent links */
+a:not([class]):hover { color: #c89d6c; }
+
+/* Prices */
+.price__current,
+.price-item--regular { color: #23201b; }
+.price-item--sale     { color: #c89d6c; }
+
+/* Cart item price accent */
+.cart-item__price,
+.cart__item-price { color: #c89d6c; font-weight: 600; }
+
+/* Product card buttons */
+.card__button .button,
+.product-form__submit,
+.quick-add__submit {
+  background-color: #c89d6c !important;
+  border-color:     #c89d6c !important;
+  color:            #faf3ed !important;
+  border-radius: 4px !important;
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  transition: background-color 0.25s ease, transform 0.2s ease !important;
+}
+.card__button .button:hover,
+.product-form__submit:hover,
+.quick-add__submit:hover {
+  background-color: #b08857 !important;
+  border-color:     #b08857 !important;
+}
+
+/* Cart CTA / checkout */
+.cart__cta,
+.cart__checkout-button {
+  background-color: #c89d6c;
+  border-color:     #c89d6c;
+  color: #faf3ed;
+}
+.cart__cta:hover,
+.cart__checkout-button:hover {
+  background-color: #b08857;
+  border-color:     #b08857;
+}
+
+/* Header */
+.header {
+  background-color: rgba(253, 249, 248, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.header__menu-item > a:hover,
+.header__menu-item.menu-item--active > a { color: #c89d6c; }
+.header__icon:hover svg,
+.header__icon:hover .icon { fill: #c89d6c; color: #c89d6c; }
+
+/* Cart badge */
+.cart-count-bubble { background-color: #c89d6c; color: #faf3ed; }
+
+/* Breadcrumbs */
+.breadcrumbs a:hover  { color: #c89d6c; }
+.breadcrumbs__separator { color: #c89d6c; }
+
+/* Quantity */
+.quantity__button:hover { color: #c89d6c; }
+
+/* Variant thumbnails */
+.product-media-gallery__thumbnail.is-active,
+.product-media-gallery__thumbnail:hover { border-color: #c89d6c; }
+
+/* Selected variant swatch */
+.color-scheme-1 .variant-picker__option--selected,
+.color-scheme-2 .variant-picker__option--selected { border-color: #c89d6c; }
+
+/* Facet pills / active filters */
+.facets__pill,
+.active-facets__button {
+  background-color: #c89d6c;
+  color: #faf3ed;
+  border-color: #c89d6c;
+}
+.facets__pill:hover,
+.active-facets__button:hover {
+  background-color: #b08857;
+  border-color:     #b08857;
+}
+
+/* Pagination */
+.pagination__list a:hover,
+.pagination__list button:hover,
+.pagination__list [aria-current] a {
+  background-color: #c89d6c;
+  color: #faf3ed;
+  border-color: #c89d6c;
+}
+
+/* Collection banner */
+.collection__banner,
+.collection-hero { background-color: #ebe6e1; }
+
+/* Form focus ring */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #c89d6c;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(200, 157, 108, 0.2);
+}
+
+/* Popover / dropdown */
+.popover,
+.dropdown-menu,
+.header__submenu { background-color: #fefefb; border-color: #D8D0C5; }
+.popover a:hover,
+.dropdown-menu a:hover,
+.header__submenu a:hover { color: #c89d6c; background-color: #ebe6e1; }
+
+/* Scrollbar */
+::-webkit-scrollbar-track  { background: #ebe6e1; }
+::-webkit-scrollbar-thumb  { background: #c89d6c; }
+
+/* Announcement bar */
+.announcement-bar { background-color: #23201b; color: #e8e0d6; }
+.announcement-bar__message,
+.announcement-bar a { color: #d9b88a; }
+
+/* Footer in elanvi-global context */
+footer,
+.footer { background-color: #23201b; color: #e8e0d6; border-top-color: rgba(232,224,214,0.12); }
+.footer a,
+.footer__link { color: rgba(232, 224, 214, 0.7); }
+.footer a:hover,
+.footer__link:hover { color: #c89d6c; }
+.footer .button--primary,
+.footer .newsletter-form__button {
+  background-color: #c89d6c;
+  border-color:     #c89d6c;
+  color: #faf3ed;
+}
+.footer .button--primary:hover,
+.footer .newsletter-form__button:hover {
+  background-color: #b08857;
+  border-color:     #b08857;
+}
+
+/* Search button */
+.search-page-input__submit,
+.search__button { background-color: #c89d6c; border-color: #c89d6c; color: #faf3ed; }
+.search-page-input__submit:hover,
+.search__button:hover { background-color: #b08857; border-color: #b08857; }

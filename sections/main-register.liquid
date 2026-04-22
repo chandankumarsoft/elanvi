@@ -1,0 +1,195 @@
+
+<div class="elanvi-account-page">
+  <div class="elanvi-account-card">
+
+    <div class="elanvi-account-card__header">
+      <h1 class="elanvi-heading-md">Create Account</h1>
+      <p class="elanvi-account-card__subtitle">Join the Elanvi ritual — ageless skincare for women 30+.</p>
+    </div>
+
+    {%- form 'create_customer', class: 'elanvi-account-form' -%}
+
+      {%- if form.errors -%}
+        <div class="elanvi-form__errors" role="alert" aria-live="assertive">
+          {{ form.errors | default_errors }}
+        </div>
+      {%- endif -%}
+
+      <div class="elanvi-form__row">
+        <div class="elanvi-form__field">
+          <label for="FirstName" class="elanvi-form__label">First name</label>
+          <input
+            type="text"
+            id="FirstName"
+            name="customer[first_name]"
+            value="{{ form.first_name }}"
+            autocomplete="given-name"
+            autocapitalize="words"
+            class="elanvi-form__input"
+            placeholder="First"
+          >
+        </div>
+        <div class="elanvi-form__field">
+          <label for="LastName" class="elanvi-form__label">Last name</label>
+          <input
+            type="text"
+            id="LastName"
+            name="customer[last_name]"
+            value="{{ form.last_name }}"
+            autocomplete="family-name"
+            autocapitalize="words"
+            class="elanvi-form__input"
+            placeholder="Last"
+          >
+        </div>
+      </div>
+
+      <div class="elanvi-form__field">
+        <label for="RegisterEmail" class="elanvi-form__label">Email address</label>
+        <input
+          type="email"
+          id="RegisterEmail"
+          name="customer[email]"
+          value="{{ form.email }}"
+          autocomplete="email"
+          autocapitalize="off"
+          autocorrect="off"
+          class="elanvi-form__input"
+          placeholder="your@email.com"
+          required
+        >
+      </div>
+
+      <div class="elanvi-form__field">
+        <label for="RegisterPassword" class="elanvi-form__label">Password</label>
+        <input
+          type="password"
+          id="RegisterPassword"
+          name="customer[password]"
+          autocomplete="new-password"
+          class="elanvi-form__input"
+          placeholder="Min. 5 characters"
+          minlength="5"
+          required
+        >
+      </div>
+
+      <button type="submit" class="elanvi-btn elanvi-btn--primary elanvi-btn--block">
+        Create Account
+      </button>
+
+    {%- endform -%}
+
+    <p class="elanvi-account-card__alt">
+      Already have an account?
+      <a href="{{ routes.account_login_url }}" class="elanvi-form__link">
+        Sign in &rarr;
+      </a>
+    </p>
+
+  </div>
+</div>
+
+{% stylesheet %}
+  .elanvi-account-page {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    background-color: var(--elanvi-bg, #F7F4EF);
+  }
+
+  .elanvi-account-card {
+    background-color: var(--elanvi-white, #fff);
+    border: 1px solid var(--elanvi-border, #E4DED5);
+    border-radius: 24px;
+    padding: 2rem 1.5rem;
+    width: 100%;
+    max-width: 26rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+
+  @media (min-width: 750px) {
+    .elanvi-account-card { padding: 3rem; }
+  }
+
+  .elanvi-account-card__header { text-align: center; margin-bottom: 1.75rem; }
+
+  .elanvi-account-card__subtitle {
+    margin-top: 0.5rem;
+    font-size: 0.9375rem;
+    color: var(--elanvi-text-muted, #5A5147);
+  }
+
+  .elanvi-account-form { display: flex; flex-direction: column; gap: 1.25rem; }
+
+  .elanvi-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+  .elanvi-form__field { display: flex; flex-direction: column; gap: 0.375rem; }
+
+  .elanvi-form__label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--elanvi-text, #2E2924);
+  }
+
+  .elanvi-form__input {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--elanvi-border, #E4DED5);
+    border-radius: 12px;
+    font-size: 1rem;
+    color: var(--elanvi-text, #2E2924);
+    background-color: var(--elanvi-white, #fff);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+  }
+
+  .elanvi-form__input:focus {
+    outline: none;
+    border-color: var(--elanvi-gold, #B78A57);
+    box-shadow: 0 0 0 3px rgba(183,138,87,0.15);
+  }
+
+  .elanvi-form__link {
+    font-size: 0.8125rem;
+    color: var(--elanvi-gold, #B78A57);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .elanvi-form__link:hover { color: var(--elanvi-gold-dark, #9f6e42); }
+
+  .elanvi-btn--block { width: 100%; margin-top: 0.5rem; }
+
+  .elanvi-account-card__alt {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--elanvi-text-muted, #5A5147);
+  }
+
+  .elanvi-form__errors {
+    background-color: #fff0f0;
+    border: 1px solid #f5c0c0;
+    border-radius: 12px;
+    padding: 0.875rem 1rem;
+    font-size: 0.875rem;
+    color: #c0392b;
+  }
+
+  .elanvi-form__errors ul { margin: 0; padding-left: 1.25rem; }
+  .elanvi-form__errors li { margin-top: 0.25rem; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Customer Register",
+  "tag": "div",
+  "class": "elanvi-section",
+  "enabled_on": {
+    "templates": ["customers/register"]
+  },
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,573 @@
+
+{%- comment -%}
+  =====================================================================
+  ELANVI CUSTOM FOOTER
+  sections/footer.liquid
+
+  Columns:
+    1) Brand — logo, tagline, social icons
+    2) Quick Links   (configurable link list)
+    3) Customer Care (configurable link list)
+    4) Newsletter    (Shopify customer form)
+
+  Bottom bar: copyright + payment icons
+  =====================================================================
+{%- endcomment -%}
+
+{%- liquid
+  assign quick_menu   = section.settings.quick_links_menu
+  assign support_menu = section.settings.support_links_menu
+  assign brand_desc   = section.settings.brand_description
+  assign nl_text      = section.settings.newsletter_text
+-%}
+
+<footer class="ef-footer" role="contentinfo" aria-label="{{ shop.name }} footer">
+
+  {%- comment -%} ── MAIN FOOTER GRID ───────────────────────────── {%- endcomment -%}
+  <div class="ef-footer__inner">
+
+    {%- comment -%} ── COL 1: BRAND ────────────────────────────── {%- endcomment -%}
+    <div class="ef-footer__brand">
+
+      {%- if section.settings.logo != blank -%}
+        <a class="ef-footer__logo-link" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+          <img
+            src="{{ section.settings.logo | image_url: width: 180 }}"
+            alt="{{ shop.name }}"
+            class="ef-footer__logo"
+            width="180"
+            height="auto"
+            loading="lazy"
+          >
+        </a>
+      {%- else -%}
+        <a class="ef-footer__logo-link ef-footer__logo-text" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+          {{- shop.name -}}
+        </a>
+      {%- endif -%}
+
+      {%- if brand_desc != blank -%}
+        <p class="ef-footer__tagline">{{ brand_desc }}</p>
+      {%- endif -%}
+
+      {%- comment -%} Social icons — reads from global theme settings {%- endcomment -%}
+      <nav class="ef-footer__social" aria-label="Follow {{ shop.name }} on social media">
+        {%- if settings.social_instagram_link != blank -%}
+          <a class="ef-footer__social-link" href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if settings.social_facebook_link != blank -%}
+          <a class="ef-footer__social-link" href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if settings.social_twitter_link != blank -%}
+          <a class="ef-footer__social-link" href="{{ settings.social_twitter_link }}" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if settings.social_youtube_link != blank -%}
+          <a class="ef-footer__social-link" href="{{ settings.social_youtube_link }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+          </a>
+        {%- endif -%}
+        {%- if settings.social_pinterest_link != blank -%}
+          <a class="ef-footer__social-link" href="{{ settings.social_pinterest_link }}" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.03-2.83.19-.78 1.28-5.42 1.28-5.42s-.33-.66-.33-1.63c0-1.53.89-2.67 1.99-2.67.94 0 1.39.71 1.39 1.55 0 .95-.6 2.36-.92 3.67-.26 1.1.55 1.99 1.63 1.99 1.96 0 3.28-2.51 3.28-5.48 0-2.26-1.53-3.96-4.3-3.96-3.14 0-5.08 2.35-5.08 4.98 0 .9.27 1.54.69 2.03.19.23.22.32.15.58-.05.19-.16.64-.21.82-.07.27-.29.37-.54.27-1.49-.62-2.19-2.3-2.19-4.19 0-3.1 2.61-6.8 7.79-6.8 4.15 0 6.87 3 6.87 6.22 0 4.24-2.35 7.4-5.82 7.4-1.16 0-2.26-.63-2.64-1.33l-.73 2.83c-.26 1.01-.98 2.28-1.46 3.05.93.29 1.91.45 2.93.45 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+          </a>
+        {%- endif -%}
+      </nav>
+
+    </div>
+
+    {%- comment -%} ── COL 2: QUICK LINKS ──────────────────────── {%- endcomment -%}
+    <div class="ef-footer__col">
+      <h3 class="ef-footer__heading">{{ section.settings.quick_links_heading | default: 'Quick Links' }}</h3>
+      <ul class="ef-footer__links" role="list">
+        {%- if linklists[quick_menu].links.size > 0 -%}
+          {%- for link in linklists[quick_menu].links -%}
+            <li><a class="ef-footer__link" href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        {%- else -%}
+          <li><a class="ef-footer__link" href="{{ routes.root_url }}">Home</a></li>
+          <li><a class="ef-footer__link" href="{{ routes.collections_url }}">Shop</a></li>
+          <li><a class="ef-footer__link" href="{{ routes.root_url }}pages/about">About</a></li>
+          <li><a class="ef-footer__link" href="{{ routes.root_url }}pages/contact">Contact</a></li>
+        {%- endif -%}
+      </ul>
+    </div>
+
+    {%- comment -%} ── COL 3: CUSTOMER CARE ────────────────────── {%- endcomment -%}
+    <div class="ef-footer__col">
+      <h3 class="ef-footer__heading">{{ section.settings.support_links_heading | default: 'Customer Care' }}</h3>
+      <ul class="ef-footer__links" role="list">
+        {%- if linklists[support_menu].links.size > 0 -%}
+          {%- for link in linklists[support_menu].links -%}
+            <li><a class="ef-footer__link" href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        {%- else -%}
+          <li><a class="ef-footer__link" href="{{ routes.root_url }}policies/privacy-policy">Privacy Policy</a></li>
+          <li><a class="ef-footer__link" href="{{ routes.root_url }}policies/terms-of-service">Terms of Service</a></li>
+          <li><a class="ef-footer__link" href="{{ routes.root_url }}policies/refund-policy">Refund Policy</a></li>
+          <li><a class="ef-footer__link" href="{{ routes.root_url }}policies/shipping-policy">Shipping Policy</a></li>
+        {%- endif -%}
+      </ul>
+    </div>
+
+    {%- comment -%} ── COL 4: NEWSLETTER ───────────────────────── {%- endcomment -%}
+    <div class="ef-footer__col ef-footer__col--newsletter">
+      <h3 class="ef-footer__heading">{{ section.settings.newsletter_heading | default: 'Stay Connected' }}</h3>
+      {%- if nl_text != blank -%}
+        <p class="ef-footer__nl-desc">{{ nl_text }}</p>
+      {%- endif -%}
+
+      {%- form 'customer', id: 'ef-newsletter-form', class: 'ef-footer__form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter,footer">
+        <div class="ef-footer__form-row" role="group" aria-label="Newsletter signup">
+          <label class="ef-footer__form-label visually-hidden" for="ef-footer-email">
+            {{ 'general.newsletter_form.email_placeholder' | t | default: 'Email address' }}
+          </label>
+          <input
+            id="ef-footer-email"
+            class="ef-footer__input"
+            type="email"
+            name="contact[email]"
+            placeholder="{{ 'general.newsletter_form.email_placeholder' | t | default: 'Your email address' }}"
+            autocomplete="email"
+            required
+            aria-required="true"
+          >
+          <button
+            class="ef-footer__submit"
+            type="submit"
+            aria-label="{{ 'general.newsletter_form.submit' | t | default: 'Subscribe' }}"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </button>
+        </div>
+
+        {%- if form.posted_successfully? -%}
+          <p class="ef-footer__form-msg ef-footer__form-msg--success" role="status">
+            {{ 'general.newsletter_form.success' | t | default: 'Thank you for subscribing!' }}
+          </p>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <p class="ef-footer__form-msg ef-footer__form-msg--error" role="alert">
+            {{ form.errors | default_errors }}
+          </p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+
+  </div>{%- comment -%} /.ef-footer__inner {%- endcomment -%}
+
+  {%- comment -%} ── BOTTOM BAR ──────────────────────────────────── {%- endcomment -%}
+  <div class="ef-footer__bar">
+    <div class="ef-footer__bar-inner">
+      <p class="ef-footer__copy">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}.
+        {%- if section.settings.copyright_extra != blank %} {{ section.settings.copyright_extra }}{%- endif -%}
+      </p>
+      {%- if shop.enabled_payment_types != empty -%}
+        <ul class="ef-footer__payments" role="list" aria-label="Accepted payment methods">
+          {%- for type in shop.enabled_payment_types -%}
+            <li class="ef-footer__payment-item" aria-label="{{ type }}">
+              {{ type | payment_type_svg_tag: class: 'ef-footer__payment-svg' }}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+
+</footer>
+
+{% stylesheet %}
+/* =================================================================
+   ELANVI FOOTER  (BEM: ef-footer)
+   ================================================================= */
+
+/* ── Design tokens (scoped) ─────────────────────────────────────── */
+.ef-footer {
+  --ef-bg:         #23201b;
+  --ef-bg-alt:     #2a2620;
+  --ef-text:       #e8e0d6;
+  --ef-muted:      rgba(232, 224, 214, 0.6);
+  --ef-accent:     #c89d6c;
+  --ef-accent-dk:  #b08857;
+  --ef-border:     rgba(232, 224, 214, 0.1);
+  --ef-radius:     6px;
+  --ef-transition: 0.22s ease;
+  --ef-font-sans:  system-ui, -apple-system, 'Inter', 'Segoe UI', Helvetica, sans-serif;
+  --ef-font-serif: 'Times New Roman', Georgia, serif;
+}
+
+/* ── Shell ─────────────────────────────────────────────────────── */
+.ef-footer {
+  background-color: var(--ef-bg);
+  color: var(--ef-text);
+  border-top: 1px solid var(--ef-border);
+  font-family: var(--ef-font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Main grid ─────────────────────────────────────────────────── */
+.ef-footer__inner {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding: 3.5rem 1.25rem 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 600px) {
+  .ef-footer__inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 2rem;
+  }
+}
+
+@media (min-width: 990px) {
+  .ef-footer__inner {
+    grid-template-columns: 1.7fr 1fr 1fr 1.5fr;
+    gap: 2rem 3.5rem;
+    padding: 4.5rem 2rem 3rem;
+  }
+}
+
+/* ── Brand column ──────────────────────────────────────────────── */
+.ef-footer__logo-link {
+  display: inline-block;
+  margin-bottom: 1.125rem;
+  text-decoration: none;
+}
+
+.ef-footer__logo {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+.ef-footer__logo-text {
+  font-family: var(--ef-font-serif);
+  font-size: 1.5rem;
+  color: var(--ef-text);
+  letter-spacing: 0.04em;
+}
+
+.ef-footer__tagline {
+  font-size: 0.875rem;
+  color: var(--ef-muted);
+  line-height: 1.7;
+  margin: 0 0 1.5rem;
+  max-width: 22rem;
+}
+
+/* ── Social icons ──────────────────────────────────────────────── */
+.ef-footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.ef-footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--ef-border);
+  color: var(--ef-muted);
+  text-decoration: none;
+  transition:
+    color            var(--ef-transition),
+    border-color     var(--ef-transition),
+    background-color var(--ef-transition);
+}
+
+.ef-footer__social-link:hover,
+.ef-footer__social-link:focus-visible {
+  color: var(--ef-accent);
+  border-color: var(--ef-accent);
+  background-color: rgba(200, 157, 108, 0.1);
+  outline: none;
+}
+
+/* ── Nav columns ───────────────────────────────────────────────── */
+.ef-footer__heading {
+  font-family: var(--ef-font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--ef-text);
+  margin: 0 0 1.25rem;
+}
+
+.ef-footer__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.ef-footer__link {
+  font-size: 0.875rem;
+  color: var(--ef-muted);
+  text-decoration: none;
+  transition: color var(--ef-transition);
+  display: inline-block;
+  padding-block: 0.125rem;
+  position: relative;
+}
+
+.ef-footer__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--ef-accent);
+  transition: width var(--ef-transition);
+}
+
+.ef-footer__link:hover,
+.ef-footer__link:focus-visible {
+  color: var(--ef-accent);
+  outline: none;
+}
+
+.ef-footer__link:hover::after,
+.ef-footer__link:focus-visible::after {
+  width: 100%;
+}
+
+/* ── Newsletter column ─────────────────────────────────────────── */
+.ef-footer__nl-desc {
+  font-size: 0.875rem;
+  color: var(--ef-muted);
+  line-height: 1.65;
+  margin: 0 0 1.125rem;
+}
+
+.ef-footer__form-row {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  background-color: var(--ef-bg-alt);
+  border: 1px solid var(--ef-border);
+  border-radius: 9999px;
+  padding: 0.3rem 0.3rem 0.3rem 1rem;
+  transition: border-color var(--ef-transition), box-shadow var(--ef-transition);
+}
+
+.ef-footer__form-row:focus-within {
+  border-color: var(--ef-accent);
+  box-shadow: 0 0 0 2px rgba(200, 157, 108, 0.15);
+}
+
+.ef-footer__input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--ef-text);
+  font-size: 0.875rem;
+  font-family: var(--ef-font-sans);
+}
+
+.ef-footer__input::placeholder { color: var(--ef-muted); }
+
+.ef-footer__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: var(--ef-accent);
+  color: #faf3ed;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color var(--ef-transition),
+    transform        var(--ef-transition);
+}
+
+.ef-footer__submit:hover { background-color: var(--ef-accent-dk); }
+.ef-footer__submit:active { transform: scale(0.93); }
+.ef-footer__submit:focus-visible {
+  outline: 2px solid var(--ef-accent);
+  outline-offset: 2px;
+}
+
+.ef-footer__form-msg {
+  font-size: 0.8125rem;
+  margin-top: 0.625rem;
+  line-height: 1.5;
+}
+
+.ef-footer__form-msg--success { color: #7cbc72; }
+.ef-footer__form-msg--error   { color: #e07878; }
+
+/* ── Bottom bar ────────────────────────────────────────────────── */
+.ef-footer__bar {
+  border-top: 1px solid var(--ef-border);
+}
+
+.ef-footer__bar-inner {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding: 1.25rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+@media (min-width: 990px) {
+  .ef-footer__bar-inner { padding: 1.25rem 2rem; }
+}
+
+.ef-footer__copy {
+  font-size: 0.8125rem;
+  color: var(--ef-muted);
+  margin: 0;
+}
+
+.ef-footer__payments {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.ef-footer__payment-item { display: contents; }
+
+.ef-footer__payment-svg,
+.ef-footer__payments svg,
+.ef-footer__payments img {
+  height: 22px;
+  width: auto;
+  opacity: 0.55;
+  filter: invert(1) brightness(10);
+}
+
+/* ── Accessibility: visually-hidden ─────────────────────────────── */
+.ef-footer .visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Elanvi Footer",
+  "class": "section-wrapper",
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Brand logo"
+    },
+    {
+      "type": "textarea",
+      "id": "brand_description",
+      "label": "Brand tagline",
+      "default": "Ayurveda-inspired skincare rooted in science. Crafted for women who believe in ritual, radiance, and results."
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "text",
+      "id": "quick_links_heading",
+      "label": "Quick Links column title",
+      "default": "Quick Links"
+    },
+    {
+      "type": "link_list",
+      "id": "quick_links_menu",
+      "label": "Quick Links menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "support_links_heading",
+      "label": "Customer Care column title",
+      "default": "Customer Care"
+    },
+    {
+      "type": "link_list",
+      "id": "support_links_menu",
+      "label": "Customer Care menu",
+      "default": "footer"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter column title",
+      "default": "Stay Connected"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_text",
+      "label": "Newsletter description",
+      "default": "Discover skincare rituals, expert tips & exclusive offers — straight to your inbox."
+    },
+    {
+      "type": "header",
+      "content": "Bottom bar"
+    },
+    {
+      "type": "text",
+      "id": "copyright_extra",
+      "label": "Extra copyright text",
+      "placeholder": "All rights reserved."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Elanvi Footer"
+    }
+  ]
+}
+{% endschema %}
+

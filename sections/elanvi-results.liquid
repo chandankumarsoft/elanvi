@@ -1,0 +1,147 @@
+{% comment %}
+  Section: elanvi-results
+  Two-column layout: testimonials on the left, two result images on the right.
+{% endcomment %}
+
+<section class="elanvi-results" id="elanvi-results">
+  <div class="elanvi-results__grid">
+
+    {%- comment %} ── Left: Testimonials ── {%- endcomment -%}
+    <div class="elanvi-results__testimonials">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'testimonial' -%}
+          <blockquote class="elanvi-testimonial" {{ block.shopify_attributes }}>
+            <p class="elanvi-testimonial__quote">&ldquo;{{ block.settings.quote }}&rdquo;</p>
+            {%- if block.settings.author != blank -%}
+              <cite class="elanvi-testimonial__author">&mdash; {{ block.settings.author }}</cite>
+            {%- endif -%}
+          </blockquote>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if section.settings.rating_text != blank -%}
+        <div class="elanvi-results__rating">
+          <span>{{ section.settings.rating_text }}</span>
+          {%- if section.settings.rating_sub != blank -%}
+            <span class="elanvi-results__rating-dot" aria-hidden="true"></span>
+            <span>{{ section.settings.rating_sub }}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment %} ── Right: Before/After Images ── {%- endcomment -%}
+    <div class="elanvi-results__images">
+      {%- if section.settings.result_image_1 != blank -%}
+        {{
+          section.settings.result_image_1
+          | image_url: width: 600
+          | image_tag:
+            loading: 'lazy',
+            alt: section.settings.result_image_1.alt | default: 'Skincare result',
+            widths: '300, 600',
+            sizes: '(min-width: 768px) 25vw, 50vw'
+        }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'elanvi-results__placeholder' }}
+      {%- endif -%}
+
+      {%- if section.settings.result_image_2 != blank -%}
+        {{
+          section.settings.result_image_2
+          | image_url: width: 600
+          | image_tag:
+            loading: 'lazy',
+            alt: section.settings.result_image_2.alt | default: 'Skincare result',
+            widths: '300, 600',
+            sizes: '(min-width: 768px) 25vw, 50vw'
+        }}
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'elanvi-results__placeholder' }}
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Elanvi — Results",
+  "tag": "div",
+  "class": "elanvi-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Result Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "result_image_1",
+      "label": "Result Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "result_image_2",
+      "label": "Result Image 2"
+    },
+    {
+      "type": "header",
+      "content": "Rating"
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating Text",
+      "default": "⭐ 4.8 from 1200+ reviews"
+    },
+    {
+      "type": "text",
+      "id": "rating_sub",
+      "label": "Rating Sub-text",
+      "default": "Clinically inspired efficacy"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "quote",
+          "label": "Quote Text",
+          "default": "I noticed a visible lift after just a few weeks."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "Anjali, 42 • Real user"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Elanvi Results",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I noticed a visible lift after just a few weeks.",
+            "author": "Anjali, 42 • Real user"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "My neck and jawline feel firmer and smoother.",
+            "author": "Meera, 38 • Verified buyer"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

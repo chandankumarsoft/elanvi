@@ -1,0 +1,1110 @@
+{%- comment -%}
+  Section: elanvi-contact
+  Premium Contact Us page — hero, info cards, form + side panel,
+  FAQ accordion, trust bar, social strip.
+{%- endcomment -%}
+
+{%- liquid
+  assign email    = section.settings.email   | default: 'hello@elanvi.in'
+  assign phone    = section.settings.phone   | default: '+91 98765 43210'
+  assign address  = section.settings.address | default: '12, Wellness Tower, Koramangala, Bengaluru – 560 034, India'
+  assign hours    = section.settings.hours   | default: 'Mon – Sat: 9:00 AM – 6:00 PM IST'
+  assign whatsapp = section.settings.whatsapp | default: '919876543210'
+-%}
+
+<div class="ec-page" id="elanvi-contact">
+
+  {%- comment -%}━━━━━━━━━━━━━━━━━━━━━━━━ HERO ━━━━━━━━━━━━━━━━━━━━━━━━{%- endcomment -%}
+  <div class="ec-hero">
+    <div class="ec-hero__bg-pattern" aria-hidden="true"></div>
+    <div class="ec-hero__inner">
+      <span class="elanvi-eyebrow">{{ section.settings.eyebrow | default: 'We are here for you' }}</span>
+      <h1 class="elanvi-heading-xl ec-hero__title">
+        {{ section.settings.heading | default: 'Get in Touch' }}
+      </h1>
+      <p class="elanvi-body-lg ec-hero__sub">
+        {{ section.settings.subheading | default: 'We love hearing from you. Whether it is a question about your order, a skincare concern, or just a hello — our care team is always ready.' }}
+      </p>
+      <div class="ec-hero__badges">
+        <span class="ec-hero__badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          Replies within 24 hrs
+        </span>
+        <span class="ec-hero__badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          Real humans, no bots
+        </span>
+        <span class="ec-hero__badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          Available on WhatsApp
+        </span>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%}━━━━━━━━━━━━━━━━━━━━━━ INFO CARDS ━━━━━━━━━━━━━━━━━━━━━━{%- endcomment -%}
+  <div class="ec-info-strip">
+    <div class="ec-info-strip__inner">
+
+      <a class="ec-info-card" href="mailto:{{ email }}">
+        <div class="ec-info-card__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        </div>
+        <div class="ec-info-card__body">
+          <p class="ec-info-card__label">Email Us</p>
+          <p class="ec-info-card__value">{{ email }}</p>
+          <p class="ec-info-card__hint">We reply within 24 hours</p>
+        </div>
+      </a>
+
+      <a class="ec-info-card" href="tel:{{ phone | remove: ' ' | remove: '-' }}">
+        <div class="ec-info-card__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.64 3.42 2 2 0 0 1 3.62 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.18 6.18l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.5z"/></svg>
+        </div>
+        <div class="ec-info-card__body">
+          <p class="ec-info-card__label">Call Us</p>
+          <p class="ec-info-card__value">{{ phone }}</p>
+          <p class="ec-info-card__hint">{{ hours }}</p>
+        </div>
+      </a>
+
+      <a class="ec-info-card" href="https://wa.me/{{ whatsapp }}" target="_blank" rel="noopener noreferrer">
+        <div class="ec-info-card__icon ec-info-card__icon--whatsapp" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.122 1.528 5.858L.057 23.447a.5.5 0 0 0 .496.553.499.499 0 0 0 .188-.037l5.7-2.239A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.679-.513-5.21-1.4l-.375-.222-3.524 1.383 1.232-3.613-.235-.374A9.96 9.96 0 0 1 2 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+        </div>
+        <div class="ec-info-card__body">
+          <p class="ec-info-card__label">WhatsApp</p>
+          <p class="ec-info-card__value">Chat with us</p>
+          <p class="ec-info-card__hint">Fastest response channel</p>
+        </div>
+      </a>
+
+      <div class="ec-info-card">
+        <div class="ec-info-card__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="ec-info-card__body">
+          <p class="ec-info-card__label">Our Office</p>
+          <p class="ec-info-card__value">{{ address }}</p>
+          <p class="ec-info-card__hint">{{ section.settings.hours | default: 'Mon – Sat: 9 AM – 6 PM IST' }}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  {%- comment -%}━━━━━━━━━━━━━━━━ FORM + SIDE PANEL ━━━━━━━━━━━━━━━━━━━{%- endcomment -%}
+  <div class="ec-body">
+    <div class="ec-body__inner">
+
+      {%- comment -%} LEFT — side reassurance panel {%- endcomment -%}
+      <div class="ec-side">
+
+        <span class="elanvi-eyebrow">Send us a message</span>
+        <h2 class="elanvi-heading-md ec-side__heading">
+          {{ section.settings.form_heading | default: 'How can we help you today?' }}
+        </h2>
+        <p class="ec-side__body">
+          {{ section.settings.form_body | default: 'Fill in the form and a dedicated member of our skincare care team will respond within 24 hours. For urgent queries, WhatsApp or call us directly.' }}
+        </p>
+
+        <ul class="ec-side__checks" role="list">
+          {%- for i in (1..6) -%}
+            {%- assign key = 'check_' | append: i -%}
+            {%- if section.settings[key] != blank -%}
+              <li>
+                <span class="ec-side__check-icon" aria-hidden="true">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                {{ section.settings[key] }}
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+
+        {%- comment -%} Response time promise card {%- endcomment -%}
+        <div class="ec-promise">
+          <div class="ec-promise__icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <p class="ec-promise__title">Our Response Promise</p>
+            <p class="ec-promise__body">We acknowledge every message within <strong>4 business hours</strong> and resolve most queries within <strong>24 hours</strong>. Your satisfaction is our priority.</p>
+          </div>
+        </div>
+
+        {%- comment -%} Quick social links {%- endcomment -%}
+        <div class="ec-side__social">
+          <p class="ec-side__social-label">Also reach us on</p>
+          <div class="ec-side__social-row">
+            {%- if settings.social_instagram_link != blank -%}
+              <a class="ec-social-btn" href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                Instagram
+              </a>
+            {%- endif -%}
+            {%- if settings.social_facebook_link != blank -%}
+              <a class="ec-social-btn" href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                Facebook
+              </a>
+            {%- endif -%}
+            {%- if settings.social_twitter_link != blank -%}
+              <a class="ec-social-btn" href="{{ settings.social_twitter_link }}" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                X / Twitter
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+
+      </div>
+
+      {%- comment -%} RIGHT — Contact form card {%- endcomment -%}
+      <div class="ec-form-wrap">
+
+        {%- form 'contact', id: 'elanvi-contact-form', class: 'ec-form' -%}
+
+          {%- if form.posted_successfully? -%}
+            <div class="ec-form__success" role="status" aria-live="polite">
+              <div class="ec-form__success-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <div>
+                <p class="ec-form__success-title">Message sent!</p>
+                <p class="ec-form__success-body">{{ 'contact.form.post_success' | t | default: 'Thank you for reaching out. A member of our team will be in touch within 24 hours.' }}</p>
+              </div>
+            </div>
+          {%- else -%}
+
+            {%- if form.errors -%}
+              <div class="ec-form__errors" role="alert">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                {{ form.errors | default_errors }}
+              </div>
+            {%- endif -%}
+
+            <div class="ec-form__row ec-form__row--2col">
+              <div class="ec-form__field">
+                <label class="ec-form__label" for="ec-name">
+                  Full Name <abbr title="required" aria-label="required">*</abbr>
+                </label>
+                <input
+                  id="ec-name"
+                  class="ec-form__input"
+                  type="text"
+                  name="contact[name]"
+                  autocomplete="name"
+                  required
+                  aria-required="true"
+                  placeholder="Priya Sharma"
+                  value="{{ form.name }}"
+                >
+              </div>
+              <div class="ec-form__field">
+                <label class="ec-form__label" for="ec-email">
+                  Email Address <abbr title="required" aria-label="required">*</abbr>
+                </label>
+                <input
+                  id="ec-email"
+                  class="ec-form__input"
+                  type="email"
+                  name="contact[email]"
+                  autocomplete="email"
+                  required
+                  aria-required="true"
+                  placeholder="priya@example.com"
+                  value="{{ form.email }}"
+                >
+              </div>
+            </div>
+
+            <div class="ec-form__row ec-form__row--2col">
+              <div class="ec-form__field">
+                <label class="ec-form__label" for="ec-phone">Phone Number</label>
+                <input
+                  id="ec-phone"
+                  class="ec-form__input"
+                  type="tel"
+                  name="contact[phone]"
+                  autocomplete="tel"
+                  placeholder="+91 98765 43210"
+                  value="{{ form.phone }}"
+                >
+              </div>
+              <div class="ec-form__field">
+                <label class="ec-form__label" for="ec-order">Order Number <span class="ec-form__label-hint">(optional)</span></label>
+                <input
+                  id="ec-order"
+                  class="ec-form__input"
+                  type="text"
+                  name="contact[order_number]"
+                  placeholder="#EL-10234"
+                >
+              </div>
+            </div>
+
+            <div class="ec-form__field">
+              <label class="ec-form__label" for="ec-subject">
+                Topic <abbr title="required" aria-label="required">*</abbr>
+              </label>
+              <div class="ec-form__select-wrap">
+                <select id="ec-subject" class="ec-form__input ec-form__select" name="contact[subject]" required aria-required="true">
+                  <option value="" disabled selected>Select a topic…</option>
+                  <option value="order">Order / Shipping / Tracking</option>
+                  <option value="product">Product Question / Advice</option>
+                  <option value="returns">Returns, Refunds & Exchanges</option>
+                  <option value="skincare">Personalised Skincare Guidance</option>
+                  <option value="partnership">Wholesale / B2B Partnership</option>
+                  <option value="press">Press / Media / Collaboration</option>
+                  <option value="feedback">Feedback & Suggestions</option>
+                  <option value="other">Other</option>
+                </select>
+                <span class="ec-form__select-arrow" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </span>
+              </div>
+            </div>
+
+            <div class="ec-form__field">
+              <label class="ec-form__label" for="ec-message">
+                Message <abbr title="required" aria-label="required">*</abbr>
+              </label>
+              <textarea
+                id="ec-message"
+                class="ec-form__input ec-form__textarea"
+                name="contact[body]"
+                rows="5"
+                required
+                aria-required="true"
+                placeholder="Tell us how we can help you…"
+              >{{ form.body }}</textarea>
+              <p class="ec-form__hint-text">The more detail you share, the faster we can help.</p>
+            </div>
+
+            <div class="ec-form__footer">
+              <button type="submit" class="ec-form__submit elanvi-btn elanvi-btn--primary">
+                Send Message
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              </button>
+              <p class="ec-form__privacy">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Your details are safe with us and never shared with third parties.
+              </p>
+            </div>
+
+          {%- endif -%}
+
+        {%- endform -%}
+      </div>
+
+    </div>
+  </div>
+
+  {%- comment -%}━━━━━━━━━━━━━━━━━━━━━━ FAQ ACCORDION ━━━━━━━━━━━━━━━━━━{%- endcomment -%}
+  <div class="ec-faq">
+    <div class="ec-faq__inner">
+      <div class="ec-faq__header">
+        <span class="elanvi-eyebrow">Quick Answers</span>
+        <h2 class="elanvi-heading-md ec-faq__heading">
+          {{ section.settings.faq_heading | default: 'Frequently Asked Questions' }}
+        </h2>
+      </div>
+
+      <div class="ec-faq__grid">
+
+        {%- for i in (1..6) -%}
+          {%- assign q_key = 'faq_q' | append: i -%}
+          {%- assign a_key = 'faq_a' | append: i -%}
+          {%- if section.settings[q_key] != blank -%}
+            <details class="ec-faq__item" name="contact-faq">
+              <summary class="ec-faq__question">
+                <span>{{ section.settings[q_key] }}</span>
+                <span class="ec-faq__icon" aria-hidden="true">
+                  <svg class="ec-faq__icon-plus" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  <svg class="ec-faq__icon-minus" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </span>
+              </summary>
+              <div class="ec-faq__answer">
+                <p>{{ section.settings[a_key] }}</p>
+              </div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%}━━━━━━━━━━━━━━━━━━━━━━━ TRUST BAR ━━━━━━━━━━━━━━━━━━━━{%- endcomment -%}
+  <div class="ec-trust">
+    <div class="ec-trust__inner">
+      <div class="ec-trust__item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>24-hr response guarantee</span>
+      </div>
+      <div class="ec-trust__divider" aria-hidden="true"></div>
+      <div class="ec-trust__item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>100% data privacy</span>
+      </div>
+      <div class="ec-trust__divider" aria-hidden="true"></div>
+      <div class="ec-trust__item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span>Dedicated skincare experts</span>
+      </div>
+      <div class="ec-trust__divider" aria-hidden="true"></div>
+      <div class="ec-trust__item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        <span>50,000+ happy customers</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% stylesheet %}
+/* =================================================================
+   ELANVI CONTACT PAGE  (BEM: ec-)
+   ================================================================= */
+.ec-page {
+  --ec-bg:       #fdf9f8;
+  --ec-bg-alt:   #fefefb;
+  --ec-strip:    #ebe6e1;
+  --ec-dark:     #23201b;
+  --ec-muted:    #4a4540;
+  --ec-accent:   #c89d6c;
+  --ec-acc-dk:   #b08857;
+  --ec-green:    #5C7A52;
+  --ec-border:   #D8D0C5;
+  --ec-radius:   10px;
+  --ec-trans:    0.22s ease;
+  --ec-sans:     system-ui, -apple-system, 'Inter', 'Segoe UI', Helvetica, sans-serif;
+  --ec-serif:    'Times New Roman', Georgia, serif;
+  background-color: var(--ec-bg);
+  font-family: var(--ec-sans);
+  color: var(--ec-dark);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Hero ──────────────────────────────────────────────────────── */
+.ec-hero {
+  position: relative;
+  background-color: var(--ec-strip);
+  padding: 5rem 1.25rem 4rem;
+  text-align: center;
+  overflow: hidden;
+}
+@media (min-width: 750px) { .ec-hero { padding: 6.5rem 2rem 5rem; } }
+
+/* decorative dot pattern */
+.ec-hero__bg-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(200,157,108,0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.ec-hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin-inline: auto;
+}
+
+.ec-hero__title {
+  margin-top: 0.75rem !important;
+  margin-bottom: 0;
+}
+
+.ec-hero__sub {
+  margin-top: 1rem !important;
+  color: var(--ec-muted);
+  max-width: 540px;
+  margin-inline: auto;
+}
+
+.ec-hero__badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.625rem;
+  margin-top: 1.75rem;
+}
+
+.ec-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.875rem;
+  background-color: rgba(200, 157, 108, 0.12);
+  border: 1px solid rgba(200, 157, 108, 0.3);
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ec-acc-dk);
+}
+
+/* ── Info cards ────────────────────────────────────────────────── */
+.ec-info-strip {
+  background-color: var(--ec-bg-alt);
+  border-top: 1px solid var(--ec-border);
+  border-bottom: 1px solid var(--ec-border);
+}
+
+.ec-info-strip__inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 2.5rem 1.25rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+@media (min-width: 600px) { .ec-info-strip__inner { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 990px) { .ec-info-strip__inner { grid-template-columns: repeat(4, 1fr); padding: 3rem 2rem; } }
+
+.ec-info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.375rem 1.25rem;
+  background-color: var(--ec-bg);
+  border: 1px solid var(--ec-border);
+  border-radius: 14px;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow var(--ec-trans), transform var(--ec-trans), border-color var(--ec-trans);
+}
+.ec-info-card:hover {
+  box-shadow: 0 6px 24px rgba(35,32,27,0.08);
+  transform: translateY(-2px);
+  border-color: var(--ec-accent);
+}
+
+.ec-info-card__icon {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: rgba(200, 157, 108, 0.1);
+  color: var(--ec-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ec-info-card__icon--whatsapp {
+  background-color: rgba(37, 211, 102, 0.1);
+  color: #25d366;
+}
+
+.ec-info-card__label {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: var(--ec-accent);
+  margin: 0 0 0.2rem;
+}
+
+.ec-info-card__value {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--ec-dark);
+  line-height: 1.45;
+  margin: 0 0 0.2rem;
+}
+
+.ec-info-card__hint {
+  font-size: 0.8rem;
+  color: var(--ec-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ── Body layout ───────────────────────────────────────────────── */
+.ec-body {
+  padding: 5rem 1.25rem 6rem;
+}
+@media (min-width: 750px) { .ec-body { padding: 6rem 2rem 7rem; } }
+
+.ec-body__inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+@media (min-width: 960px) {
+  .ec-body__inner { grid-template-columns: 1fr 1.55fr; gap: 5.5rem; }
+}
+
+/* ── Side panel ────────────────────────────────────────────────── */
+.ec-side__heading { margin-top: 0.75rem !important; }
+
+.ec-side__body {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: var(--ec-muted);
+  line-height: 1.8;
+}
+
+.ec-side__checks {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.ec-side__checks li {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.9375rem;
+  color: var(--ec-muted);
+}
+
+.ec-side__check-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: rgba(200, 157, 108, 0.12);
+  color: var(--ec-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Response promise card */
+.ec-promise {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  margin-top: 2rem;
+  padding: 1.125rem 1.25rem;
+  background-color: var(--ec-bg-alt);
+  border: 1px solid var(--ec-border);
+  border-left: 3px solid var(--ec-accent);
+  border-radius: 10px;
+}
+
+.ec-promise__icon {
+  flex-shrink: 0;
+  color: var(--ec-accent);
+  margin-top: 0.1rem;
+}
+
+.ec-promise__title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ec-dark);
+  margin: 0 0 0.3rem;
+}
+
+.ec-promise__body {
+  font-size: 0.875rem;
+  color: var(--ec-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Social links */
+.ec-side__social { margin-top: 2rem; }
+
+.ec-side__social-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ec-muted);
+  margin: 0 0 0.625rem;
+  font-weight: 600;
+}
+
+.ec-side__social-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ec-social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--ec-border);
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ec-muted);
+  text-decoration: none;
+  transition: color var(--ec-trans), border-color var(--ec-trans), background-color var(--ec-trans);
+}
+.ec-social-btn:hover {
+  color: var(--ec-accent);
+  border-color: var(--ec-accent);
+  background-color: rgba(200,157,108,0.06);
+}
+
+/* ── Form card ─────────────────────────────────────────────────── */
+.ec-form-wrap {
+  background-color: #fff;
+  border: 1px solid var(--ec-border);
+  border-radius: 18px;
+  padding: 2.25rem;
+  box-shadow: 0 4px 32px rgba(35,32,27,0.06);
+}
+@media (min-width: 750px) { .ec-form-wrap { padding: 2.75rem; } }
+
+.ec-form { display: flex; flex-direction: column; gap: 1.375rem; }
+
+/* Success state */
+.ec-form__success {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background-color: rgba(92, 122, 82, 0.08);
+  border: 1px solid rgba(92, 122, 82, 0.25);
+  border-radius: 12px;
+  padding: 1.25rem 1.375rem;
+}
+
+.ec-form__success-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(92, 122, 82, 0.15);
+  color: var(--ec-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ec-form__success-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #2e5928;
+  margin: 0 0 0.25rem;
+}
+
+.ec-form__success-body {
+  font-size: 0.9rem;
+  color: #3d6b35;
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* Error state */
+.ec-form__errors {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  background-color: rgba(192, 57, 43, 0.06);
+  border: 1px solid rgba(192, 57, 43, 0.2);
+  border-radius: 10px;
+  padding: 0.875rem 1.125rem;
+  color: #a33;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Grid rows */
+.ec-form__row { display: flex; flex-direction: column; gap: 1.375rem; }
+@media (min-width: 540px) { .ec-form__row--2col { flex-direction: row; } }
+
+.ec-form__field { display: flex; flex-direction: column; gap: 0.4rem; flex: 1; }
+
+/* Labels */
+.ec-form__label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--ec-dark);
+}
+.ec-form__label abbr {
+  text-decoration: none;
+  color: var(--ec-accent);
+  margin-left: 1px;
+}
+.ec-form__label-hint {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ec-muted);
+  font-size: 0.8rem;
+}
+
+/* Inputs / textarea */
+.ec-form__input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1.5px solid var(--ec-border);
+  border-radius: 9px;
+  background-color: #fff;
+  color: var(--ec-dark);
+  font-size: 0.9375rem;
+  font-family: var(--ec-sans);
+  transition: border-color var(--ec-trans), box-shadow var(--ec-trans);
+  outline: none;
+  box-sizing: border-box;
+}
+.ec-form__input::placeholder { color: #bdb4aa; }
+.ec-form__input:focus {
+  border-color: var(--ec-accent);
+  box-shadow: 0 0 0 3px rgba(200, 157, 108, 0.15);
+}
+
+/* Select wrapper */
+.ec-form__select-wrap {
+  position: relative;
+}
+.ec-form__select {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 2.75rem;
+  width: 100%;
+}
+.ec-form__select-arrow {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--ec-muted);
+}
+
+.ec-form__textarea { resize: vertical; min-height: 130px; }
+
+.ec-form__hint-text {
+  font-size: 0.8rem;
+  color: var(--ec-muted);
+  margin: 0;
+}
+
+/* Footer row */
+.ec-form__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  align-items: flex-start;
+}
+
+.ec-form__submit {
+  gap: 0.6rem;
+  padding: 0.9rem 2.25rem;
+  font-size: 0.875rem;
+}
+
+.ec-form__privacy {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8rem;
+  color: var(--ec-muted);
+  margin: 0;
+}
+.ec-form__privacy svg { flex-shrink: 0; color: var(--ec-green); }
+
+/* ── FAQ ───────────────────────────────────────────────────────── */
+.ec-faq {
+  background-color: var(--ec-bg-alt);
+  border-top: 1px solid var(--ec-border);
+  padding: 5rem 1.25rem;
+}
+@media (min-width: 750px) { .ec-faq { padding: 6rem 2rem; } }
+
+.ec-faq__inner { max-width: 900px; margin-inline: auto; }
+
+.ec-faq__header { text-align: center; margin-bottom: 3rem; }
+
+.ec-faq__heading { margin-top: 0.75rem !important; }
+
+.ec-faq__grid { display: flex; flex-direction: column; gap: 0; }
+
+.ec-faq__item {
+  border-bottom: 1px solid var(--ec-border);
+}
+.ec-faq__item:first-of-type { border-top: 1px solid var(--ec-border); }
+
+.ec-faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ec-dark);
+  list-style: none;
+  user-select: none;
+  transition: color var(--ec-trans);
+}
+.ec-faq__question::-webkit-details-marker { display: none; }
+.ec-faq__question:hover { color: var(--ec-accent); }
+
+.ec-faq__icon { flex-shrink: 0; color: var(--ec-accent); }
+.ec-faq__icon-minus { display: none; }
+
+details[open] .ec-faq__icon-plus  { display: none; }
+details[open] .ec-faq__icon-minus { display: block; }
+details[open] .ec-faq__question   { color: var(--ec-accent); }
+
+.ec-faq__answer {
+  padding: 0 0 1.25rem;
+}
+.ec-faq__answer p {
+  font-size: 0.9375rem;
+  color: var(--ec-muted);
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* ── Trust bar ─────────────────────────────────────────────────── */
+.ec-trust {
+  background-color: var(--ec-dark);
+  padding: 2rem 1.25rem;
+}
+@media (min-width: 750px) { .ec-trust { padding: 2.25rem 2rem; } }
+
+.ec-trust__inner {
+  max-width: 1100px;
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem 0;
+}
+
+.ec-trust__item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(232, 224, 214, 0.85);
+  padding-inline: 1.75rem;
+}
+.ec-trust__item svg { color: var(--ec-accent); flex-shrink: 0; }
+
+.ec-trust__divider {
+  width: 1px;
+  height: 28px;
+  background-color: rgba(232, 224, 214, 0.15);
+}
+@media (max-width: 599px) { .ec-trust__divider { display: none; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Elanvi — Contact",
+  "tag": "div",
+  "class": "elanvi-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "We are here for you"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Page heading",
+      "default": "Get in Touch"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "We love hearing from you. Whether it is a question about your order, a skincare concern, or just a hello — our care team is always ready."
+    },
+    {
+      "type": "header",
+      "content": "Contact Details"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email address",
+      "default": "hello@elanvi.in"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone number",
+      "default": "+91 98765 43210"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp",
+      "label": "WhatsApp number (digits only, with country code)",
+      "default": "919876543210"
+    },
+    {
+      "type": "textarea",
+      "id": "address",
+      "label": "Office address",
+      "default": "12, Wellness Tower, Koramangala, Bengaluru – 560 034, India"
+    },
+    {
+      "type": "text",
+      "id": "hours",
+      "label": "Working hours",
+      "default": "Mon – Sat: 9:00 AM – 6:00 PM IST"
+    },
+    {
+      "type": "header",
+      "content": "Form Section"
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form heading",
+      "default": "How can we help you today?"
+    },
+    {
+      "type": "textarea",
+      "id": "form_body",
+      "label": "Form description",
+      "default": "Fill in the form and a dedicated member of our skincare care team will respond within 24 hours. For urgent queries, WhatsApp or call us directly."
+    },
+    {
+      "type": "text",
+      "id": "check_1",
+      "label": "Checklist item 1",
+      "default": "Skincare advice & product recommendations"
+    },
+    {
+      "type": "text",
+      "id": "check_2",
+      "label": "Checklist item 2",
+      "default": "Order tracking, shipping & delivery"
+    },
+    {
+      "type": "text",
+      "id": "check_3",
+      "label": "Checklist item 3",
+      "default": "Returns, refunds & exchanges"
+    },
+    {
+      "type": "text",
+      "id": "check_4",
+      "label": "Checklist item 4",
+      "default": "Wholesale & partnership enquiries"
+    },
+    {
+      "type": "text",
+      "id": "check_5",
+      "label": "Checklist item 5",
+      "default": "Press, media & influencer requests"
+    },
+    {
+      "type": "text",
+      "id": "check_6",
+      "label": "Checklist item 6",
+      "default": "Personalised skincare routines"
+    },
+    {
+      "type": "header",
+      "content": "FAQ Section"
+    },
+    {
+      "type": "text",
+      "id": "faq_heading",
+      "label": "FAQ heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "text",
+      "id": "faq_q1",
+      "label": "FAQ 1 question",
+      "default": "How long does delivery take?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_a1",
+      "label": "FAQ 1 answer",
+      "default": "Standard delivery takes 4–7 business days across India. Express delivery (1–2 days) is available for select pin codes. You will receive a tracking link via email once your order is shipped."
+    },
+    {
+      "type": "text",
+      "id": "faq_q2",
+      "label": "FAQ 2 question",
+      "default": "What is your return policy?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_a2",
+      "label": "FAQ 2 answer",
+      "default": "We offer a 30-day hassle-free return policy on all unopened products. If a product did not meet your expectations, simply contact us and we will arrange a pick-up and full refund."
+    },
+    {
+      "type": "text",
+      "id": "faq_q3",
+      "label": "FAQ 3 question",
+      "default": "Are Elanvi products suitable for sensitive skin?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_a3",
+      "label": "FAQ 3 answer",
+      "default": "Yes! All Elanvi products are dermatologically tested, pH-balanced, and free from parabens, sulfates, and artificial fragrances. We recommend doing a patch test before full application if you have highly reactive skin."
+    },
+    {
+      "type": "text",
+      "id": "faq_q4",
+      "label": "FAQ 4 question",
+      "default": "Do you offer a subscription or loyalty programme?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_a4",
+      "label": "FAQ 4 answer",
+      "default": "Yes! Our Elanvi Ritual Club subscribers enjoy 15% off every order, early access to new launches, and free samples with every shipment. Sign up via the newsletter in the footer."
+    },
+    {
+      "type": "text",
+      "id": "faq_q5",
+      "label": "FAQ 5 question",
+      "default": "How do I track my order?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_a5",
+      "label": "FAQ 5 answer",
+      "default": "Once your order is dispatched, you will receive an email with a tracking number and a direct link to the courier portal. You can also track your order by logging into your Elanvi account."
+    },
+    {
+      "type": "text",
+      "id": "faq_q6",
+      "label": "FAQ 6 question",
+      "default": "Are Elanvi products cruelty-free and vegan?"
+    },
+    {
+      "type": "textarea",
+      "id": "faq_a6",
+      "label": "FAQ 6 answer",
+      "default": "All Elanvi products are 100% cruelty-free and never tested on animals. Most of our range is vegan; individual product pages indicate whether a formula contains any animal-derived ingredients."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Elanvi — Contact"
+    }
+  ]
+}
+{% endschema %}

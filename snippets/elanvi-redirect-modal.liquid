@@ -1,0 +1,37 @@
+{% comment %}
+  Snippet: elanvi-redirect-modal
+  Confirmation dialog shown before redirecting users to an external platform.
+  Controlled entirely by elanvi-theme.js.
+  Include once per page, ideally at the end of the elanvi-hero section.
+{% endcomment %}
+
+<dialog
+  id="elanvi-redirect-modal"
+  class="elanvi-modal"
+  aria-labelledby="elanvi-modal-title"
+>
+  <div class="elanvi-modal__box">
+    <div class="elanvi-modal__icon" aria-hidden="true">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" focusable="false">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+      </svg>
+    </div>
+
+    <h2 id="elanvi-modal-title" class="elanvi-modal__title">Leaving Elanvi</h2>
+
+    <p class="elanvi-modal__body">
+      You're being redirected to
+      <strong id="elanvi-modal-store">our partner store</strong>
+      to complete your purchase.
+    </p>
+
+    <div class="elanvi-modal__actions">
+      <button id="elanvi-modal-cancel" class="elanvi-modal__cancel" type="button">
+        Cancel
+      </button>
+      <button id="elanvi-modal-confirm" class="elanvi-modal__confirm" type="button">
+        Continue &rarr;
+      </button>
+    </div>
+  </div>
+</dialog>

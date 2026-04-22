@@ -1,0 +1,360 @@
+{% comment %}
+  Section: elanvi-hero
+  Full-width hero with product image, headline, CTA buttons,
+  feature badges, bundle selector, and external platform links.
+{% endcomment %}
+
+{%- liquid
+  assign hero_image           = section.settings.hero_image
+  assign eyebrow              = section.settings.eyebrow
+  assign heading              = section.settings.heading
+  assign subheading           = section.settings.subheading
+  assign cta_primary_text     = section.settings.cta_primary_text
+  assign cta_secondary_text   = section.settings.cta_secondary_text
+  assign product_url          = section.settings.product_url
+  assign bundle_label         = section.settings.bundle_label
+  assign platforms_label      = section.settings.platforms_label
+  assign amazon_url           = section.settings.amazon_url
+  assign nykaa_url            = section.settings.nykaa_url
+  assign flipkart_url         = section.settings.flipkart_url
+  assign trust_1              = section.settings.trust_1
+  assign trust_2              = section.settings.trust_2
+  assign trust_3              = section.settings.trust_3
+-%}
+
+<section class="elanvi-hero" id="home">
+  <div class="elanvi-hero__grid">
+
+    {%- comment %} ── Media Panel ── {%- endcomment -%}
+    <div class="elanvi-hero__media">
+      {%- if hero_image != blank -%}
+        {{
+          hero_image
+          | image_url: width: 1000
+          | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            alt: hero_image.alt | default: heading,
+            widths: '400, 600, 800, 1000',
+            sizes: '(min-width: 1024px) 50vw, 100vw'
+        }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'elanvi-hero__placeholder-img' }}
+      {%- endif -%}
+    </div>
+
+    {%- comment %} ── Content Panel ── {%- endcomment -%}
+    <div class="elanvi-hero__content">
+
+      {%- if eyebrow != blank -%}
+        <span class="elanvi-eyebrow">{{ eyebrow }}</span>
+      {%- endif -%}
+
+      {%- if heading != blank -%}
+        <h1 class="elanvi-heading-xl">
+          {{- heading | newline_to_br -}}
+        </h1>
+      {%- endif -%}
+
+      {%- if subheading != blank -%}
+        <p class="elanvi-body-lg">{{ subheading }}</p>
+      {%- endif -%}
+
+      {%- comment %} CTA Buttons {%- endcomment -%}
+      <div class="elanvi-hero__cta-row">
+
+        {%- comment %} Buy Now → select product, add first available variant, go to checkout {%- endcomment -%}
+        {%- assign buy_product = all_products[section.settings.buy_product] -%}
+        {%- assign buy_variant = buy_product.selected_or_first_available_variant -%}
+        {%- if buy_variant != blank -%}
+          <form action="/cart/add" method="post" class="elanvi-buy-form">
+            <input type="hidden" name="id" value="{{ buy_variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="return_to" value="/checkout">
+            <button type="submit" class="elanvi-btn elanvi-btn--primary">
+              {{ cta_primary_text | default: 'Buy Now' }}
+            </button>
+          </form>
+        {%- else -%}
+          <button class="elanvi-btn elanvi-btn--primary" type="button" data-elanvi-action="buy">
+            {{ cta_primary_text | default: 'Buy Now' }}
+          </button>
+        {%- endif -%}
+
+        {%- comment %} Explore Elanvi → product details page (uses product URL as fallback) {%- endcomment -%}
+        {%- assign explore_url = product_url | default: buy_product.url -%}
+        {%- if explore_url != blank -%}
+          <a href="{{ explore_url }}" class="elanvi-btn elanvi-btn--outline">
+            {{ cta_secondary_text | default: 'Explore Elanvi' }}
+          </a>
+        {%- else -%}
+          <button class="elanvi-btn elanvi-btn--outline" type="button" data-elanvi-action="explore">
+            {{ cta_secondary_text | default: 'Explore Elanvi' }}
+          </button>
+        {%- endif -%}
+
+      </div>
+
+      {%- comment %} Feature Badges {%- endcomment -%}
+      {%- assign badge_blocks = section.blocks | where: 'type', 'badge' -%}
+      {%- if badge_blocks.size > 0 -%}
+        <div class="elanvi-hero__badges">
+          {%- for block in badge_blocks -%}
+            <div class="elanvi-hero__badge" {{ block.shopify_attributes }}>
+              {{ block.settings.text }}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- comment %} Bundle & Save {%- endcomment -%}
+      {%- assign bundle_blocks = section.blocks | where: 'type', 'bundle_item' -%}
+      {%- if false and bundle_blocks.size > 0 -%}
+        <div class="elanvi-bundle">
+          <p class="elanvi-bundle__label">{{ bundle_label | default: 'Bundle & Save' }}</p>
+
+          <div class="elanvi-bundle__list">
+            {%- for block in bundle_blocks -%}
+              {%- render 'elanvi-bundle-item',
+                bundle_name: block.settings.title,
+                bundle_subtitle: block.settings.subtitle,
+                bundle_price: block.settings.price,
+                block: block
+              -%}
+            {%- endfor -%}
+          </div>
+
+          <div
+            class="elanvi-bundle__toast is-hidden"
+            id="elanvi-bundle-toast"
+            aria-live="polite"
+            aria-atomic="true"
+          ></div>
+
+          {%- comment %} Platform Redirect Buttons {%- endcomment -%}
+          {%- render 'elanvi-platform-buttons',
+            amazon_url: amazon_url,
+            nykaa_url: nykaa_url,
+            flipkart_url: flipkart_url,
+            label: platforms_label,
+            trust_1: trust_1,
+            trust_2: trust_2,
+            trust_3: trust_3
+          -%}
+        </div>
+      {%- endif -%}
+
+    </div>{%- comment %} /content panel {%- endcomment -%}
+  </div>
+</section>
+
+{%- render 'elanvi-redirect-modal' -%}
+
+{% schema %}
+{
+  "name": "Elanvi — Hero",
+  "tag": "div",
+  "class": "elanvi-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "header",
+      "content": "Copy"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "Ayurveda + Science for 30+ Skin"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading (use new lines for line breaks)",
+      "default": "Lift & Firm\nNeck & Jawline\nCream"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Age-smart skincare designed to support smoother, firmer, more elegant-looking skin."
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "product",
+      "id": "buy_product",
+      "label": "Buy Now — Select Product",
+      "info": "Pick your product. Buy Now will add it to cart and go straight to checkout. Explore Elanvi will also link to this product's page automatically."
+    },
+    {
+      "type": "url",
+      "id": "product_url",
+      "label": "Explore Elanvi — Override URL (optional)",
+      "info": "Only needed if you want Explore Elanvi to link to a different page than the selected product."
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_text",
+      "label": "Primary Button Label",
+      "default": "Buy Now"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_text",
+      "label": "Secondary Button Label",
+      "default": "Explore Elanvi"
+    },
+    {
+      "type": "header",
+      "content": "Bundle Section"
+    },
+    {
+      "type": "text",
+      "id": "bundle_label",
+      "label": "Bundle Section Label",
+      "default": "Bundle & Save"
+    },
+    {
+      "type": "header",
+      "content": "External Platform Links"
+    },
+    {
+      "type": "text",
+      "id": "platforms_label",
+      "label": "Platforms Intro Label",
+      "default": "✨ Also available on:"
+    },
+    {
+      "type": "url",
+      "id": "amazon_url",
+      "label": "Amazon Product URL"
+    },
+    {
+      "type": "url",
+      "id": "nykaa_url",
+      "label": "Nykaa Product URL"
+    },
+    {
+      "type": "url",
+      "id": "flipkart_url",
+      "label": "Flipkart Product URL"
+    },
+    {
+      "type": "header",
+      "content": "Trust Indicators"
+    },
+    {
+      "type": "text",
+      "id": "trust_1",
+      "label": "Trust Indicator 1",
+      "default": "✓ Official Partner"
+    },
+    {
+      "type": "text",
+      "id": "trust_2",
+      "label": "Trust Indicator 2",
+      "default": "🔒 Secure Checkout"
+    },
+    {
+      "type": "text",
+      "id": "trust_3",
+      "label": "Trust Indicator 3",
+      "default": "⚡ Same Day Shipping*"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Feature Badge",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Badge Text",
+          "default": "✨ Feature highlight"
+        }
+      ]
+    },
+    {
+      "type": "bundle_item",
+      "name": "Bundle Option",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Bundle Name",
+          "default": "Single Ritual"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Bundle Description",
+          "default": "1 x Neck & Jawline Cream"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Display Price",
+          "default": "₹1,499"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Elanvi Hero",
+      "blocks": [
+        {
+          "type": "badge",
+          "settings": {
+            "text": "✨ Visible firming support for neck & jawline skin"
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "text": "🌿 Elegant texture designed for everyday skincare rituals"
+          }
+        },
+        {
+          "type": "bundle_item",
+          "settings": {
+            "title": "Single Ritual",
+            "subtitle": "1 x Neck & Jawline Cream",
+            "price": "₹1,499"
+          }
+        },
+        {
+          "type": "bundle_item",
+          "settings": {
+            "title": "Firming Duo",
+            "subtitle": "2 x Neck & Jawline Cream",
+            "price": "₹2,699"
+          }
+        },
+        {
+          "type": "bundle_item",
+          "settings": {
+            "title": "Age-Smart Bundle",
+            "subtitle": "Cream + Firming Serum + Gentle Face Wash",
+            "price": "₹3,499"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

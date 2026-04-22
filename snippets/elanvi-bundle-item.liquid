@@ -1,0 +1,43 @@
+{% comment %}
+  Snippet: elanvi-bundle-item
+  Renders a single bundle option row inside the Bundle & Save block.
+
+  Parameters:
+    bundle_name      {String} — Display name for this bundle
+    bundle_subtitle  {String} — Short description (e.g. "2 x Neck & Jawline Cream")
+    bundle_price     {String} — Price string (live money or fallback display)
+    bundle_variant_id {String} — Shopify variant ID to inject into the buy form on select
+    buy_form_id      {String} — id of the parent <form> to update
+    buy_input_id     {String} — id of the <input name="id"> inside the buy form
+    block            {Object} — Shopify block object (for shopify_attributes)
+{% endcomment %}
+
+<div
+  class="elanvi-bundle-item"
+  role="radio"
+  aria-checked="false"
+  tabindex="0"
+  data-bundle-name="{{ bundle_name | escape }}"
+  data-bundle-price="{{ bundle_price | escape }}"
+  data-variant-id="{{ bundle_variant_id | escape }}"
+  data-buy-input-id="{{ buy_input_id | escape }}"
+  {% if block %}{{ block.shopify_attributes }}{% endif %}
+>
+  <div class="elanvi-bundle-item__info">
+    <h3 class="elanvi-bundle-item__title">{{ bundle_name }}</h3>
+    {%- if bundle_subtitle != blank -%}
+      <p class="elanvi-bundle-item__sub">{{ bundle_subtitle }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="elanvi-bundle-item__pricing">
+    <p class="elanvi-bundle-item__price">{{ bundle_price }}</p>
+    <button
+      class="elanvi-bundle-item__select-btn"
+      type="button"
+      aria-label="Select {{ bundle_name | escape }}"
+    >
+      Select
+    </button>
+  </div>
+</div>

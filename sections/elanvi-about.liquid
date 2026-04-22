@@ -1,0 +1,139 @@
+{% comment %}
+  Section: elanvi-about
+  Brand story / About section with heading, body text, eco badges, and CTAs.
+{% endcomment %}
+
+<section class="elanvi-about" id="elanvi-about">
+  <div class="elanvi-about__inner">
+
+    <div class="elanvi-about__text">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="elanvi-heading-lg">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.body != blank -%}
+        <p class="elanvi-about__body">{{ section.settings.body }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.badge_1 != blank or section.settings.badge_2 != blank or section.settings.badge_3 != blank -%}
+        <div class="elanvi-about__badges">
+          {%- if section.settings.badge_1 != blank -%}<span>{{ section.settings.badge_1 }}</span>{%- endif -%}
+          {%- if section.settings.badge_2 != blank -%}<span>{{ section.settings.badge_2 }}</span>{%- endif -%}
+          {%- if section.settings.badge_3 != blank -%}<span>{{ section.settings.badge_3 }}</span>{%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="elanvi-about__actions">
+
+      {%- comment %} Buy Now → select product, add first available variant, go to checkout {%- endcomment -%}
+      {%- assign buy_product = all_products[section.settings.buy_product] -%}
+      {%- assign buy_variant = buy_product.selected_or_first_available_variant -%}
+      {%- if buy_variant != blank -%}
+        <form action="/cart/add" method="post" class="elanvi-buy-form">
+          <input type="hidden" name="id" value="{{ buy_variant.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="return_to" value="/checkout">
+          <button type="submit" class="elanvi-btn elanvi-btn--primary">
+            {{ section.settings.cta_primary | default: 'Buy Now' }}
+          </button>
+        </form>
+      {%- else -%}
+        <button class="elanvi-btn elanvi-btn--primary" type="button" data-elanvi-action="buy">
+          {{ section.settings.cta_primary | default: 'Buy Now' }}
+        </button>
+      {%- endif -%}
+
+      {%- comment %} Explore Elanvi → product details page (uses product URL as fallback) {%- endcomment -%}
+      {%- assign explore_url = section.settings.product_url | default: buy_product.url -%}
+      {%- if explore_url != blank -%}
+        <a href="{{ explore_url }}" class="elanvi-btn elanvi-btn--outline">
+          {{ section.settings.cta_secondary | default: 'Explore Elanvi' }}
+        </a>
+      {%- else -%}
+        <button class="elanvi-btn elanvi-btn--outline" type="button" data-elanvi-action="explore">
+          {{ section.settings.cta_secondary | default: 'Explore Elanvi' }}
+        </button>
+      {%- endif -%}
+
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Elanvi — About",
+  "tag": "div",
+  "class": "elanvi-section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Elanvi is building skincare for women above 30 years."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body Text",
+      "default": "Thoughtful, elegant, age-smart skincare that honors Ayurvedic heritage and modern science. Every formula is crafted to nurture mature skin with dignity and grace."
+    },
+    {
+      "type": "header",
+      "content": "Trust Badges"
+    },
+    {
+      "type": "text",
+      "id": "badge_1",
+      "label": "Badge 1",
+      "default": "🌱 Cruelty-free"
+    },
+    {
+      "type": "text",
+      "id": "badge_2",
+      "label": "Badge 2",
+      "default": "💧 Clean ingredients"
+    },
+    {
+      "type": "text",
+      "id": "badge_3",
+      "label": "Badge 3",
+      "default": "♻️ Recyclable packaging"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "product",
+      "id": "buy_product",
+      "label": "Buy Now — Select Product",
+      "info": "Pick your product. Buy Now will add it to cart and go straight to checkout. Explore Elanvi will also link to this product automatically."
+    },
+    {
+      "type": "url",
+      "id": "product_url",
+      "label": "Explore Elanvi — Override URL (optional)",
+      "info": "Only needed if you want Explore Elanvi to go somewhere other than the selected product page."
+    },
+    {
+      "type": "text",
+      "id": "cta_primary",
+      "label": "Primary Button Label",
+      "default": "Buy Now"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary",
+      "label": "Secondary Button Label",
+      "default": "Explore Elanvi"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Elanvi About"
+    }
+  ]
+}
+{% endschema %}

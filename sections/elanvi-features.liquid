@@ -1,0 +1,97 @@
+{% comment %}
+  Section: elanvi-features
+  Three-column USP strip displayed between the hero and ingredients.
+  Each feature block has an icon (emoji), title, and short description.
+{% endcomment %}
+
+<section class="elanvi-features" id="elanvi-features" aria-label="{{ section.settings.aria_label | default: 'Key Features' }}">
+  <div class="elanvi-features__grid">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'feature' -%}
+        <div class="elanvi-feature" {{ block.shopify_attributes }}>
+          <div class="elanvi-feature__icon" aria-hidden="true">{{ block.settings.icon }}</div>
+          <div>
+            <h3 class="elanvi-feature__title">{{ block.settings.title }}</h3>
+            {%- if block.settings.description != blank -%}
+              <p class="elanvi-feature__desc">{{ block.settings.description }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Elanvi — Features Strip",
+  "tag": "div",
+  "class": "elanvi-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Accessible section label (screen readers)",
+      "default": "Key Features"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji)",
+          "default": "✿"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Short description of this feature."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Elanvi Features Strip",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "✿",
+            "title": "Ayurveda + Science",
+            "description": "Botanical wisdom paired with modern skincare actives."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "⚗️",
+            "title": "Clinically Inspired Actives",
+            "description": "Designed to feel elegant, effective, and skin-conscious."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "✓",
+            "title": "Dermatologically Tested",
+            "description": "Created to feel trustworthy and refined for daily use."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

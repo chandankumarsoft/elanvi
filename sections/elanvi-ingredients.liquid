@@ -1,0 +1,130 @@
+{% comment %}
+  Section: elanvi-ingredients
+  Ingredient spotlight grid — up to 8 ingredients, each with a circular
+  image, name, and short description.
+{% endcomment %}
+
+<section class="elanvi-ingredients" id="elanvi-ingredients">
+  <div class="elanvi-ingredients__header">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="elanvi-heading-lg">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <p class="elanvi-ingredients__subtitle">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="elanvi-ingredients__grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'ingredient' -%}
+          <div class="elanvi-ingredient" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 224
+                | image_tag:
+                  class: 'elanvi-ingredient__img',
+                  loading: 'lazy',
+                  alt: block.settings.image.alt | default: block.settings.name,
+                  widths: '112, 224',
+                  sizes: '112px'
+              }}
+            {%- else -%}
+              {{ 'product-1' | placeholder_svg_tag: 'elanvi-ingredient__img elanvi-ingredient__img--placeholder' }}
+            {%- endif -%}
+
+            <h3 class="elanvi-ingredient__name">{{ block.settings.name }}</h3>
+
+            {%- if block.settings.description != blank -%}
+              <p class="elanvi-ingredient__desc">{{ block.settings.description }}</p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Elanvi — Ingredients",
+  "tag": "div",
+  "class": "elanvi-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Ingredient Spotlight"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "Potent botanicals & actives that redefine firmness and radiance for mature skin."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Ingredient Image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Ingredient Name",
+          "default": "Ingredient"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Short Description",
+          "default": "Supports skin health and vitality."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Elanvi Ingredients",
+      "blocks": [
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Gotu Kola",
+            "description": "Supports skin firmness and helps improve elasticity."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Bakuchiol",
+            "description": "Gentle retinol-like active that smooths and refines."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Niacinamide",
+            "description": "Helps even tone and brighten skin appearance."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "name": "Saffron",
+            "description": "Adds radiance and a luxurious Ayurvedic touch."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

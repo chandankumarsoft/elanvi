@@ -1,0 +1,314 @@
+
+<div class="elanvi-account-dashboard">
+
+  <nav class="elanvi-account-breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ routes.account_url }}">Account</a>
+    <span aria-hidden="true">&rsaquo;</span>
+    <span aria-current="page">Order {{ order.name }}</span>
+  </nav>
+
+  <div class="elanvi-account-dashboard__header">
+    <div>
+      <h1 class="elanvi-heading-md">Order {{ order.name }}</h1>
+      <p class="elanvi-account-dashboard__name">
+        Placed on {{ order.created_at | date: '%B %d, %Y' }}
+        &middot;
+        <span class="elanvi-orders-table__badge elanvi-orders-table__badge--{{ order.financial_status }}">
+          {{ order.financial_status_label }}
+        </span>
+      </p>
+    </div>
+  </div>
+
+  {%- comment %} ── Line Items ── {%- endcomment -%}
+  <div class="elanvi-order-items">
+    {%- for line_item in order.line_items -%}
+      <div class="elanvi-order-item">
+        {%- if line_item.image -%}
+          <div class="elanvi-order-item__image">
+            {{
+              line_item.image
+              | image_url: width: 160
+              | image_tag:
+                loading: 'lazy',
+                alt: line_item.image.alt | default: line_item.title,
+                widths: '80, 160'
+            }}
+          </div>
+        {%- endif -%}
+        <div class="elanvi-order-item__info">
+          <p class="elanvi-order-item__title">{{ line_item.title }}</p>
+          {%- unless line_item.variant.title contains 'Default' -%}
+            <p class="elanvi-order-item__variant">{{ line_item.variant.title }}</p>
+          {%- endunless -%}
+          <p class="elanvi-order-item__qty">Qty: {{ line_item.quantity }}</p>
+          {%- if line_item.fulfillment -%}
+            <p class="elanvi-order-item__fulfillment">
+              {%- if line_item.fulfillment.tracking_url -%}
+                <a href="{{ line_item.fulfillment.tracking_url }}" target="_blank" rel="noopener" class="elanvi-form__link">
+                  Track shipment &rarr;
+                </a>
+              {%- else -%}
+                Fulfilled {{ line_item.fulfillment.created_at | date: '%b %d, %Y' }}
+              {%- endif -%}
+            </p>
+          {%- endif -%}
+        </div>
+        <p class="elanvi-order-item__price">{{ line_item.final_line_price | money }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- comment %} ── Order Summary ── {%- endcomment -%}
+  <div class="elanvi-order-summary-grid">
+
+    {%- if order.shipping_address -%}
+      <div class="elanvi-order-address">
+        <h2 class="elanvi-order-address__title">Shipping Address</h2>
+        <address class="elanvi-order-address__body">
+          {{ order.shipping_address.name }}<br>
+          {{ order.shipping_address.address1 }}<br>
+          {%- if order.shipping_address.address2 != blank -%}
+            {{ order.shipping_address.address2 }}<br>
+          {%- endif -%}
+          {{ order.shipping_address.city }},
+          {{ order.shipping_address.province_code }}
+          {{ order.shipping_address.zip }}<br>
+          {{ order.shipping_address.country_code }}
+        </address>
+      </div>
+    {%- endif -%}
+
+    <div class="elanvi-order-totals">
+      <h2 class="elanvi-order-totals__title">Order Summary</h2>
+      <dl class="elanvi-order-totals__list">
+        <div class="elanvi-order-totals__row">
+          <dt>Subtotal</dt>
+          <dd>{{ order.subtotal_price | money }}</dd>
+        </div>
+        {%- for discount in order.cart_level_discount_applications -%}
+          <div class="elanvi-order-totals__row elanvi-order-totals__row--discount">
+            <dt>{{ discount.title }}</dt>
+            <dd>&minus; {{ discount.total_allocated_amount | money }}</dd>
+          </div>
+        {%- endfor -%}
+        {%- for shipping_line in order.shipping_lines -%}
+          <div class="elanvi-order-totals__row">
+            <dt>{{ shipping_line.title }}</dt>
+            <dd>{{ shipping_line.price | money }}</dd>
+          </div>
+        {%- endfor -%}
+        {%- if order.tax_price > 0 -%}
+          <div class="elanvi-order-totals__row">
+            <dt>Tax</dt>
+            <dd>{{ order.tax_price | money }}</dd>
+          </div>
+        {%- endif -%}
+        <div class="elanvi-order-totals__row elanvi-order-totals__row--total">
+          <dt>Total</dt>
+          <dd>{{ order.total_price | money }}</dd>
+        </div>
+      </dl>
+    </div>
+
+  </div>
+
+  <a href="{{ routes.account_url }}" class="elanvi-account-back">
+    &larr; Back to account
+  </a>
+
+</div>
+
+{% stylesheet %}
+  .elanvi-account-dashboard {
+    max-width: 900px;
+    margin-inline: auto;
+    padding: 2.5rem 1rem 4rem;
+  }
+
+  @media (min-width: 750px) {
+    .elanvi-account-dashboard { padding: 3.5rem 1.5rem 5rem; }
+  }
+
+  .elanvi-account-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--elanvi-text-muted, #5A5147);
+    margin-bottom: 1.5rem;
+  }
+
+  .elanvi-account-breadcrumb a {
+    color: var(--elanvi-gold, #B78A57);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .elanvi-account-dashboard__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+
+  .elanvi-account-dashboard__name {
+    margin-top: 0.5rem;
+    color: var(--elanvi-text-muted, #5A5147);
+    font-size: 0.9375rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .elanvi-order-items {
+    border: 1px solid var(--elanvi-border, #E4DED5);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .elanvi-order-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--elanvi-border, #E4DED5);
+  }
+
+  .elanvi-order-item:last-child { border-bottom: none; }
+
+  .elanvi-order-item__image {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--elanvi-bg-cream, #ECE6DE);
+  }
+
+  .elanvi-order-item__image img { width: 100%; height: 100%; object-fit: cover; }
+
+  .elanvi-order-item__info { flex: 1; }
+
+  .elanvi-order-item__title {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--elanvi-text, #2E2924);
+    margin: 0;
+  }
+
+  .elanvi-order-item__variant,
+  .elanvi-order-item__qty,
+  .elanvi-order-item__fulfillment {
+    font-size: 0.8125rem;
+    color: var(--elanvi-text-muted, #5A5147);
+    margin: 0.25rem 0 0;
+  }
+
+  .elanvi-order-item__price {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--elanvi-text, #2E2924);
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .elanvi-order-summary-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 750px) {
+    .elanvi-order-summary-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .elanvi-order-address,
+  .elanvi-order-totals {
+    background: var(--elanvi-white, #fff);
+    border: 1px solid var(--elanvi-border, #E4DED5);
+    border-radius: 16px;
+    padding: 1.5rem;
+  }
+
+  .elanvi-order-address__title,
+  .elanvi-order-totals__title {
+    font-family: var(--elanvi-font-serif, serif);
+    font-size: 1rem;
+    color: var(--elanvi-text, #2E2924);
+    margin: 0 0 0.875rem;
+    font-weight: 600;
+  }
+
+  .elanvi-order-address__body {
+    font-size: 0.875rem;
+    color: var(--elanvi-text-muted, #5A5147);
+    font-style: normal;
+    line-height: 1.6;
+  }
+
+  .elanvi-order-totals__list { margin: 0; padding: 0; }
+
+  .elanvi-order-totals__row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--elanvi-border, #E4DED5);
+  }
+
+  .elanvi-order-totals__row:last-child { border-bottom: none; }
+  .elanvi-order-totals__row dt { color: var(--elanvi-text-muted, #5A5147); }
+  .elanvi-order-totals__row dd { margin: 0; font-weight: 500; }
+  .elanvi-order-totals__row--total dt,
+  .elanvi-order-totals__row--total dd { font-weight: 700; font-size: 1rem; color: var(--elanvi-text, #2E2924); }
+  .elanvi-order-totals__row--discount dt,
+  .elanvi-order-totals__row--discount dd { color: var(--elanvi-green, #5C7A52); }
+
+  .elanvi-orders-table__badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background-color: var(--elanvi-bg-light, #FAF8F4);
+    color: var(--elanvi-text, #2E2924);
+    border: 1px solid var(--elanvi-border, #E4DED5);
+  }
+
+  .elanvi-orders-table__badge--paid { background-color: #e6f7ee; color: #1a7040; border-color: #b6e0c8; }
+  .elanvi-orders-table__badge--fulfilled { background-color: #e6f7ee; color: #1a7040; border-color: #b6e0c8; }
+  .elanvi-orders-table__badge--pending { background-color: #fff9e6; color: #8f6b00; border-color: #ffe099; }
+
+  .elanvi-account-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    color: var(--elanvi-gold, #B78A57);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .elanvi-form__link {
+    color: var(--elanvi-gold, #B78A57);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    font-size: 0.875rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Customer Order",
+  "tag": "div",
+  "class": "elanvi-section",
+  "enabled_on": {
+    "templates": ["customers/order"]
+  },
+  "settings": []
+}
+{% endschema %}

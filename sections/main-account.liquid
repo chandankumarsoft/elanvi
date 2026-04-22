@@ -1,0 +1,291 @@
+
+<div class="elanvi-account-dashboard">
+
+  {%- comment %} ── Page Header ── {%- endcomment -%}
+  <div class="elanvi-account-dashboard__header">
+    <div class="elanvi-account-dashboard__welcome">
+      <h1 class="elanvi-heading-md">My Account</h1>
+      <p class="elanvi-account-dashboard__name">
+        Welcome back, {{ customer.first_name | default: customer.email }}.
+      </p>
+    </div>
+    <a href="{{ routes.account_logout_url }}" class="elanvi-account-logout">
+      Sign out
+    </a>
+  </div>
+
+  {%- comment %} ── Profile & Nav Cards ── {%- endcomment -%}
+  <div class="elanvi-account-grid">
+
+    <div class="elanvi-account-info-card">
+      <h2 class="elanvi-account-info-card__title">Account Details</h2>
+      <dl class="elanvi-account-info-card__list">
+        <div class="elanvi-account-info-card__row">
+          <dt>Name</dt>
+          <dd>{{ customer.name | default: '—' }}</dd>
+        </div>
+        <div class="elanvi-account-info-card__row">
+          <dt>Email</dt>
+          <dd>{{ customer.email }}</dd>
+        </div>
+        {%- if customer.default_address -%}
+          <div class="elanvi-account-info-card__row">
+            <dt>Default address</dt>
+            <dd>
+              {{ customer.default_address.address1 }},
+              {{ customer.default_address.city }},
+              {{ customer.default_address.country }}
+            </dd>
+          </div>
+        {%- endif -%}
+      </dl>
+      <a href="{{ routes.account_addresses_url }}" class="elanvi-account-info-card__link">
+        Manage addresses &rarr;
+      </a>
+    </div>
+
+  </div>
+
+  {%- comment %} ── Order History ── {%- endcomment -%}
+  <div class="elanvi-account-orders">
+    <h2 class="elanvi-account-orders__title">Order History</h2>
+
+    {%- if customer.orders.size == 0 -%}
+
+      <div class="elanvi-account-empty">
+        <p class="elanvi-account-empty__text">You haven't placed any orders yet.</p>
+        <a href="{{ routes.all_products_collection_url }}" class="elanvi-btn elanvi-btn--primary">
+          Start Shopping
+        </a>
+      </div>
+
+    {%- else -%}
+
+      <div class="elanvi-orders-table-wrap">
+        <table class="elanvi-orders-table" role="table">
+          <thead>
+            <tr>
+              <th scope="col">Order</th>
+              <th scope="col">Date</th>
+              <th scope="col">Payment</th>
+              <th scope="col">Fulfilment</th>
+              <th scope="col">Total</th>
+              <th scope="col"><span class="visually-hidden">View</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for order in customer.orders -%}
+              <tr>
+                <td data-label="Order">
+                  <a href="{{ order.customer_url }}" class="elanvi-orders-table__link">
+                    {{ order.name }}
+                  </a>
+                </td>
+                <td data-label="Date">{{ order.created_at | date: '%b %d, %Y' }}</td>
+                <td data-label="Payment">
+                  <span class="elanvi-orders-table__badge elanvi-orders-table__badge--{{ order.financial_status }}">
+                    {{ order.financial_status_label }}
+                  </span>
+                </td>
+                <td data-label="Fulfilment">
+                  <span class="elanvi-orders-table__badge elanvi-orders-table__badge--{{ order.fulfillment_status }}">
+                    {{ order.fulfillment_status_label | default: 'Processing' }}
+                  </span>
+                </td>
+                <td data-label="Total">{{ order.total_price | money }}</td>
+                <td>
+                  <a href="{{ order.customer_url }}" class="elanvi-orders-table__view">
+                    View &rarr;
+                  </a>
+                </td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+
+    {%- endif -%}
+  </div>
+
+</div>
+
+{% stylesheet %}
+  .elanvi-account-dashboard {
+    max-width: 900px;
+    margin-inline: auto;
+    padding: 2.5rem 1rem 4rem;
+  }
+
+  @media (min-width: 750px) {
+    .elanvi-account-dashboard { padding: 3.5rem 1.5rem 5rem; }
+  }
+
+  .elanvi-account-dashboard__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .elanvi-account-dashboard__name {
+    margin-top: 0.25rem;
+    color: var(--elanvi-text-muted, #5A5147);
+    font-size: 0.9375rem;
+  }
+
+  .elanvi-account-logout {
+    font-size: 0.875rem;
+    color: var(--elanvi-gold, #B78A57);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    white-space: nowrap;
+    margin-top: 0.25rem;
+  }
+
+  .elanvi-account-grid { margin-bottom: 2.5rem; }
+
+  .elanvi-account-info-card {
+    background: var(--elanvi-white, #fff);
+    border: 1px solid var(--elanvi-border, #E4DED5);
+    border-radius: 16px;
+    padding: 1.5rem;
+  }
+
+  @media (min-width: 750px) {
+    .elanvi-account-info-card { padding: 2rem; max-width: 26rem; }
+  }
+
+  .elanvi-account-info-card__title {
+    font-family: var(--elanvi-font-serif, serif);
+    font-size: 1.125rem;
+    color: var(--elanvi-text, #2E2924);
+    margin: 0 0 1rem;
+  }
+
+  .elanvi-account-info-card__list { margin: 0; padding: 0; }
+
+  .elanvi-account-info-card__row {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--elanvi-border, #E4DED5);
+    font-size: 0.875rem;
+  }
+
+  .elanvi-account-info-card__row:last-child { border-bottom: none; }
+  .elanvi-account-info-card__row dt { color: var(--elanvi-text-muted, #5A5147); }
+  .elanvi-account-info-card__row dd { margin: 0; color: var(--elanvi-text, #2E2924); font-weight: 500; }
+
+  .elanvi-account-info-card__link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: var(--elanvi-gold, #B78A57);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .elanvi-account-orders__title {
+    font-family: var(--elanvi-font-serif, serif);
+    font-size: 1.375rem;
+    color: var(--elanvi-text, #2E2924);
+    margin: 0 0 1.25rem;
+  }
+
+  .elanvi-account-empty {
+    background: var(--elanvi-bg-light, #FAF8F4);
+    border: 1px solid var(--elanvi-border, #E4DED5);
+    border-radius: 16px;
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+
+  .elanvi-account-empty__text {
+    color: var(--elanvi-text-muted, #5A5147);
+    margin: 0 0 1.5rem;
+  }
+
+  .elanvi-orders-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--elanvi-border, #E4DED5);
+    border-radius: 16px;
+  }
+
+  .elanvi-orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .elanvi-orders-table thead tr {
+    border-bottom: 1px solid var(--elanvi-border, #E4DED5);
+    background-color: var(--elanvi-bg-light, #FAF8F4);
+  }
+
+  .elanvi-orders-table th,
+  .elanvi-orders-table td {
+    padding: 0.875rem 1rem;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .elanvi-orders-table th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--elanvi-text-muted, #5A5147);
+    font-weight: 600;
+  }
+
+  .elanvi-orders-table tbody tr {
+    border-bottom: 1px solid var(--elanvi-border, #E4DED5);
+  }
+
+  .elanvi-orders-table tbody tr:last-child { border-bottom: none; }
+
+  .elanvi-orders-table__link {
+    color: var(--elanvi-text, #2E2924);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .elanvi-orders-table__view {
+    color: var(--elanvi-gold, #B78A57);
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  .elanvi-orders-table__badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background-color: var(--elanvi-bg-light, #FAF8F4);
+    color: var(--elanvi-text, #2E2924);
+    border: 1px solid var(--elanvi-border, #E4DED5);
+  }
+
+  .elanvi-orders-table__badge--paid { background-color: #e6f7ee; color: #1a7040; border-color: #b6e0c8; }
+  .elanvi-orders-table__badge--fulfilled { background-color: #e6f7ee; color: #1a7040; border-color: #b6e0c8; }
+  .elanvi-orders-table__badge--pending { background-color: #fff9e6; color: #8f6b00; border-color: #ffe099; }
+  .elanvi-orders-table__badge--unfulfilled { background-color: #fff9e6; color: #8f6b00; border-color: #ffe099; }
+  .elanvi-orders-table__badge--refunded { background-color: #fef0f0; color: #c0392b; border-color: #f5c0c0; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Customer Account",
+  "tag": "div",
+  "class": "elanvi-section",
+  "enabled_on": {
+    "templates": ["customers/account"]
+  },
+  "settings": []
+}
+{% endschema %}

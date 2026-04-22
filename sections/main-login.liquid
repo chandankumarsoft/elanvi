@@ -1,0 +1,174 @@
+
+<div class="elanvi-account-page">
+  <div class="elanvi-account-card">
+
+    <div class="elanvi-account-card__header">
+      <h1 class="elanvi-heading-md">Sign In</h1>
+      <p class="elanvi-account-card__subtitle">Welcome back to your Elanvi account.</p>
+    </div>
+
+    {%- form 'customer_login', class: 'elanvi-account-form' -%}
+
+      {%- if form.errors -%}
+        <div class="elanvi-form__errors" role="alert" aria-live="assertive">
+          {{ form.errors | default_errors }}
+        </div>
+      {%- endif -%}
+
+      <div class="elanvi-form__field">
+        <label for="CustomerEmail" class="elanvi-form__label">Email address</label>
+        <input
+          type="email"
+          id="CustomerEmail"
+          name="customer[email]"
+          value="{{ form.email }}"
+          autocomplete="email"
+          autocapitalize="off"
+          autocorrect="off"
+          class="elanvi-form__input"
+          placeholder="your@email.com"
+          required
+        >
+      </div>
+
+      <div class="elanvi-form__field">
+        <div class="elanvi-form__label-row">
+          <label for="CustomerPassword" class="elanvi-form__label">Password</label>
+          <a href="{{ routes.account_recover_url }}" class="elanvi-form__link">
+            Forgot password?
+          </a>
+        </div>
+        <input
+          type="password"
+          id="CustomerPassword"
+          name="customer[password]"
+          autocomplete="current-password"
+          class="elanvi-form__input"
+          placeholder="••••••••"
+          required
+        >
+      </div>
+
+      <button type="submit" class="elanvi-btn elanvi-btn--primary elanvi-btn--block">
+        Sign In
+      </button>
+
+    {%- endform -%}
+
+    <p class="elanvi-account-card__alt">
+      New to Elanvi?
+      <a href="{{ routes.account_register_url }}" class="elanvi-form__link">
+        Create an account &rarr;
+      </a>
+    </p>
+
+  </div>
+</div>
+
+{% stylesheet %}
+  .elanvi-account-page {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    background-color: var(--elanvi-bg, #F7F4EF);
+  }
+
+  .elanvi-account-card {
+    background-color: var(--elanvi-white, #fff);
+    border: 1px solid var(--elanvi-border, #E4DED5);
+    border-radius: 24px;
+    padding: 2rem 1.5rem;
+    width: 100%;
+    max-width: 26rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+
+  @media (min-width: 750px) {
+    .elanvi-account-card { padding: 3rem; }
+  }
+
+  .elanvi-account-card__header { text-align: center; margin-bottom: 1.75rem; }
+
+  .elanvi-account-card__subtitle {
+    margin-top: 0.5rem;
+    font-size: 0.9375rem;
+    color: var(--elanvi-text-muted, #5A5147);
+  }
+
+  .elanvi-account-form { display: flex; flex-direction: column; gap: 1.25rem; }
+
+  .elanvi-form__field { display: flex; flex-direction: column; gap: 0.375rem; }
+
+  .elanvi-form__label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .elanvi-form__label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--elanvi-text, #2E2924);
+  }
+
+  .elanvi-form__input {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--elanvi-border, #E4DED5);
+    border-radius: 12px;
+    font-size: 1rem;
+    color: var(--elanvi-text, #2E2924);
+    background-color: var(--elanvi-white, #fff);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+  }
+
+  .elanvi-form__input:focus {
+    outline: none;
+    border-color: var(--elanvi-gold, #B78A57);
+    box-shadow: 0 0 0 3px rgba(183,138,87,0.15);
+  }
+
+  .elanvi-form__link {
+    font-size: 0.8125rem;
+    color: var(--elanvi-gold, #B78A57);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .elanvi-form__link:hover { color: var(--elanvi-gold-dark, #9f6e42); }
+
+  .elanvi-btn--block { width: 100%; margin-top: 0.5rem; }
+
+  .elanvi-account-card__alt {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--elanvi-text-muted, #5A5147);
+  }
+
+  .elanvi-form__errors {
+    background-color: #fff0f0;
+    border: 1px solid #f5c0c0;
+    border-radius: 12px;
+    padding: 0.875rem 1rem;
+    font-size: 0.875rem;
+    color: #c0392b;
+  }
+
+  .elanvi-form__errors ul { margin: 0; padding-left: 1.25rem; }
+  .elanvi-form__errors li { margin-top: 0.25rem; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Customer Login",
+  "tag": "div",
+  "class": "elanvi-section",
+  "enabled_on": {
+    "templates": ["customers/login"]
+  },
+  "settings": []
+}
+{% endschema %}

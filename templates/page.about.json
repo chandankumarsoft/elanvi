@@ -1,0 +1,48 @@
+{
+  "sections": {
+    "about_main": {
+      "type": "elanvi-about-page",
+      "settings": {
+        "eyebrow": "Our Story",
+        "hero_heading": "Science Rooted in Ancient Wisdom",
+        "hero_body": "Elanvi was born from a simple belief: that women above 30 deserve skincare that is as thoughtful and refined as they are. We weave centuries of Ayurvedic intelligence with cutting-edge dermatological science — creating rituals, not just products.",
+        "pillar_1_title": "Ayurvedic Heritage",
+        "pillar_1_body": "Every formula begins with time-honoured Ayurvedic botanicals — Ashwagandha, Kumkumadi, Saffron, and more — chosen for their proven efficacy on mature skin.",
+        "pillar_2_title": "Modern Science",
+        "pillar_2_body": "Our R&D team pairs ancient actives with clinically validated peptides, retinoids, and hyaluronic acid complexes — delivering visible results without compromise.",
+        "pillar_3_title": "Luxury You Deserve",
+        "pillar_3_body": "Premium textures, elegant packaging, and a sensorial ritual experience designed to make every morning and evening feel like a celebration of self.",
+        "story_eyebrow": "Where it all began",
+        "story_heading": "A Kitchen Counter. A Real Problem. A Purpose.",
+        "story_body_1": "In 2021, our founder Ananya noticed something that most skincare brands were ignoring: women in their 30s, 40s, and 50s were being offered the same products as teenagers. Generic formulas. Generic promises. No acknowledgment of the unique shifts that mature skin undergoes — hormonally, structurally, and environmentally.",
+        "story_body_2": "She spent two years working with Ayurvedic scholars in Kerala and dermatologists in Bengaluru, blending the two worlds into what is now Elanvi. The name itself derives from the Tamil word meaning 'youthful, radiant, and full of life.' Every product carries that intention.",
+        "story_cta": "Explore Our Products",
+        "stat_1_num": "30+",
+        "stat_1_label": "Ayurvedic Actives",
+        "stat_2_num": "50,000+",
+        "stat_2_label": "Happy Customers",
+        "stat_3_num": "4.8★",
+        "stat_3_label": "Average Rating",
+        "stat_4_num": "100%",
+        "stat_4_label": "Cruelty-Free",
+        "values_eyebrow": "What we stand for",
+        "values_heading": "Our Core Values",
+        "val_1_title": "Safety First",
+        "val_1_body": "Dermatologically tested on Indian skin tones. Free from parabens, sulfates, mineral oil, and artificial colourants.",
+        "val_2_title": "Sustainably Crafted",
+        "val_2_body": "Recyclable packaging, ethically sourced botanicals, and carbon-conscious manufacturing — because beauty should not cost the planet.",
+        "val_3_title": "Women-First Philosophy",
+        "val_3_body": "Built by women, for women. We celebrate the beauty of ageing gracefully and reject the narrative that skin must be fixed.",
+        "val_4_title": "Transparent Ingredients",
+        "val_4_body": "Full ingredient transparency on every product. No hidden chemicals. No misleading claims. Just honest, effective skincare.",
+        "cta_heading": "Ready to begin your ritual?",
+        "cta_sub": "Join over 50,000 women who have made Elanvi part of their daily self-care practice.",
+        "cta_btn_1": "Shop Now",
+        "cta_btn_2": "Contact Us"
+      }
+    }
+  },
+  "order": [
+    "about_main"
+  ]
+}

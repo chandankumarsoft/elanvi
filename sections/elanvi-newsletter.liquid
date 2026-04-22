@@ -1,0 +1,100 @@
+{% comment %}
+  Section: elanvi-newsletter
+  Email signup via Shopify's native {% form 'customer' %} with
+  client-side validation reinforcement (elanvi-theme.js).
+{% endcomment %}
+
+<section class="elanvi-newsletter" id="elanvi-newsletter">
+  <div class="elanvi-newsletter__inner">
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="elanvi-heading-md">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.subtitle != blank -%}
+      <p class="elanvi-newsletter__subtitle">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+
+    {%- form 'customer', id: 'elanvi-newsletter-form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter,elanvi">
+
+      <div class="elanvi-newsletter__form">
+        <label for="elanvi-newsletter-email" class="elanvi-sr-only">
+          Email address
+        </label>
+        <input
+          type="email"
+          id="elanvi-newsletter-email"
+          name="contact[email]"
+          placeholder="{{ section.settings.placeholder | default: 'Your email address' }}"
+          class="elanvi-newsletter__input"
+          autocomplete="email"
+          required
+          value="{{ form.email }}"
+        >
+        <button type="submit" class="elanvi-btn elanvi-btn--dark">
+          {{ section.settings.button_text | default: 'Subscribe' }}
+        </button>
+      </div>
+
+      {%- if form.posted_successfully? -%}
+        <p class="elanvi-newsletter__feedback elanvi-newsletter__feedback--active">
+          {{ section.settings.success_message | default: '✓ Thank you! Check your inbox for your 15% off code.' }}
+        </p>
+      {%- elsif form.errors -%}
+        <p class="elanvi-newsletter__feedback elanvi-newsletter__feedback--active elanvi-newsletter__feedback--error">
+          {{ form.errors.translated_fields['email'] | capitalize }}
+          {{ form.errors.messages['email'] }}
+        </p>
+      {%- else -%}
+        <p id="elanvi-newsletter-feedback" class="elanvi-newsletter__feedback is-hidden"></p>
+      {%- endif -%}
+    {%- endform -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Elanvi — Newsletter",
+  "tag": "div",
+  "class": "elanvi-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Join The Elanvi Ritual"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Receive skincare wisdom, first access to launches & 15% off your next order."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Input Placeholder",
+      "default": "Your email address"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success Message",
+      "default": "✓ Thank you! Check your inbox for your 15% off code."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Elanvi Newsletter"
+    }
+  ]
+}
+{% endschema %}

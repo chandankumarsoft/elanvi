@@ -1,0 +1,41 @@
+{
+  "sections": {
+    "contact_main": {
+      "type": "elanvi-contact",
+      "settings": {
+        "eyebrow": "We are here for you",
+        "heading": "Get in Touch",
+        "subheading": "We love hearing from you. Whether it is a question about your order, a skincare concern, or just a hello — our care team is always ready.",
+        "email": "hello@elanvi.in",
+        "phone": "+91 98765 43210",
+        "whatsapp": "919876543210",
+        "address": "12, Wellness Tower, Koramangala, Bengaluru – 560 034, India",
+        "hours": "Mon – Sat: 9:00 AM – 6:00 PM IST",
+        "form_heading": "How can we help you today?",
+        "form_body": "Fill in the form and a dedicated member of our skincare care team will respond within 24 hours. For urgent queries, WhatsApp or call us directly.",
+        "check_1": "Skincare advice & product recommendations",
+        "check_2": "Order tracking, shipping & delivery",
+        "check_3": "Returns, refunds & exchanges",
+        "check_4": "Wholesale & partnership enquiries",
+        "check_5": "Press, media & influencer requests",
+        "check_6": "Personalised skincare routines",
+        "faq_heading": "Frequently Asked Questions",
+        "faq_q1": "How long does delivery take?",
+        "faq_a1": "Standard delivery takes 4–7 business days across India. Express delivery (1–2 days) is available for select pin codes. You will receive a tracking link via email once your order is shipped.",
+        "faq_q2": "What is your return policy?",
+        "faq_a2": "We offer a 30-day hassle-free return policy on all unopened products. If a product did not meet your expectations, simply contact us and we will arrange a pick-up and full refund.",
+        "faq_q3": "Are Elanvi products suitable for sensitive skin?",
+        "faq_a3": "Yes! All Elanvi products are dermatologically tested, pH-balanced, and free from parabens, sulfates, and artificial fragrances. We recommend doing a patch test before full application if you have highly reactive skin.",
+        "faq_q4": "Do you offer a subscription or loyalty programme?",
+        "faq_a4": "Yes! Our Elanvi Ritual Club subscribers enjoy 15% off every order, early access to new launches, and free samples with every shipment. Sign up via the newsletter in the footer.",
+        "faq_q5": "How do I track my order?",
+        "faq_a5": "Once your order is dispatched, you will receive an email with a tracking number and a direct link to the courier portal. You can also track your order by logging into your Elanvi account.",
+        "faq_q6": "Are Elanvi products cruelty-free and vegan?",
+        "faq_a6": "All Elanvi products are 100% cruelty-free and never tested on animals. Most of our range is vegan; individual product pages indicate whether a formula contains any animal-derived ingredients."
+      }
+    }
+  },
+  "order": [
+    "contact_main"
+  ]
+}
