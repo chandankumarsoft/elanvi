@@ -30,25 +30,15 @@
           disabled
           aria-disabled="true"
         {%- endif %}
-        aria-label="Order now at amazon.com"
+        aria-label="Order now at Amazon"
       >
-        <span class="elanvi-amazon-inner">
-          <span class="elanvi-amazon-text">
-            <span class="elanvi-amazon-top">Order now at</span>
-            <span class="elanvi-amazon-bottom">
-              <span class="elanvi-amazon-brand">
-                amazon
-                <svg class="elanvi-amazon-smile-svg" viewBox="0 0 60 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <path d="M 2 3 Q 30 12 56 3" stroke="#FF9900" stroke-width="2" stroke-linecap="round" fill="none"/>
-                  <path d="M 51 1 L 56 3 L 51 6.5" stroke="#FF9900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                </svg>
-              </span>.com
-            </span>
-          </span>
-          <svg class="elanvi-amazon-chevron" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M1 1 L7 7 L1 13" stroke="#FF9900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
+        <img
+          src="{{ 'amazonorderbutton.png' | asset_url }}"
+          alt="Order now at Amazon"
+          class="elanvi-amazon-img"
+          loading="lazy"
+          decoding="async"
+        >
       </button>
 
       <button
