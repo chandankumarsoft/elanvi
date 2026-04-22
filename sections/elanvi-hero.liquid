@@ -107,42 +107,16 @@
         </div>
       {%- endif -%}
 
-      {%- comment %} Bundle & Save {%- endcomment -%}
-      {%- assign bundle_blocks = section.blocks | where: 'type', 'bundle_item' -%}
-      {%- if false and bundle_blocks.size > 0 -%}
-        <div class="elanvi-bundle">
-          <p class="elanvi-bundle__label">{{ bundle_label | default: 'Bundle & Save' }}</p>
-
-          <div class="elanvi-bundle__list">
-            {%- for block in bundle_blocks -%}
-              {%- render 'elanvi-bundle-item',
-                bundle_name: block.settings.title,
-                bundle_subtitle: block.settings.subtitle,
-                bundle_price: block.settings.price,
-                block: block
-              -%}
-            {%- endfor -%}
-          </div>
-
-          <div
-            class="elanvi-bundle__toast is-hidden"
-            id="elanvi-bundle-toast"
-            aria-live="polite"
-            aria-atomic="true"
-          ></div>
-
-          {%- comment %} Platform Redirect Buttons {%- endcomment -%}
-          {%- render 'elanvi-platform-buttons',
-            amazon_url: amazon_url,
-            nykaa_url: nykaa_url,
-            flipkart_url: flipkart_url,
-            label: platforms_label,
-            trust_1: trust_1,
-            trust_2: trust_2,
-            trust_3: trust_3
-          -%}
-        </div>
-      {%- endif -%}
+      {%- comment %} Platform Redirect Buttons {%- endcomment -%}
+      {%- render 'elanvi-platform-buttons',
+        amazon_url: amazon_url,
+        nykaa_url: nykaa_url,
+        flipkart_url: flipkart_url,
+        label: platforms_label,
+        trust_1: trust_1,
+        trust_2: trust_2,
+        trust_3: trust_3
+      -%}
 
     </div>{%- comment %} /content panel {%- endcomment -%}
   </div>

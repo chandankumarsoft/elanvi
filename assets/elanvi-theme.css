@@ -368,6 +368,8 @@
 .elanvi-platform-btn--amazon  { background: linear-gradient(135deg, #232f3e, #1a2532); }
 .elanvi-platform-btn--nykaa   { background: linear-gradient(135deg, #FC2779, #e01e6a); }
 .elanvi-platform-btn--flipkart { background: linear-gradient(135deg, #2874F0, #1a5bbf); }
+.elanvi-platform-btn--inactive,
+.elanvi-platform-btn[disabled] { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
 
 .elanvi-platform-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
 
