@@ -53,15 +53,13 @@
         {%- endif %}
         aria-label="Order now at nykaa.com"
       >
-        <span class="elanvi-nykaa-inner">
-          <span class="elanvi-nykaa-text">
-            <span class="elanvi-nykaa-top">Order now at</span>
-            <span class="elanvi-nykaa-bottom">nykaa.com</span>
-          </span>
-          <svg class="elanvi-nykaa-chevron" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M1 1 L7 7 L1 13" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
+        <img
+          src="{{ 'nykaaorderbutton.png' | asset_url }}"
+          alt="Order now at Nykaa"
+          class="elanvi-nykaa-img"
+          loading="lazy"
+          decoding="async"
+        >
       </button>
 
       {%- if flipkart_url != blank -%}
