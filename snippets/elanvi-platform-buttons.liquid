@@ -32,15 +32,22 @@
         {%- endif %}
         aria-label="Order now at amazon.com"
       >
-        <span class="elanvi-amazon-icon" aria-hidden="true">
-          <svg viewBox="0 0 48 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="48" height="20">
-            <path d="M2 14 Q24 22 46 8" stroke="#FF9900" stroke-width="2.8" stroke-linecap="round" fill="none"/>
-            <path d="M39 4 L46 8 L40 13" stroke="#FF9900" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <span class="elanvi-amazon-inner">
+          <span class="elanvi-amazon-text">
+            <span class="elanvi-amazon-top">Order now at</span>
+            <span class="elanvi-amazon-bottom">
+              <span class="elanvi-amazon-brand">
+                amazon
+                <svg class="elanvi-amazon-smile-svg" viewBox="0 0 62 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M2 5 Q28 13 54 3" stroke="#FF9900" stroke-width="2.4" stroke-linecap="round"/>
+                  <path d="M48 1 L54 3 L50 8" stroke="#FF9900" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>.com
+            </span>
+          </span>
+          <svg class="elanvi-amazon-chevron" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M1 1 L7 7 L1 13" stroke="#FF9900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-        </span>
-        <span class="elanvi-amazon-label">
-          <span class="elanvi-amazon-label__top">Order now at</span>
-          <span class="elanvi-amazon-label__bottom">amazon.com</span>
         </span>
       </button>
 
