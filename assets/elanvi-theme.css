@@ -365,7 +365,37 @@
 .elanvi-platform-btn:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
 .elanvi-platform-btn:active { transform: scale(0.96); }
 
-.elanvi-platform-btn--amazon  { background: linear-gradient(135deg, #232f3e, #1a2532); }
+.elanvi-platform-btn--amazon {
+  background: #131921;
+  box-shadow: none;
+  border-radius: 100px;
+  padding: 0.5rem 1.2rem;
+  gap: 0.7rem;
+  align-items: center;
+}
+.elanvi-platform-btn--amazon:hover { box-shadow: none; background: #1e2a38; }
+.elanvi-platform-btn--amazon:active { transform: scale(0.97); }
+
+.elanvi-amazon-icon { display: flex; align-items: center; flex-shrink: 0; }
+
+.elanvi-amazon-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.25;
+}
+.elanvi-amazon-label__top {
+  font-size: 0.6rem;
+  font-weight: 400;
+  opacity: 0.75;
+  letter-spacing: 0.03em;
+}
+.elanvi-amazon-label__bottom {
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
 .elanvi-platform-btn--nykaa   { background: linear-gradient(135deg, #FC2779, #e01e6a); }
 .elanvi-platform-btn--flipkart { background: linear-gradient(135deg, #2874F0, #1a5bbf); }
 .elanvi-platform-btn--inactive,
@@ -382,6 +412,7 @@
   pointer-events: none;
 }
 .elanvi-platform-btn:hover .elanvi-platform-btn__shine { transform: translateY(0); }
+.elanvi-platform-btn--amazon .elanvi-platform-btn__shine { display: none; }
 
 .elanvi-platforms__trust {
   display: flex;
