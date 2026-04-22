@@ -38,9 +38,9 @@
             <span class="elanvi-amazon-bottom">
               <span class="elanvi-amazon-brand">
                 amazon
-                <svg class="elanvi-amazon-smile-svg" viewBox="0 0 62 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <path d="M2 5 Q28 13 54 3" stroke="#FF9900" stroke-width="2.4" stroke-linecap="round"/>
-                  <path d="M48 1 L54 3 L50 8" stroke="#FF9900" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg class="elanvi-amazon-smile-svg" viewBox="0 0 60 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M 2 3 Q 30 12 56 3" stroke="#FF9900" stroke-width="2" stroke-linecap="round" fill="none"/>
+                  <path d="M 51 1 L 56 3 L 51 6.5" stroke="#FF9900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                 </svg>
               </span>.com
             </span>
@@ -61,13 +61,17 @@
           disabled
           aria-disabled="true"
         {%- endif %}
-        aria-label="Buy on Nykaa"
+        aria-label="Order now at nykaa.com"
       >
-        <span class="elanvi-platform-btn__shine" aria-hidden="true"></span>
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 13c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5z"/>
-        </svg>
-        Nykaa
+        <span class="elanvi-nykaa-inner">
+          <span class="elanvi-nykaa-text">
+            <span class="elanvi-nykaa-top">Order now at</span>
+            <span class="elanvi-nykaa-bottom">nykaa.com</span>
+          </span>
+          <svg class="elanvi-nykaa-chevron" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M1 1 L7 7 L1 13" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
       </button>
 
       {%- if flipkart_url != blank -%}
