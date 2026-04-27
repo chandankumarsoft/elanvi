@@ -159,6 +159,38 @@
         "subtitle": "Potent botanicals & actives that redefine firmness and radiance for mature skin."
       }
     },
+    "elanvi-reels": {
+      "type": "reels-section",
+      "blocks": {
+        "reel-1": {
+          "type": "reel",
+          "settings": {
+            "title": "Morning Ritual",
+            "link_text": "Shop Now"
+          }
+        },
+        "reel-2": {
+          "type": "reel",
+          "settings": {
+            "title": "Visible Firming Results",
+            "link_text": "Shop Now"
+          }
+        },
+        "reel-3": {
+          "type": "reel",
+          "settings": {
+            "title": "How to Apply",
+            "link_text": "Learn More"
+          }
+        }
+      },
+      "block_order": ["reel-1", "reel-2", "reel-3"],
+      "settings": {
+        "eyebrow": "As Seen In Action",
+        "heading": "Real Results, Real Skin",
+        "subtext": "Watch how Elanvi works on real women above 30."
+      }
+    },
     "elanvi-results": {
       "type": "elanvi-results",
       "blocks": {
@@ -217,6 +249,7 @@
     "elanvi-hero",
     "elanvi-features",
     "elanvi-ingredients",
+    "elanvi-reels",
     "elanvi-results",
     "elanvi-about",
     "elanvi-newsletter"

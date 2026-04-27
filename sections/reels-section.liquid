@@ -1,0 +1,727 @@
+{% comment %}
+  Section: reels-section
+  Instagram-style Reels showcase — horizontally scrollable short-video carousel.
+  Supports Shopify-hosted MP4 (video picker) or a raw MP4 URL per block.
+  Features: autoplay on scroll-into-view, pause on exit, play/pause toggle,
+  mute/unmute, progress bar, CSS scroll-snap, fully responsive.
+{% endcomment %}
+
+{%- if section.blocks.size > 0 -%}
+
+<section
+  class="elanvi-reels"
+  id="elanvi-reels-{{ section.id }}"
+  aria-label="{{ section.settings.heading | default: 'Reels' | escape }}"
+>
+  <div class="elanvi-reels__inner">
+
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="elanvi-reels__header">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="elanvi-eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="elanvi-heading-lg">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subtext != blank -%}
+          <p class="elanvi-reels__subtext">{{ section.settings.subtext }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="elanvi-reels__carousel" role="list" aria-label="Video reels">
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'reel' -%}
+
+          {%- liquid
+            assign has_hosted_video = false
+            assign has_url_video    = false
+            if block.settings.video != blank
+              assign has_hosted_video = true
+            endif
+            if block.settings.video_url != blank
+              assign has_url_video = true
+            endif
+            assign has_video = false
+            if has_hosted_video or has_url_video
+              assign has_video = true
+            endif
+          -%}
+
+          <div
+            class="elanvi-reel"
+            role="listitem"
+            data-reel
+            {{ block.shopify_attributes }}
+          >
+            {%- comment %} ── Media wrap ── {%- endcomment -%}
+            <div class="elanvi-reel__media-wrap">
+
+              {%- if has_video -%}
+                <video
+                  class="elanvi-reel__video"
+                  playsinline
+                  muted
+                  loop
+                  preload="none"
+                  data-reel-video
+                  aria-label="{{ block.settings.title | default: 'Reel video' | escape }}"
+                  tabindex="-1"
+                >
+                  {%- if has_hosted_video -%}
+                    {%- for source in block.settings.video.sources -%}
+                      {%- if source.format == 'mp4' -%}
+                        <source src="{{ source.url }}" type="video/mp4">
+                      {%- endif -%}
+                    {%- endfor -%}
+                    {%- comment %} Fallback: first available source {%- endcomment -%}
+                    {%- unless block.settings.video.sources | map: 'format' | join: ',' contains 'mp4' -%}
+                      {%- for source in block.settings.video.sources limit: 1 -%}
+                        <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                      {%- endfor -%}
+                    {%- endunless -%}
+                  {%- elsif has_url_video -%}
+                    <source src="{{ block.settings.video_url | escape }}" type="video/mp4">
+                  {%- endif -%}
+                </video>
+
+                {%- comment %} Poster / thumbnail {%- endcomment -%}
+                {%- if block.settings.thumbnail != blank -%}
+                  {{
+                    block.settings.thumbnail
+                    | image_url: width: 400
+                    | image_tag:
+                      class: 'elanvi-reel__poster',
+                      loading: 'lazy',
+                      alt: block.settings.title | default: '',
+                      widths: '200, 400',
+                      sizes: '(min-width: 1024px) 22vw, (min-width: 768px) 28vw, 45vw'
+                  }}
+                {%- endif -%}
+
+                {%- comment %} Controls overlay {%- endcomment -%}
+                <div class="elanvi-reel__controls" aria-hidden="true">
+                  <button
+                    class="elanvi-reel__btn elanvi-reel__play-btn"
+                    data-reel-play
+                    aria-label="Play or pause"
+                    type="button"
+                  >
+                    <span class="elanvi-reel__icon elanvi-reel__icon--play">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="26" height="26" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                    </span>
+                    <span class="elanvi-reel__icon elanvi-reel__icon--pause">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="26" height="26" aria-hidden="true"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                    </span>
+                  </button>
+
+                  <button
+                    class="elanvi-reel__btn elanvi-reel__mute-btn"
+                    data-reel-mute
+                    aria-label="Mute or unmute"
+                    type="button"
+                  >
+                    <span class="elanvi-reel__icon elanvi-reel__icon--muted">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                    </span>
+                    <span class="elanvi-reel__icon elanvi-reel__icon--unmuted">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                    </span>
+                  </button>
+                </div>
+
+                {%- comment %} Progress bar {%- endcomment -%}
+                <div class="elanvi-reel__progress" aria-hidden="true">
+                  <div class="elanvi-reel__progress-fill" data-reel-progress></div>
+                </div>
+
+              {%- else -%}
+
+                {%- comment %} No video — show placeholder {%- endcomment -%}
+                <div class="elanvi-reel__placeholder">
+                  {{ 'image' | placeholder_svg_tag: 'elanvi-reel__placeholder-svg' }}
+                </div>
+
+              {%- endif -%}
+            </div>
+
+            {%- comment %} ── Caption below card ── {%- endcomment -%}
+            <div class="elanvi-reel__info">
+              {%- if block.settings.title != blank -%}
+                <p class="elanvi-reel__title">{{ block.settings.title | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.link != blank -%}
+                <a
+                  href="{{ block.settings.link }}"
+                  class="elanvi-reel__link elanvi-btn elanvi-btn--outline"
+                  {% unless block.settings.link_text != blank %}aria-label="{{ block.settings.title | default: 'View' | escape }}"{% endunless %}
+                >
+                  {{- block.settings.link_text | default: 'Shop Now' | escape -}}
+                </a>
+              {%- endif -%}
+            </div>
+
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+
+    </div>
+  </div>
+</section>
+
+<style>
+/* =================================================================
+   ELANVI REELS SECTION
+   ================================================================= */
+.elanvi-reels {
+  background-color: var(--elanvi-bg, #fdf9f8);
+  padding: 3rem 1rem 3.5rem;
+  overflow: hidden;
+}
+
+.elanvi-reels__inner {
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.elanvi-reels__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.elanvi-reels__header .elanvi-eyebrow {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.elanvi-reels__header .elanvi-heading-lg {
+  margin-bottom: 0.5rem;
+}
+
+.elanvi-reels__subtext {
+  font-family: var(--elanvi-font-sans, system-ui, sans-serif);
+  font-size: 0.9375rem;
+  color: var(--elanvi-text-muted, #4a4540);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Carousel track ─────────────────────────────────────────── */
+.elanvi-reels__carousel {
+  display: flex;
+  gap: 0.875rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  padding-bottom: 0.5rem;
+  padding-inline: 0.125rem;
+  /* Fade-out hint at edges on wider screens */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 3%,
+    black 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 3%,
+    black 94%,
+    transparent 100%
+  );
+}
+
+.elanvi-reels__carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Individual reel card ───────────────────────────────────── */
+.elanvi-reel {
+  flex: 0 0 calc(50% - 0.4375rem);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+@media (min-width: 480px) {
+  .elanvi-reel { flex: 0 0 calc(43% - 0.4375rem); }
+}
+
+@media (min-width: 640px) {
+  .elanvi-reel { flex: 0 0 calc(33% - 0.58rem); }
+  .elanvi-reels__carousel { gap: 1rem; }
+}
+
+@media (min-width: 900px) {
+  .elanvi-reel { flex: 0 0 calc(25% - 0.66rem); }
+  .elanvi-reels__carousel { gap: 1.125rem; }
+}
+
+@media (min-width: 1200px) {
+  .elanvi-reel { flex: 0 0 calc(20% - 0.9rem); }
+  .elanvi-reels__carousel { gap: 1.25rem; }
+}
+
+/* ── Media wrap ─────────────────────────────────────────────── */
+.elanvi-reel__media-wrap {
+  position: relative;
+  border-radius: var(--elanvi-radius-lg, 24px);
+  overflow: hidden;
+  background-color: var(--elanvi-bg-cream, #ebe6e1);
+  aspect-ratio: 9 / 16;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.elanvi-reel__media-wrap:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
+}
+
+/* ── Video element ──────────────────────────────────────────── */
+.elanvi-reel__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Poster / thumbnail ─────────────────────────────────────── */
+.elanvi-reel__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  z-index: 1;
+}
+
+.elanvi-reel--playing .elanvi-reel__poster {
+  opacity: 0;
+}
+
+/* ── Controls gradient overlay ──────────────────────────────── */
+.elanvi-reel__controls {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0.75rem 0.625rem;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.15) 35%,
+    transparent 60%
+  );
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+/* Show controls on hover (desktop) */
+.elanvi-reel__media-wrap:hover .elanvi-reel__controls {
+  opacity: 1;
+}
+
+/* Show controls when video is paused */
+.elanvi-reel--paused .elanvi-reel__controls {
+  opacity: 1;
+}
+
+/* Always show on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .elanvi-reel__controls { opacity: 1; }
+}
+
+/* ── Control buttons ────────────────────────────────────────── */
+.elanvi-reel__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease, transform 0.15s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.elanvi-reel__btn:hover {
+  background: rgba(255, 255, 255, 0.32);
+}
+
+.elanvi-reel__btn:active {
+  transform: scale(0.88);
+}
+
+/* ── Icon state management ──────────────────────────────────── */
+.elanvi-reel__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* Play/Pause */
+.elanvi-reel__icon--pause { display: none; }
+
+.elanvi-reel--playing .elanvi-reel__icon--play  { display: none; }
+.elanvi-reel--playing .elanvi-reel__icon--pause { display: flex; }
+
+/* Muted/Unmuted — default: muted */
+.elanvi-reel__icon--unmuted { display: none; }
+
+.elanvi-reel--unmuted .elanvi-reel__icon--muted   { display: none; }
+.elanvi-reel--unmuted .elanvi-reel__icon--unmuted { display: flex; }
+
+/* ── Progress bar ───────────────────────────────────────────── */
+.elanvi-reel__progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.22);
+  z-index: 3;
+}
+
+.elanvi-reel__progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--elanvi-gold, #c89d6c);
+  border-radius: 0 2px 2px 0;
+  will-change: width;
+}
+
+/* ── Placeholder (no video) ─────────────────────────────────── */
+.elanvi-reel__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.elanvi-reel__placeholder-svg {
+  width: 55%;
+  height: 55%;
+  opacity: 0.25;
+}
+
+/* ── Caption area ───────────────────────────────────────────── */
+.elanvi-reel__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-inline: 0.125rem;
+}
+
+.elanvi-reel__title {
+  font-family: var(--elanvi-font-sans, system-ui, sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--elanvi-text, #23201b);
+  margin: 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .elanvi-reel__title { font-size: 0.875rem; }
+}
+
+.elanvi-reel__link {
+  font-size: 0.6875rem;
+  padding: 0.4rem 0.875rem;
+  min-height: 36px;
+  align-self: flex-start;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .elanvi-reel__link { font-size: 0.75rem; }
+}
+</style>
+
+<script>
+(function () {
+  'use strict';
+
+  /**
+   * Initialise all reel cards within a given section element.
+   * Safe to call multiple times (Shopify Theme Editor re-init).
+   */
+  function initReels(sectionEl) {
+    var cards = sectionEl.querySelectorAll('[data-reel]');
+    if (!cards.length) return;
+
+    /* Destroy any previously attached observer on re-init */
+    if (sectionEl._reelsIO) {
+      sectionEl._reelsIO.disconnect();
+    }
+
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          var card  = entry.target;
+          var video = card.querySelector('[data-reel-video]');
+          if (!video) return;
+
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            /* Load video sources on first intersection (lazy load) */
+            if (!video._reelsLoaded) {
+              video._reelsLoaded = true;
+              var sources = video.querySelectorAll('source');
+              sources.forEach(function (src) {
+                if (src.dataset.src) {
+                  src.src = src.dataset.src;
+                }
+              });
+              video.load();
+            }
+            video.play().catch(function () { /* autoplay policy — ignored */ });
+            card.classList.add('elanvi-reel--playing');
+            card.classList.remove('elanvi-reel--paused');
+          } else {
+            video.pause();
+            card.classList.remove('elanvi-reel--playing');
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    sectionEl._reelsIO = io;
+
+    cards.forEach(function (card) {
+      var video       = card.querySelector('[data-reel-video]');
+      var playBtn     = card.querySelector('[data-reel-play]');
+      var muteBtn     = card.querySelector('[data-reel-mute]');
+      var mediaWrap   = card.querySelector('.elanvi-reel__media-wrap');
+      var progressFill = card.querySelector('[data-reel-progress]');
+
+      if (!video) return;
+
+      io.observe(card);
+
+      /* ── Play / Pause via button ─────────────────────────── */
+      if (playBtn) {
+        playBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          togglePlayPause(card, video);
+        });
+      }
+
+      /* ── Play / Pause via media-wrap tap/click ───────────── */
+      if (mediaWrap) {
+        mediaWrap.addEventListener('click', function (e) {
+          if (e.target.closest('.elanvi-reel__btn')) return;
+          togglePlayPause(card, video);
+        });
+      }
+
+      /* ── Mute / Unmute ───────────────────────────────────── */
+      if (muteBtn) {
+        muteBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          video.muted = !video.muted;
+          card.classList.toggle('elanvi-reel--unmuted', !video.muted);
+        });
+      }
+
+      /* ── Sync CSS state from native video events ─────────── */
+      video.addEventListener('play', function () {
+        card.classList.add('elanvi-reel--playing');
+        card.classList.remove('elanvi-reel--paused');
+      });
+
+      video.addEventListener('pause', function () {
+        card.classList.remove('elanvi-reel--playing');
+        card.classList.add('elanvi-reel--paused');
+      });
+
+      /* ── Progress bar ────────────────────────────────────── */
+      if (progressFill) {
+        var rafId = null;
+
+        function updateProgress() {
+          if (video.duration) {
+            progressFill.style.width = ((video.currentTime / video.duration) * 100) + '%';
+          }
+          if (!video.paused && !video.ended) {
+            rafId = requestAnimationFrame(updateProgress);
+          }
+        }
+
+        video.addEventListener('play', function () {
+          if (rafId) cancelAnimationFrame(rafId);
+          rafId = requestAnimationFrame(updateProgress);
+        });
+
+        video.addEventListener('pause', function () {
+          if (rafId) cancelAnimationFrame(rafId);
+        });
+
+        video.addEventListener('ended', function () {
+          if (rafId) cancelAnimationFrame(rafId);
+          progressFill.style.width = '0%';
+        });
+
+        video.addEventListener('seeked', updateProgress);
+      }
+    });
+  }
+
+  function togglePlayPause(card, video) {
+    if (video.paused) {
+      video.play().catch(function () {});
+    } else {
+      video.pause();
+    }
+  }
+
+  /* ── Boot ────────────────────────────────────────────────── */
+  function boot() {
+    document.querySelectorAll('[id^="elanvi-reels-"]').forEach(initReels);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+
+  /* Shopify Theme Editor: re-init when section is reloaded */
+  document.addEventListener('shopify:section:load', function (e) {
+    var section = e.target.querySelector('[id^="elanvi-reels-"]');
+    if (section) initReels(section);
+  });
+
+})();
+</script>
+
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Elanvi — Reels",
+  "tag": "div",
+  "class": "elanvi-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "As Seen In Action"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Real Results, Real Skin"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Watch how Elanvi works on real women above 30."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "reel",
+      "name": "Reel",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video (Upload MP4)"
+        },
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "Or paste a direct MP4 URL",
+          "info": "Used only when no video is uploaded above. Must be a publicly accessible .mp4 link."
+        },
+        {
+          "type": "image_picker",
+          "id": "thumbnail",
+          "label": "Thumbnail / Poster Image",
+          "info": "Shown before video loads. Recommended: 9:16 portrait image."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Caption",
+          "default": "See the difference"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link Button Text",
+          "default": "Shop Now"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Elanvi — Reels",
+      "blocks": [
+        {
+          "type": "reel",
+          "settings": {
+            "title": "Morning Ritual",
+            "link_text": "Shop Now"
+          }
+        },
+        {
+          "type": "reel",
+          "settings": {
+            "title": "Visible Firming Results",
+            "link_text": "Shop Now"
+          }
+        },
+        {
+          "type": "reel",
+          "settings": {
+            "title": "How to Apply",
+            "link_text": "Learn More"
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}
