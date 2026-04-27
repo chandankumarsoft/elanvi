@@ -198,6 +198,15 @@
             "link_text": "Learn More"
           }
         },
+        "reel_VE4fVf": {
+          "type": "reel",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/vp/03af296def254fc6983ed98836396ec6/03af296def254fc6983ed98836396ec6.HD-720p-1.6Mbps-51623026.mp4",
+            "title": "How to Apply",
+            "link": "",
+            "link_text": "Learn More"
+          }
+        },
         "reel_R3pM8J": {
           "type": "reel",
           "settings": {
@@ -213,6 +222,7 @@
         "reel-2",
         "reel-3",
         "reel_UybqR4",
+        "reel_VE4fVf",
         "reel_R3pM8J"
       ],
       "settings": {
