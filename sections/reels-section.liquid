@@ -75,8 +75,9 @@
                         <source src="{{ source.url }}" type="video/mp4">
                       {%- endif -%}
                     {%- endfor -%}
-                    {%- comment %} Fallback: first available source {%- endcomment -%}
-                    {%- unless block.settings.video.sources | map: 'format' | join: ',' contains 'mp4' -%}
+                    {%- comment %} Fallback: first available source if no mp4 was found {%- endcomment -%}
+                    {%- assign video_formats = block.settings.video.sources | map: 'format' | join: ',' -%}
+                    {%- unless video_formats contains 'mp4' -%}
                       {%- for source in block.settings.video.sources limit: 1 -%}
                         <source src="{{ source.url }}" type="{{ source.mime_type }}">
                       {%- endfor -%}
