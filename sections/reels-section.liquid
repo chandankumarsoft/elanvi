@@ -29,7 +29,19 @@
       </div>
     {%- endif -%}
 
-    <div class="elanvi-reels__carousel" role="list" aria-label="Video reels">
+    <div class="elanvi-reels__track">
+
+      <button
+        class="elanvi-reels__arrow elanvi-reels__arrow--prev"
+        data-reels-prev
+        aria-label="Previous reels"
+        type="button"
+        disabled
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      </button>
+
+      <div class="elanvi-reels__carousel" role="list" aria-label="Video reels">
 
       {%- for block in section.blocks -%}
         {%- if block.type == 'reel' -%}
@@ -167,7 +179,18 @@
         {%- endif -%}
       {%- endfor -%}
 
-    </div>
+      </div><!-- /.elanvi-reels__carousel -->
+
+      <button
+        class="elanvi-reels__arrow elanvi-reels__arrow--next"
+        data-reels-next
+        aria-label="Next reels"
+        type="button"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+      </button>
+
+    </div><!-- /.elanvi-reels__track -->
   </div>
 </section>
 
@@ -207,6 +230,60 @@
   color: var(--elanvi-text-muted, #4a4540);
   margin: 0;
   line-height: 1.6;
+}
+
+/* ── Track wrapper (positions arrows) ──────────────────────── */
+.elanvi-reels__track {
+  position: relative;
+}
+
+/* ── Arrow buttons ──────────────────────────────────────────── */
+.elanvi-reels__arrow {
+  display: none; /* shown only on non-touch / >= 640 px */
+  position: absolute;
+  top: 38%; /* vertically centred within the 9:16 video portion */
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--elanvi-white, #fff);
+  color: var(--elanvi-text, #23201b);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+
+.elanvi-reels__arrow--prev { left: -22px; }
+.elanvi-reels__arrow--next { right: -22px; }
+
+.elanvi-reels__arrow:hover {
+  background: var(--elanvi-gold, #c89d6c);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(200, 157, 108, 0.35);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.elanvi-reels__arrow:active {
+  transform: translateY(-50%) scale(0.92);
+}
+
+.elanvi-reels__arrow:disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Show arrows on pointer (mouse/trackpad) devices >= 640 px */
+@media (min-width: 640px) and (hover: hover) and (pointer: fine) {
+  .elanvi-reels__arrow { display: flex; }
+  /* Give the inner a little horizontal padding so arrows don't overlap cards */
+  .elanvi-reels__inner { padding-inline: 28px; }
 }
 
 /* ── Carousel track ─────────────────────────────────────────── */
@@ -482,6 +559,45 @@
     /* Destroy any previously attached observer on re-init */
     if (sectionEl._reelsIO) {
       sectionEl._reelsIO.disconnect();
+    }
+
+    /* ── Arrow navigation ───────────────────────────────────── */
+    var carousel  = sectionEl.querySelector('.elanvi-reels__carousel');
+    var prevBtn   = sectionEl.querySelector('[data-reels-prev]');
+    var nextBtn   = sectionEl.querySelector('[data-reels-next]');
+
+    function getScrollStep() {
+      var firstCard = carousel && carousel.querySelector('[data-reel]');
+      if (firstCard) {
+        var gap = parseInt(window.getComputedStyle(carousel).gap) || 16;
+        return firstCard.offsetWidth + gap;
+      }
+      return carousel ? carousel.offsetWidth * 0.75 : 300;
+    }
+
+    function updateArrows() {
+      if (!carousel) return;
+      var atStart = carousel.scrollLeft <= 4;
+      var atEnd   = carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 4;
+      if (prevBtn) prevBtn.disabled = atStart;
+      if (nextBtn) nextBtn.disabled = atEnd;
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function () {
+        carousel.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function () {
+        carousel.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+      });
+    }
+
+    if (carousel) {
+      carousel.addEventListener('scroll', updateArrows, { passive: true });
+      updateArrows();
     }
 
     var io = new IntersectionObserver(
