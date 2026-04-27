@@ -165,26 +165,56 @@
         "reel-1": {
           "type": "reel",
           "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/vp/fda27ea0f40a444091e578289916dbb4/fda27ea0f40a444091e578289916dbb4.HD-720p-1.6Mbps-51623086.mp4",
             "title": "Morning Ritual",
+            "link": "",
             "link_text": "Shop Now"
           }
         },
         "reel-2": {
           "type": "reel",
           "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/vp/96689c704809478c816cbd6176498b5f/96689c704809478c816cbd6176498b5f.HD-720p-1.6Mbps-51623071.mp4",
             "title": "Visible Firming Results",
+            "link": "",
             "link_text": "Shop Now"
           }
         },
         "reel-3": {
           "type": "reel",
           "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/vp/c1398fbc91004c54ad5efcb0c92ca062/c1398fbc91004c54ad5efcb0c92ca062.HD-720p-1.6Mbps-51623046.mp4",
             "title": "How to Apply",
+            "link": "",
+            "link_text": "Learn More"
+          }
+        },
+        "reel_UybqR4": {
+          "type": "reel",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/vp/03af296def254fc6983ed98836396ec6/03af296def254fc6983ed98836396ec6.HD-720p-1.6Mbps-51623026.mp4",
+            "title": "How to Apply",
+            "link": "",
+            "link_text": "Learn More"
+          }
+        },
+        "reel_R3pM8J": {
+          "type": "reel",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/vp/9a50716a4e6e4d55b8fe899486037d86/9a50716a4e6e4d55b8fe899486037d86.HD-720p-1.6Mbps-51623005.mp4",
+            "title": "How to Apply",
+            "link": "",
             "link_text": "Learn More"
           }
         }
       },
-      "block_order": ["reel-1", "reel-2", "reel-3"],
+      "block_order": [
+        "reel-1",
+        "reel-2",
+        "reel-3",
+        "reel_UybqR4",
+        "reel_R3pM8J"
+      ],
       "settings": {
         "eyebrow": "As Seen In Action",
         "heading": "Real Results, Real Skin",
