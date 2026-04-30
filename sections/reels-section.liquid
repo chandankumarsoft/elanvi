@@ -1155,8 +1155,13 @@
           s.type = src.type || 'video/mp4';
           modalVideo.appendChild(s);
         });
+        modalVideo.muted    = true;
+        modalVideo.autoplay = true;
+        modalVideo.addEventListener('canplay', function onCanPlay() {
+          modalVideo.removeEventListener('canplay', onCanPlay);
+          modalVideo.play().catch(function () {});
+        }, { once: true });
         modalVideo.load();
-        modalVideo.play().catch(function () {});
       }
     }
 
