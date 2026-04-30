@@ -65,6 +65,7 @@
             class="elanvi-reel"
             role="listitem"
             data-reel
+            data-reel-block-id="{{ block.id }}"
             {{ block.shopify_attributes }}
           >
             {%- comment %} ── Media wrap ── {%- endcomment -%}
@@ -193,6 +194,98 @@
     </div><!-- /.elanvi-reels__track -->
   </div>
 </section>
+
+{%- comment %} ── Pre-rendered product data (hidden, one per reel block) ── {%- endcomment -%}
+{%- for block in section.blocks -%}
+  {%- if block.type == 'reel' -%}
+    {%- assign _rp = block.settings.product -%}
+    <div
+      class="elanvi-reel-product-data"
+      id="elanvi-reel-pdata-{{ block.id }}"
+      hidden
+      aria-hidden="true"
+    >
+      {%- if _rp != blank -%}
+        {%- if _rp.featured_image != blank -%}
+          <div class="elanvi-reel-modal__product-image">
+            {{
+              _rp.featured_image
+              | image_url: width: 600
+              | image_tag:
+                class: 'elanvi-reel-modal__product-img',
+                loading: 'lazy',
+                alt: _rp.title,
+                widths: '300, 500, 600',
+                sizes: '(min-width: 768px) 30vw, 70vw'
+            }}
+          </div>
+        {%- endif -%}
+        <div class="elanvi-reel-modal__product-body">
+          <h3 class="elanvi-reel-modal__product-title">{{ _rp.title | escape }}</h3>
+          {%- if _rp.description != blank -%}
+            <p class="elanvi-reel-modal__product-desc">{{ _rp.description | strip_html | truncate: 160 }}</p>
+          {%- endif -%}
+          <div class="elanvi-reel-modal__product-price">
+            {%- if _rp.compare_at_price > _rp.price -%}
+              <span class="elanvi-reel-modal__price--compare">{{ _rp.compare_at_price | money }}</span>
+            {%- endif -%}
+            <span class="elanvi-reel-modal__price--current">{{ _rp.price | money }}</span>
+          </div>
+          <div class="elanvi-reel-modal__product-actions">
+            <button
+              class="elanvi-reel-modal__btn elanvi-reel-modal__btn--cart"
+              data-reel-atc
+              data-variant-id="{{ _rp.first_available_variant.id }}"
+              type="button"
+            >Add to Cart</button>
+            <a
+              href="{{ _rp.url }}"
+              class="elanvi-reel-modal__btn elanvi-reel-modal__btn--info"
+            >More Info</a>
+          </div>
+        </div>
+      {%- else -%}
+        <div class="elanvi-reel-modal__no-product">
+          <p>No product linked to this reel.</p>
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+{%- endfor -%}
+
+{%- comment %} ── Reel Product Modal ─────────────────────────────────────── {%- endcomment -%}
+<div
+  class="elanvi-reel-modal"
+  id="elanvi-reel-modal-{{ section.id }}"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Reel details"
+  data-reel-modal
+  hidden
+>
+  <div class="elanvi-reel-modal__backdrop" data-reel-modal-backdrop></div>
+  <div class="elanvi-reel-modal__container" role="document">
+    <button
+      class="elanvi-reel-modal__close"
+      data-reel-modal-close
+      aria-label="Close"
+      type="button"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+    </button>
+    <div class="elanvi-reel-modal__video-side">
+      <video
+        class="elanvi-reel-modal__video"
+        playsinline
+        muted
+        loop
+        data-reel-modal-video
+        aria-label="Reel video"
+      ></video>
+    </div>
+    <div class="elanvi-reel-modal__product-side" data-reel-modal-product></div>
+  </div>
+</div>
 
 <style>
 /* =================================================================
@@ -542,6 +635,298 @@
 @media (min-width: 768px) {
   .elanvi-reel__link { font-size: 0.75rem; }
 }
+
+/* =================================================================
+   ELANVI REEL PRODUCT MODAL
+   ================================================================= */
+.elanvi-reel-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.elanvi-reel-modal[hidden] {
+  display: none;
+}
+
+/* Backdrop */
+.elanvi-reel-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.elanvi-reel-modal--open .elanvi-reel-modal__backdrop {
+  opacity: 1;
+}
+
+/* Container */
+.elanvi-reel-modal__container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 880px;
+  max-height: 90vh;
+  background: var(--elanvi-white, #fff);
+  border-radius: var(--elanvi-radius-lg, 20px);
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  transform: translateY(24px) scale(0.97);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+}
+
+.elanvi-reel-modal--open .elanvi-reel-modal__container {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.elanvi-reel-modal--closing .elanvi-reel-modal__container {
+  transform: translateY(16px) scale(0.98);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* Close button */
+.elanvi-reel-modal__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--elanvi-text, #23201b);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.elanvi-reel-modal__close:hover {
+  background: var(--elanvi-gold, #c89d6c);
+  color: #fff;
+  transform: scale(1.08);
+}
+
+/* Video side */
+.elanvi-reel-modal__video-side {
+  flex: 0 0 auto;
+  width: 38%;
+  min-height: 420px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.elanvi-reel-modal__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Product side */
+.elanvi-reel-modal__product-side {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 2rem 1.75rem;
+  gap: 1.25rem;
+}
+
+/* Product image */
+.elanvi-reel-modal__product-image {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--elanvi-bg-cream, #ebe6e1);
+}
+
+.elanvi-reel-modal__product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Product body */
+.elanvi-reel-modal__product-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.elanvi-reel-modal__product-title {
+  font-family: var(--elanvi-font-serif, Georgia, serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--elanvi-text, #23201b);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.elanvi-reel-modal__product-desc {
+  font-family: var(--elanvi-font-sans, system-ui, sans-serif);
+  font-size: 0.875rem;
+  color: var(--elanvi-text-muted, #4a4540);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.elanvi-reel-modal__product-price {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.elanvi-reel-modal__price--compare {
+  font-size: 0.9rem;
+  color: var(--elanvi-text-muted, #4a4540);
+  text-decoration: line-through;
+}
+
+.elanvi-reel-modal__price--current {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--elanvi-text, #23201b);
+}
+
+/* Actions */
+.elanvi-reel-modal__product-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.elanvi-reel-modal__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  font-family: var(--elanvi-font-sans, system-ui, sans-serif);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, transform 0.15s, border-color 0.2s;
+  border: 2px solid transparent;
+  min-height: 44px;
+  white-space: nowrap;
+}
+
+.elanvi-reel-modal__btn:active {
+  transform: scale(0.96);
+}
+
+.elanvi-reel-modal__btn--cart {
+  background: var(--elanvi-gold, #c89d6c);
+  color: #fff;
+  border-color: var(--elanvi-gold, #c89d6c);
+  flex: 1 1 auto;
+}
+
+.elanvi-reel-modal__btn--cart:hover {
+  background: #b5895a;
+  border-color: #b5895a;
+}
+
+.elanvi-reel-modal__btn--cart:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.elanvi-reel-modal__btn--cart.elanvi-reel-modal__btn--added {
+  background: #3a7d44;
+  border-color: #3a7d44;
+}
+
+.elanvi-reel-modal__btn--info {
+  background: transparent;
+  color: var(--elanvi-text, #23201b);
+  border-color: var(--elanvi-text, #23201b);
+  flex: 0 0 auto;
+}
+
+.elanvi-reel-modal__btn--info:hover {
+  background: var(--elanvi-text, #23201b);
+  color: #fff;
+}
+
+.elanvi-reel-modal__no-product {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
+  color: var(--elanvi-text-muted, #4a4540);
+  font-family: var(--elanvi-font-sans, system-ui, sans-serif);
+  font-size: 0.9rem;
+}
+
+/* ── Responsive: sheet from bottom on mobile ─────────────────── */
+@media (max-width: 767px) {
+  .elanvi-reel-modal {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .elanvi-reel-modal__container {
+    flex-direction: column;
+    max-width: 100%;
+    max-height: 92vh;
+    border-radius: 20px 20px 0 0;
+    transform: translateY(100%);
+    opacity: 1;
+  }
+
+  .elanvi-reel-modal--open .elanvi-reel-modal__container {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .elanvi-reel-modal--closing .elanvi-reel-modal__container {
+    transform: translateY(60px);
+    opacity: 0;
+  }
+
+  .elanvi-reel-modal__video-side {
+    width: 100%;
+    min-height: unset;
+    height: 52vw;
+    max-height: 260px;
+  }
+
+  .elanvi-reel-modal__product-side {
+    padding: 1.25rem 1rem;
+    gap: 0.875rem;
+  }
+
+  .elanvi-reel-modal__product-image {
+    display: none;
+  }
+}
 </style>
 
 <script>
@@ -652,11 +1037,15 @@
         });
       }
 
-      /* ── Play / Pause via media-wrap tap/click ───────────── */
+      /* ── Media-wrap tap/click → open product modal ─────── */
       if (mediaWrap) {
         mediaWrap.addEventListener('click', function (e) {
           if (e.target.closest('.elanvi-reel__btn')) return;
-          togglePlayPause(card, video);
+          if (typeof window._elanviOpenReelModal === 'function') {
+            window._elanviOpenReelModal(card);
+          } else {
+            togglePlayPause(card, video);
+          }
         });
       }
 
@@ -738,6 +1127,123 @@
   });
 
 })();
+
+/* ══════════════════════════════════════════════════════════════
+   REEL PRODUCT MODAL
+   ══════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  var modal        = document.querySelector('[data-reel-modal]');
+  var modalVideo   = modal && modal.querySelector('[data-reel-modal-video]');
+  var modalProduct = modal && modal.querySelector('[data-reel-modal-product]');
+  var backdrop     = modal && modal.querySelector('[data-reel-modal-backdrop]');
+  var closeBtn     = modal && modal.querySelector('[data-reel-modal-close]');
+
+  if (!modal) return;
+
+  /* ── Open ─────────────────────────────────────────────────── */
+  function openModal(card) {
+    /* Copy video sources from the reel card into the modal video */
+    var reelVideo = card.querySelector('[data-reel-video]');
+    if (modalVideo) {
+      while (modalVideo.firstChild) { modalVideo.removeChild(modalVideo.firstChild); }
+      if (reelVideo) {
+        reelVideo.querySelectorAll('source').forEach(function (src) {
+          var s  = document.createElement('source');
+          s.src  = src.src || src.getAttribute('data-src') || '';
+          s.type = src.type || 'video/mp4';
+          modalVideo.appendChild(s);
+        });
+        modalVideo.load();
+        modalVideo.play().catch(function () {});
+      }
+    }
+
+    /* Swap in pre-rendered product HTML */
+    var blockId = card.getAttribute('data-reel-block-id');
+    if (modalProduct) {
+      modalProduct.innerHTML = '';
+      var pdata = blockId ? document.getElementById('elanvi-reel-pdata-' + blockId) : null;
+      if (pdata) {
+        modalProduct.innerHTML = pdata.innerHTML;
+        var atcBtn = modalProduct.querySelector('[data-reel-atc]');
+        if (atcBtn) { atcBtn.addEventListener('click', addToCart); }
+      }
+    }
+
+    /* Show modal */
+    modal.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(function () {
+      modal.classList.add('elanvi-reel-modal--open');
+    });
+    if (closeBtn) { closeBtn.focus(); }
+  }
+
+  /* ── Close ────────────────────────────────────────────────── */
+  function closeModal() {
+    modal.classList.remove('elanvi-reel-modal--open');
+    modal.classList.add('elanvi-reel-modal--closing');
+    modal.querySelector('.elanvi-reel-modal__container')
+      .addEventListener('transitionend', function onEnd() {
+        modal.setAttribute('hidden', '');
+        modal.classList.remove('elanvi-reel-modal--closing');
+        document.body.style.overflow = '';
+        if (modalVideo) {
+          modalVideo.pause();
+          while (modalVideo.firstChild) { modalVideo.removeChild(modalVideo.firstChild); }
+          modalVideo.load();
+        }
+      }, { once: true });
+  }
+
+  /* ── Add to Cart (AJAX) ───────────────────────────────────── */
+  function addToCart(e) {
+    var btn       = e.currentTarget;
+    var variantId = btn.getAttribute('data-variant-id');
+    if (!variantId) return;
+    btn.disabled    = true;
+    btn.textContent = 'Adding…';
+
+    fetch('/cart/add.js', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' },
+      body:    JSON.stringify({ id: parseInt(variantId, 10), quantity: 1 })
+    })
+    .then(function (res) {
+      if (!res.ok) { return res.json().then(function (d) { throw new Error(d.description || 'Error'); }); }
+      return res.json();
+    })
+    .then(function () {
+      btn.textContent = 'Added!';
+      btn.classList.add('elanvi-reel-modal__btn--added');
+      /* Notify cart bubble / drawer if theme listens for this event */
+      document.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
+      setTimeout(function () {
+        btn.disabled    = false;
+        btn.textContent = 'Add to Cart';
+        btn.classList.remove('elanvi-reel-modal__btn--added');
+      }, 2200);
+    })
+    .catch(function () {
+      btn.disabled    = false;
+      btn.textContent = 'Try Again';
+    });
+  }
+
+  /* ── Event listeners ──────────────────────────────────────── */
+  if (closeBtn) { closeBtn.addEventListener('click', closeModal); }
+  if (backdrop) { backdrop.addEventListener('click', closeModal); }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !modal.hasAttribute('hidden')) { closeModal(); }
+  });
+
+  /* Expose opener so reel cards can call it */
+  window._elanviOpenReelModal = openModal;
+
+})();
 </script>
 
 {%- endif -%}
@@ -805,6 +1311,12 @@
           "id": "link_text",
           "label": "Link Button Text",
           "default": "Shop Now"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Linked Product",
+          "info": "Product shown in the popup modal when this reel is clicked."
         }
       ]
     }
