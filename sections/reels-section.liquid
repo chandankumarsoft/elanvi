@@ -1203,6 +1203,11 @@
 
   /* ── Close ────────────────────────────────────────────────── */
   function closeModal() {
+    /* Stop video immediately — don't wait for the animation to finish */
+    if (modalVideo) {
+      modalVideo.pause();
+    }
+
     modal.classList.remove('elanvi-reel-modal--open');
     modal.classList.add('elanvi-reel-modal--closing');
     modal.querySelector('.elanvi-reel-modal__container')
@@ -1211,7 +1216,7 @@
         modal.classList.remove('elanvi-reel-modal--closing');
         document.body.style.overflow = '';
         if (modalVideo) {
-          modalVideo.pause();
+          modalVideo.removeAttribute('src');
           while (modalVideo.firstChild) { modalVideo.removeChild(modalVideo.firstChild); }
           modalVideo.load();
         }
