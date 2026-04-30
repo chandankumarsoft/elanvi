@@ -1144,28 +1144,45 @@
 
   /* ── Open ─────────────────────────────────────────────────── */
   function openModal(card) {
-    /* Copy video sources from the reel card into the modal video */
+    /* 1. Show modal first — browsers won't load/play video in display:none */
+    modal.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(function () {
+      modal.classList.add('elanvi-reel-modal--open');
+    });
+    if (closeBtn) { closeBtn.focus(); }
+
+    /* 2. Set up video after modal is visible */
     var reelVideo = card.querySelector('[data-reel-video]');
     if (modalVideo) {
+      modalVideo.pause();
+      modalVideo.removeAttribute('src');
       while (modalVideo.firstChild) { modalVideo.removeChild(modalVideo.firstChild); }
+
       if (reelVideo) {
-        reelVideo.querySelectorAll('source').forEach(function (src) {
-          var s  = document.createElement('source');
-          s.src  = src.src || src.getAttribute('data-src') || '';
-          s.type = src.type || 'video/mp4';
-          modalVideo.appendChild(s);
-        });
-        modalVideo.muted    = true;
-        modalVideo.autoplay = true;
-        modalVideo.addEventListener('canplay', function onCanPlay() {
-          modalVideo.removeEventListener('canplay', onCanPlay);
-          modalVideo.play().catch(function () {});
-        }, { once: true });
-        modalVideo.load();
+        /* Use direct src instead of <source> children — more reliable */
+        var firstSrc = reelVideo.querySelector('source');
+        var videoUrl = firstSrc
+          ? (firstSrc.src || firstSrc.getAttribute('data-src') || '')
+          : '';
+
+        if (videoUrl) {
+          modalVideo.muted    = true;
+          modalVideo.autoplay = true;
+          modalVideo.src      = videoUrl;
+          modalVideo.load();
+          modalVideo.play().catch(function () {
+            /* If autoplay is blocked, wait for canplay and retry once */
+            modalVideo.addEventListener('canplay', function retry() {
+              modalVideo.removeEventListener('canplay', retry);
+              modalVideo.play().catch(function () {});
+            });
+          });
+        }
       }
     }
 
-    /* Swap in pre-rendered product HTML */
+    /* 3. Swap in pre-rendered product HTML */
     var blockId = card.getAttribute('data-reel-block-id');
     if (modalProduct) {
       modalProduct.innerHTML = '';
@@ -1176,14 +1193,6 @@
         if (atcBtn) { atcBtn.addEventListener('click', addToCart); }
       }
     }
-
-    /* Show modal */
-    modal.removeAttribute('hidden');
-    document.body.style.overflow = 'hidden';
-    requestAnimationFrame(function () {
-      modal.classList.add('elanvi-reel-modal--open');
-    });
-    if (closeBtn) { closeBtn.focus(); }
   }
 
   /* ── Close ────────────────────────────────────────────────── */
