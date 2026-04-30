@@ -277,7 +277,6 @@
       <video
         class="elanvi-reel-modal__video"
         playsinline
-        muted
         loop
         data-reel-modal-video
         aria-label="Reel video"
@@ -1167,10 +1166,17 @@
           : '';
 
         if (videoUrl) {
+          /* Mute only to satisfy autoplay policy, then unmute once playing */
           modalVideo.muted    = true;
           modalVideo.autoplay = true;
           modalVideo.src      = videoUrl;
           modalVideo.load();
+
+          modalVideo.addEventListener('playing', function unmuteOnPlay() {
+            modalVideo.removeEventListener('playing', unmuteOnPlay);
+            modalVideo.muted = false;
+          });
+
           modalVideo.play().catch(function () {
             /* If autoplay is blocked, wait for canplay and retry once */
             modalVideo.addEventListener('canplay', function retry() {
