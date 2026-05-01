@@ -141,48 +141,63 @@
 
 
 .elanvi-hero__grid {
-  display: grid; 
+  display: grid;
   background-color: var(--elanvi-white);
-  overflow: hidden;  
+  overflow: hidden;
 }
-@media (min-width: 990px) { .elanvi-hero__grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 990px) { .elanvi-hero__grid { grid-template-columns: 52fr 48fr; min-height: 640px; } }
 
 .elanvi-hero__media {
-  min-height: 300px;
-  background-color: #fdf9f8;
+  position: relative;
+  min-height: 320px;
+  background: linear-gradient(160deg, #fdf9f8 0%, #f5ebe4 55%, #eedfd5 100%);
   order: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
-@media (min-width: 750px) { .elanvi-hero__media { min-height: 400px; } }
-@media (min-width: 768px) { .elanvi-hero__media { min-height: 500px; } }
-@media (min-width: 990px) { .elanvi-hero__media { min-height: 640px; } }
+@media (min-width: 750px) { .elanvi-hero__media { min-height: 420px; } }
+@media (min-width: 768px) { .elanvi-hero__media { min-height: 520px; } }
+@media (min-width: 990px) { .elanvi-hero__media { min-height: 640px; align-items: center; } }
 
 .elanvi-hero__media img,
 .elanvi-hero__placeholder-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 80%;
+  max-width: 360px;
+  height: auto;
+  object-fit: contain;
   display: block;
+  position: relative;
+  z-index: 1;
+  padding-top: 1.5rem;
 }
 @media (min-width: 990px) {
   .elanvi-hero__media img,
   .elanvi-hero__placeholder-img {
-    width: 600px;
-    height: auto;
-    object-fit: fill;
+    width: 75%;
+    max-width: 460px;
+    height: 100%;
+    max-height: 580px;
+    padding: 3rem 2rem 0;
+    object-fit: contain;
+    object-position: center bottom;
+    filter: drop-shadow(0 32px 56px rgba(120, 60, 30, 0.18));
   }
 }
 
 .elanvi-hero__content {
-  padding: 1.5rem;
+  padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   order: 2;
-  background-color:#fdf9f8;
+  background-color: #fff;
+  border-left: 3px solid transparent;
 }
-@media (min-width: 750px) { .elanvi-hero__content { padding: 2rem; } }
-@media (min-width: 768px) { .elanvi-hero__content { padding: 3rem; } }
-@media (min-width: 990px) { .elanvi-hero__content { padding: 4rem; padding-right: 0; } }
+@media (min-width: 750px) { .elanvi-hero__content { padding: 2.5rem; } }
+@media (min-width: 768px) { .elanvi-hero__content { padding: 3.5rem; } }
+@media (min-width: 990px) { .elanvi-hero__content { padding: 4.5rem 5rem 4.5rem 4rem; } }
 
 .elanvi-hero__cta-row {
   display: grid;
