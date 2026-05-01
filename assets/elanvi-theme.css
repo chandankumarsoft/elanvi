@@ -132,94 +132,106 @@
 /* =================================================================
    HERO SECTION
    ================================================================= */
-.elanvi-hero__content .elanvi-heading-xl { margin-top: 0.6rem; font-size: clamp(1.75rem, 3.5vw, 2.75rem); }
-.elanvi-hero__content .elanvi-body-lg { margin-top: 0.5rem; font-size: clamp(0.875rem, 1.2vw, 1.125rem); line-height: 1.5; }
+
+/* ── override heading/body sizes inside hero to keep everything in-viewport ── */
+.elanvi-hero__content .elanvi-heading-xl {
+  margin-top: 0.5rem;
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  line-height: 1.1;
+}
+.elanvi-hero__content .elanvi-body-lg {
+  margin-top: 0.5rem;
+  font-size: clamp(0.875rem, 1.1vw, 1.05rem);
+  line-height: 1.55;
+}
+
+/* ── Hero wrapper ── */
 .elanvi-hero {
   max-width: 100%;
   margin-inline: auto;
   height: 100svh;
+  min-height: 560px;
   overflow: hidden;
 }
 
-
+/* ── Two-column grid ── */
 .elanvi-hero__grid {
   display: grid;
-  background-color: var(--elanvi-white);
-  overflow: hidden;
   height: 100%;
-}
-@media (min-width: 990px) { .elanvi-hero__grid { grid-template-columns: 42fr 58fr; } }
-
-.elanvi-hero__media {
-  position: relative;
-  min-height: 220px;
-  background: linear-gradient(160deg, #fdf9f8 0%, #f5ebe4 60%, #eedfd5 100%);
-  order: 1;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-@media (min-width: 990px) { .elanvi-hero__media { min-height: unset; height: 100%; } }
-
-.elanvi-hero__media img,
-.elanvi-hero__placeholder-img {
-  width: 85%;
-  max-width: 340px;
-  height: auto;
-  max-height: 88%;
-  object-fit: contain;
-  object-position: center center;
-  display: block;
-  position: relative;
-  filter: drop-shadow(0 16px 40px rgba(120, 60, 30, 0.15));
+  background-color: var(--elanvi-white);
 }
 @media (min-width: 990px) {
-  .elanvi-hero__media img,
-  .elanvi-hero__placeholder-img {
-    width: 80%;
-    max-width: 320px;
-    max-height: 82%;
+  .elanvi-hero__grid {
+    grid-template-columns: 48fr 52fr;
   }
 }
 
+/* ── LEFT: image panel — full-bleed cover ── */
+.elanvi-hero__media {
+  position: relative;
+  min-height: 260px;
+  background: #f4ede6;
+  order: 1;
+  overflow: hidden;
+}
+@media (min-width: 990px) {
+  .elanvi-hero__media {
+    min-height: unset;
+    height: 100%;
+  }
+}
+
+.elanvi-hero__media img,
+.elanvi-hero__placeholder-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* ── RIGHT: content panel ── */
 .elanvi-hero__content {
-  padding: 1.25rem 1.5rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   order: 2;
-  background-color: #fdf9f8;
+  background-color: #ffffff;
   overflow: hidden;
+  border-left: 1px solid var(--elanvi-border);
 }
-@media (min-width: 750px) { .elanvi-hero__content { padding: 1.5rem 2rem; } }
-@media (min-width: 990px) { .elanvi-hero__content { padding: 2.5rem 3rem 2.5rem 3rem; height: 100%; } }
+@media (min-width: 750px) { .elanvi-hero__content { padding: 2rem 2.5rem; } }
+@media (min-width: 990px) { .elanvi-hero__content { padding: 2.5rem 3.5rem; height: 100%; } }
 
+/* ── CTA buttons row ── */
 .elanvi-hero__cta-row {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+/* ── Feature badges ── */
+.elanvi-hero__badges {
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
-  max-width: 36rem;
   margin-top: 1rem;
 }
-@media (min-width: 750px) { .elanvi-hero__cta-row { grid-template-columns: 1fr 1fr; } }
-
-.elanvi-hero__badges {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.4rem;
-  margin-top: 0.75rem;
-}
-@media (min-width: 750px) { .elanvi-hero__badges { grid-template-columns: 1fr 1fr; gap: 0.5rem; } }
 
 .elanvi-hero__badge {
   border: 1px solid var(--elanvi-border);
-  padding: 0.4rem 0.75rem;
+  padding: 0.35rem 0.75rem;
   background-color: var(--elanvi-bg-light);
-  border-radius: var(--elanvi-radius-sm);
-  font-size: 0.8rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
   color: var(--elanvi-text-muted);
   line-height: 1.4;
+  white-space: nowrap;
 }
 
 /* ---------- Bundle & Save ---------- */
