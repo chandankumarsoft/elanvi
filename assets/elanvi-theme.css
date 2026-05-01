@@ -141,21 +141,19 @@
 
 
 .elanvi-hero__grid {
-  display: grid;
+  display: grid; 
   background-color: var(--elanvi-white);
-  overflow: hidden;
+  overflow: hidden;  
 }
-@media (min-width: 990px) { .elanvi-hero__grid { grid-template-columns: 52fr 48fr; min-height: 640px; } }
+@media (min-width: 990px) { .elanvi-hero__grid { grid-template-columns: 1fr 1fr; } }
 
 .elanvi-hero__media {
-  position: relative;
-  min-height: 320px;
-  background: linear-gradient(160deg, #fdf9f8 0%, #f5ebe4 55%, #eedfd5 100%);
+  min-height: 300px;
+  background-color: #fdf9f8;
   order: 1;
-  overflow: hidden;
 }
-@media (min-width: 750px) { .elanvi-hero__media { min-height: 420px; } }
-@media (min-width: 768px) { .elanvi-hero__media { min-height: 520px; } }
+@media (min-width: 750px) { .elanvi-hero__media { min-height: 400px; } }
+@media (min-width: 768px) { .elanvi-hero__media { min-height: 500px; } }
 @media (min-width: 990px) { .elanvi-hero__media { min-height: 640px; } }
 
 .elanvi-hero__media img,
@@ -163,25 +161,28 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
   display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
+}
+@media (min-width: 990px) {
+  .elanvi-hero__media img,
+  .elanvi-hero__placeholder-img {
+    width: 600px;
+    height: auto;
+    object-fit: fill;
+  }
 }
 
 .elanvi-hero__content {
-  padding: 2rem 1.5rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   order: 2;
-  background-color: #fff;
-  border-left: 3px solid transparent;
+  background-color:#fdf9f8;
 }
-@media (min-width: 750px) { .elanvi-hero__content { padding: 2.5rem; } }
-@media (min-width: 768px) { .elanvi-hero__content { padding: 3.5rem; } }
-@media (min-width: 990px) { .elanvi-hero__content { padding: 4.5rem 5rem 4.5rem 4rem; } }
+@media (min-width: 750px) { .elanvi-hero__content { padding: 2rem; } }
+@media (min-width: 768px) { .elanvi-hero__content { padding: 3rem; } }
+@media (min-width: 990px) { .elanvi-hero__content { padding: 4rem; padding-right: 0; } }
 
 .elanvi-hero__cta-row {
   display: grid;
