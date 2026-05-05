@@ -24,38 +24,15 @@
       {%- endif -%}
     </div>
 
-    <div class="elanvi-about__actions">
-
-      {%- comment %} Buy Now → select product, add first available variant, go to checkout {%- endcomment -%}
-      {%- assign buy_product = all_products[section.settings.buy_product] -%}
-      {%- assign buy_variant = buy_product.selected_or_first_available_variant -%}
-      {%- if buy_variant != blank -%}
-        <form action="/cart/add" method="post" class="elanvi-buy-form">
-          <input type="hidden" name="id" value="{{ buy_variant.id }}">
-          <input type="hidden" name="quantity" value="1">
-          <input type="hidden" name="return_to" value="/checkout">
-          <button type="submit" class="elanvi-btn elanvi-btn--primary">
-            {{ section.settings.cta_primary | default: 'Buy Now' }}
-          </button>
-        </form>
-      {%- else -%}
-        <button class="elanvi-btn elanvi-btn--primary" type="button" data-elanvi-action="buy">
-          {{ section.settings.cta_primary | default: 'Buy Now' }}
-        </button>
-      {%- endif -%}
-
-      {%- comment %} Explore Elanvi → product details page (uses product URL as fallback) {%- endcomment -%}
-      {%- assign explore_url = section.settings.product_url | default: buy_product.url -%}
-      {%- if explore_url != blank -%}
-        <a href="{{ explore_url }}" class="elanvi-btn elanvi-btn--outline">
-          {{ section.settings.cta_secondary | default: 'Explore Elanvi' }}
-        </a>
-      {%- else -%}
-        <button class="elanvi-btn elanvi-btn--outline" type="button" data-elanvi-action="explore">
-          {{ section.settings.cta_secondary | default: 'Explore Elanvi' }}
-        </button>
-      {%- endif -%}
-
+    <div class="elanvi-about__video">
+      <video
+        src="https://cdn.shopify.com/videos/c/o/v/1d7b810e3fb14e9fb27ebeca3e95d054.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+        class="elanvi-about__video-player"
+      ></video>
     </div>
 
   </div>
@@ -101,34 +78,6 @@
       "label": "Badge 3",
       "default": "♻️ Recyclable packaging"
     },
-    {
-      "type": "header",
-      "content": "Buttons"
-    },
-    {
-      "type": "product",
-      "id": "buy_product",
-      "label": "Buy Now — Select Product",
-      "info": "Pick your product. Buy Now will add it to cart and go straight to checkout. Explore Elanvi will also link to this product automatically."
-    },
-    {
-      "type": "url",
-      "id": "product_url",
-      "label": "Explore Elanvi — Override URL (optional)",
-      "info": "Only needed if you want Explore Elanvi to go somewhere other than the selected product page."
-    },
-    {
-      "type": "text",
-      "id": "cta_primary",
-      "label": "Primary Button Label",
-      "default": "Buy Now"
-    },
-    {
-      "type": "text",
-      "id": "cta_secondary",
-      "label": "Secondary Button Label",
-      "default": "Explore Elanvi"
-    }
   ],
   "presets": [
     {

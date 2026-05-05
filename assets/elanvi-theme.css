@@ -200,7 +200,7 @@
   flex-direction: column;
   justify-content: center;
   order: 2;
-  background-color: #ffffff;
+  background-color: #fdf9f8;
   overflow: hidden;
   border-left: 1px solid var(--elanvi-border);
 }
@@ -931,14 +931,24 @@ div[id*="elanvi-about"] {
 @media (min-width: 750px) { .elanvi-about__badges { gap: 1.25rem; font-size: 0.875rem; margin-top: 1.5rem; } }
 @media (min-width: 768px) { .elanvi-about__badges { justify-content: flex-start; } }
 
-.elanvi-about__actions {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+.elanvi-about__video {
   flex-shrink: 0;
   width: 100%;
+  max-width: 420px;
+  border-radius: 1rem;
+  overflow: hidden;
 }
-@media (min-width: 750px) { .elanvi-about__actions { flex-direction: row; width: auto; } }
+.elanvi-about__video-player {
+  width: 100%;
+  height: auto;
+  max-height: 340px;
+  object-fit: cover;
+  display: block;
+  border-radius: 1rem;
+}
+@media (min-width: 768px) {
+  .elanvi-about__video { width: 42%; max-width: 460px; }
+}
 
 /* =================================================================
    NEWSLETTER SECTION
