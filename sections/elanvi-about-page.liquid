@@ -385,11 +385,21 @@
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
+.eap p,
+.eap blockquote,
+.eap h2,
+.eap h3 {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
 
 /* Eyebrow: slightly larger within the about page for readability */
 .eap .elanvi-eyebrow {
-  font-size: 0.6875rem;
-  letter-spacing: 0.28em;
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+}
+@media (min-width: 480px) {
+  .eap .elanvi-eyebrow { letter-spacing: 0.28em; }
 }
 @media (min-width: 750px) {
   .eap .elanvi-eyebrow { font-size: 0.8125rem; }
@@ -461,8 +471,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1px solid rgba(255,255,255,0.4);
   color: #fff;
@@ -623,7 +633,9 @@
   display: block;
   transition: transform 0.6s ease;
 }
-.eap-story__media:hover .eap-story__img { transform: scale(1.04); }
+@media (hover: hover) {
+  .eap-story__media:hover .eap-story__img { transform: scale(1.04); }
+}
 .eap-story__placeholder {
   width: 100%;
   height: 100%;
@@ -679,7 +691,7 @@
 .eap-timeline__track::before {
   content: '';
   position: absolute;
-  left: 18px;
+  left: 17px;
   top: 0;
   bottom: 0;
   width: 2px;
@@ -972,7 +984,9 @@
   display: block;
   transition: transform 0.6s ease;
 }
-.eap-founder__media:hover .eap-founder__img { transform: scale(1.03); }
+@media (hover: hover) {
+  .eap-founder__media:hover .eap-founder__img { transform: scale(1.03); }
+}
 .eap-founder__placeholder {
   width: 100%;
   height: 100%;
