@@ -354,6 +354,17 @@
   -webkit-font-smoothing: antialiased;
 }
 
+/* Eyebrow: slightly larger within the about page for readability */
+.eap .elanvi-eyebrow {
+  font-size: 0.6875rem;
+  letter-spacing: 0.28em;
+}
+@media (min-width: 750px) {
+  .eap .elanvi-eyebrow { font-size: 0.8125rem; }
+}
+/* Eyebrow on dark-background sections */
+.eap-cta .elanvi-eyebrow { color: var(--elanvi-gold) !important; }
+
 /* ==================================================================
    1. HERO
    ================================================================== */
@@ -466,11 +477,12 @@
   background: var(--elanvi-bg-card);
   border-radius: var(--elanvi-radius);
   border: 1px solid var(--elanvi-border);
-  transition: box-shadow var(--elanvi-transition), transform var(--elanvi-transition);
+  transition: box-shadow var(--elanvi-transition), transform var(--elanvi-transition), border-color var(--elanvi-transition);
 }
 .eap-mission__block:hover {
-  box-shadow: 0 8px 28px rgba(35, 32, 27, 0.07);
+  box-shadow: 0 8px 28px rgba(35, 32, 27, 0.09);
   transform: translateY(-4px);
+  border-color: rgba(200, 157, 108, 0.55);
 }
 .eap-mission__icon {
   width: 56px;
@@ -550,7 +562,7 @@
    4. JOURNEY TIMELINE
    ================================================================== */
 .eap-timeline {
-  background-color: var(--elanvi-bg-card);
+  background-color: var(--elanvi-bg-cream);
   padding: 5.5rem 1.25rem;
   border-top: 1px solid var(--elanvi-border);
   border-bottom: 1px solid var(--elanvi-border);
@@ -605,7 +617,7 @@
   height: 38px;
   border-radius: 50%;
   background-color: var(--elanvi-gold);
-  border: 3px solid var(--elanvi-bg-card);
+  border: 3px solid var(--elanvi-bg-cream);
   box-shadow: 0 0 0 2px var(--elanvi-gold);
   position: relative;
   z-index: 1;
@@ -660,7 +672,7 @@
 }
 .eap-stat__label {
   font-size: 0.8rem;
-  color: rgba(232, 224, 214, 0.6);
+  color: rgba(232, 224, 214, 0.88);
   text-transform: uppercase;
   letter-spacing: 0.15em;
   margin: 0;
@@ -760,7 +772,7 @@
    ================================================================== */
 .eap-values {
   padding: 5.5rem 1.25rem;
-  background-color: var(--elanvi-bg-card);
+  background-color: var(--elanvi-bg-cream);
   border-top: 1px solid var(--elanvi-border);
 }
 @media (min-width: 750px) { .eap-values { padding: 7rem 2rem; } }
@@ -775,15 +787,16 @@
 @media (min-width: 600px) { .eap-values__grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 990px) { .eap-values__grid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
 .eap-value-card {
-  background-color: var(--elanvi-bg);
+  background-color: var(--elanvi-bg-card);
   border: 1px solid var(--elanvi-border);
   border-radius: var(--elanvi-radius);
   padding: 2rem 1.5rem;
-  transition: box-shadow var(--elanvi-transition), transform var(--elanvi-transition);
+  transition: box-shadow var(--elanvi-transition), transform var(--elanvi-transition), border-color var(--elanvi-transition);
 }
 .eap-value-card:hover {
-  box-shadow: 0 10px 36px rgba(35, 32, 27, 0.08);
+  box-shadow: 0 10px 36px rgba(35, 32, 27, 0.1);
   transform: translateY(-4px);
+  border-color: rgba(200, 157, 108, 0.55);
 }
 .eap-value-card__icon {
   width: 48px;
@@ -813,7 +826,7 @@
    8. CERTIFICATIONS STRIP
    ================================================================== */
 .eap-certs {
-  background-color: var(--elanvi-bg-cream);
+  background-color: var(--elanvi-bg);
   border-top: 1px solid var(--elanvi-border);
   border-bottom: 1px solid var(--elanvi-border);
   padding: 3rem 1.25rem;
@@ -882,7 +895,7 @@
 }
 .eap-cta__sub {
   font-size: 1rem;
-  color: rgba(232, 224, 214, 0.72);
+  color: rgba(232, 224, 214, 0.9);
   line-height: 1.75;
   margin: 0 0 2.5rem;
 }
