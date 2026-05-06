@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "about_main": {
@@ -6,6 +15,7 @@
         "eyebrow": "Our Story",
         "hero_heading": "Science Rooted in Ancient Wisdom",
         "hero_body": "Elanvi was born from a simple belief: that women above 30 deserve skincare that is as thoughtful and refined as they are. We weave centuries of Ayurvedic intelligence with cutting-edge dermatological science — creating rituals, not just products.",
+        "hero_image": "shopify://shop_images/elanvi_about_us_banner.png",
         "pillar_1_title": "Ayurvedic Heritage",
         "pillar_1_body": "Every formula begins with time-honoured Ayurvedic botanicals — Ashwagandha, Kumkumadi, Saffron, and more — chosen for their proven efficacy on mature skin.",
         "pillar_2_title": "Modern Science",
