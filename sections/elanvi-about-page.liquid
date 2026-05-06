@@ -50,6 +50,12 @@
 
   {%- comment -%}──────────────────────────── 2. MISSION PILLARS ────────────────{%- endcomment -%}
   <div class="eap-mission">
+    <div class="eap-mission__header">
+      <span class="elanvi-eyebrow">{{ section.settings.mission_eyebrow | default: 'The Elanvi Way' }}</span>
+      <h2 class="elanvi-heading-lg eap-mission__heading">
+        {{ section.settings.mission_heading | default: 'Our Founding Principles' }}
+      </h2>
+    </div>
     <div class="eap-mission__inner">
       <div class="eap-mission__block">
         <div class="eap-mission__icon" aria-hidden="true">
@@ -163,23 +169,48 @@
 
   {%- comment -%}──────────────────────────── 5. STATS BAR ──────────────────────{%- endcomment -%}
   <div class="eap-stats">
+    <div class="eap-stats__header">
+      <span class="elanvi-eyebrow eap-stats__eyebrow">{{ section.settings.stats_eyebrow | default: 'By The Numbers' }}</span>
+      <h2 class="eap-stats__heading">{{ section.settings.stats_heading | default: 'Trusted by Thousands' }}</h2>
+    </div>
     <div class="eap-stats__inner">
+
       <div class="eap-stat">
+        <div class="eap-stat__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a9 9 0 0 1 9 9c0 4.97-9 13-9 13S3 15.97 3 11a9 9 0 0 1 9-9z"/><circle cx="12" cy="11" r="3"/></svg>
+        </div>
         <p class="eap-stat__number">{{ section.settings.stat_1_num | default: '30+' }}</p>
+        <span class="eap-stat__divider" aria-hidden="true"></span>
         <p class="eap-stat__label">{{ section.settings.stat_1_label | default: 'Ayurvedic Actives' }}</p>
       </div>
+
       <div class="eap-stat">
+        <div class="eap-stat__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
         <p class="eap-stat__number">{{ section.settings.stat_2_num | default: '50,000+' }}</p>
+        <span class="eap-stat__divider" aria-hidden="true"></span>
         <p class="eap-stat__label">{{ section.settings.stat_2_label | default: 'Happy Customers' }}</p>
       </div>
+
       <div class="eap-stat">
+        <div class="eap-stat__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
         <p class="eap-stat__number">{{ section.settings.stat_3_num | default: '4.8★' }}</p>
+        <span class="eap-stat__divider" aria-hidden="true"></span>
         <p class="eap-stat__label">{{ section.settings.stat_3_label | default: 'Average Rating' }}</p>
       </div>
+
       <div class="eap-stat">
+        <div class="eap-stat__icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
         <p class="eap-stat__number">{{ section.settings.stat_4_num | default: '100%' }}</p>
+        <span class="eap-stat__divider" aria-hidden="true"></span>
         <p class="eap-stat__label">{{ section.settings.stat_4_label | default: 'Cruelty-Free' }}</p>
       </div>
+
     </div>
   </div>
 
@@ -371,11 +402,11 @@
 .eap-hero {
   position: relative;
   overflow: hidden;
-  min-height: 480px;
+  min-height: 420px;
   display: flex;
   align-items: flex-end;
 }
-@media (min-width: 750px)  { .eap-hero { min-height: 600px; } }
+@media (min-width: 750px)  { .eap-hero { min-height: 580px; } }
 @media (min-width: 1100px) { .eap-hero { min-height: 680px; } }
 
 .eap-hero__media {
@@ -408,18 +439,18 @@
   max-width: 720px;
   margin-inline: auto;
   text-align: center;
-  padding: 3rem 1.25rem 4rem;
+  padding: 3rem 1.5rem 4rem;
 }
-@media (min-width: 750px) { .eap-hero__inner { padding: 3rem 2rem 5.5rem; } }
+@media (min-width: 750px) { .eap-hero__inner { padding: 3rem 2.5rem 5.5rem; } }
 .eap-hero__inner .elanvi-eyebrow { color: var(--elanvi-gold); }
 .eap-hero__title {
   color: #fff;
   margin-top: 0.75rem !important;
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(1.625rem, 6vw, 3.5rem);
 }
 .eap-hero__sub {
-  margin-top: 1.25rem;
-  font-size: clamp(0.9375rem, 1.5vw, 1.125rem);
+  margin-top: 1rem;
+  font-size: clamp(0.875rem, 2.5vw, 1.125rem);
   color: rgba(255, 255, 255, 0.82);
   line-height: 1.75;
   max-width: 580px;
@@ -456,33 +487,59 @@
   border-top: 1px solid var(--elanvi-border);
   border-bottom: 1px solid var(--elanvi-border);
 }
+.eap-mission__header {
+  text-align: center;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem 0;
+}
+@media (min-width: 750px) {
+  .eap-mission__header { padding: 5rem 2.5rem 0; }
+}
+.eap-mission__heading { margin-top: 0.875rem !important; }
+.eap-mission__heading::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--elanvi-gold), rgba(200, 157, 108, 0.25));
+  margin: 1rem auto 0;
+  border-radius: 2px;
+}
 .eap-mission__inner {
   max-width: 1200px;
   margin-inline: auto;
-  padding: 3.5rem 1.25rem;
+  padding: 2.5rem 1.5rem 4rem;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2.5rem;
+  gap: 1.75rem;
 }
 @media (min-width: 750px) {
   .eap-mission__inner {
     grid-template-columns: repeat(3, 1fr);
-    padding: 5rem 2rem;
-    gap: 3rem;
+    padding: 2.5rem 2.5rem 5rem;
+    gap: 2.5rem;
   }
 }
 .eap-mission__block {
   text-align: center;
-  padding: 2rem 1.5rem;
+  padding: 1.75rem 1.25rem 1.5rem;
   background: var(--elanvi-bg-card);
   border-radius: var(--elanvi-radius);
   border: 1px solid var(--elanvi-border);
+  border-top: 3px solid var(--elanvi-gold);
   transition: box-shadow var(--elanvi-transition), transform var(--elanvi-transition), border-color var(--elanvi-transition);
 }
-.eap-mission__block:hover {
-  box-shadow: 0 8px 28px rgba(35, 32, 27, 0.09);
-  transform: translateY(-4px);
-  border-color: rgba(200, 157, 108, 0.55);
+@media (min-width: 750px) {
+  .eap-mission__block { padding: 2.25rem 1.5rem 2rem; }
+}
+@media (hover: hover) {
+  .eap-mission__block:hover {
+    box-shadow: 0 12px 36px rgba(35, 32, 27, 0.1);
+    transform: translateY(-5px);
+    border-color: var(--elanvi-gold);
+    border-top-color: var(--elanvi-gold);
+  }
 }
 .eap-mission__icon {
   width: 56px;
@@ -512,20 +569,23 @@
 /* ==================================================================
    3. BRAND STORY
    ================================================================== */
-.eap-story { padding: 5.5rem 1.25rem; }
-@media (min-width: 750px) { .eap-story { padding: 7rem 2rem; } }
+.eap-story {
+  padding: 4rem 1.5rem;
+  background: linear-gradient(175deg, var(--elanvi-bg) 0%, rgba(235, 230, 225, 0.3) 100%);
+}
+@media (min-width: 750px) { .eap-story { padding: 5.5rem 2.5rem; } }
 .eap-story__inner {
   max-width: 1200px;
   margin-inline: auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: 2.5rem;
   align-items: center;
 }
 @media (min-width: 900px) {
   .eap-story__inner {
     grid-template-columns: 1fr 1fr;
-    gap: 6rem;
+    gap: 5rem;
   }
 }
 .eap-story__heading { margin-top: 0.875rem !important; }
@@ -537,11 +597,23 @@
 }
 @media (min-width: 750px) { .eap-story__body { font-size: 1.0625rem; } }
 .eap-story__cta { margin-top: 2.25rem; }
+@media (min-width: 900px) {
+  .eap-story__text {
+    padding-left: 2.5rem;
+    border-left: 2px solid rgba(200, 157, 108, 0.35);
+  }
+}
 .eap-story__media {
   border-radius: var(--elanvi-radius-lg);
   overflow: hidden;
-  aspect-ratio: 4 / 5;
-  box-shadow: 0 20px 60px rgba(35, 32, 27, 0.1);
+  aspect-ratio: 3 / 2;
+  box-shadow: 0 12px 40px rgba(35, 32, 27, 0.08);
+}
+@media (min-width: 900px) {
+  .eap-story__media {
+    aspect-ratio: 4 / 5;
+    box-shadow: 0 20px 60px rgba(35, 32, 27, 0.1);
+  }
 }
 .eap-story__img {
   width: 100%;
@@ -554,8 +626,11 @@
 .eap-story__placeholder {
   width: 100%;
   height: 100%;
+  min-height: 220px;
   background: linear-gradient(155deg, var(--elanvi-bg-cream) 0%, #c8bbb0 100%);
-  min-height: 440px;
+}
+@media (min-width: 900px) {
+  .eap-story__placeholder { min-height: 440px; }
 }
 
 /* ==================================================================
@@ -563,14 +638,37 @@
    ================================================================== */
 .eap-timeline {
   background-color: var(--elanvi-bg-cream);
-  padding: 5.5rem 1.25rem;
+  padding: 4rem 1.5rem;
   border-top: 1px solid var(--elanvi-border);
   border-bottom: 1px solid var(--elanvi-border);
+  position: relative;
+  overflow: hidden;
 }
-@media (min-width: 750px) { .eap-timeline { padding: 7rem 2rem; } }
-.eap-timeline__inner { max-width: 1100px; margin-inline: auto; }
-.eap-timeline__header { text-align: center; margin-bottom: 4rem; }
+.eap-timeline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(200, 157, 108, 0.08) 0%, transparent 55%);
+  pointer-events: none;
+}
+@media (min-width: 750px) { .eap-timeline { padding: 5.5rem 2.5rem; } }
+.eap-timeline__inner {
+  max-width: 1100px;
+  margin-inline: auto;
+  position: relative;
+  z-index: 1;
+}
+.eap-timeline__header { text-align: center; margin-bottom: 2.5rem; }
 .eap-timeline__heading { margin-top: 0.875rem !important; }
+.eap-timeline__heading::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--elanvi-gold), rgba(200, 157, 108, 0.25));
+  margin: 1rem auto 0;
+  border-radius: 2px;
+}
 .eap-timeline__track {
   display: flex;
   flex-direction: column;
@@ -597,11 +695,13 @@
 .eap-timeline__item {
   display: flex;
   align-items: flex-start;
-  gap: 1.25rem;
-  padding-bottom: 2.5rem;
+  gap: 1rem;
+  padding-bottom: 2rem;
+  padding-left: 0;
   flex: 1;
   position: relative;
 }
+.eap-timeline__item:last-child { padding-bottom: 0; }
 @media (min-width: 750px) {
   .eap-timeline__item {
     flex-direction: column;
@@ -613,32 +713,42 @@
 }
 .eap-timeline__dot {
   flex-shrink: 0;
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background-color: var(--elanvi-gold);
   border: 3px solid var(--elanvi-bg-cream);
   box-shadow: 0 0 0 2px var(--elanvi-gold);
   position: relative;
   z-index: 1;
+  margin-top: 2px;
 }
-@media (min-width: 750px) { .eap-timeline__dot { margin-bottom: 1.5rem; } }
+@media (min-width: 750px) {
+  .eap-timeline__dot {
+    width: 38px;
+    height: 38px;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+}
 .eap-timeline__card { flex: 1; }
 @media (min-width: 750px) { .eap-timeline__card { flex: none; } }
 .eap-timeline__year {
   font-family: var(--elanvi-font-serif);
-  font-size: 1.375rem;
+  font-size: 1.125rem;
   color: var(--elanvi-gold);
   font-style: italic;
   display: block;
-  margin-bottom: 0.375rem;
+  margin-bottom: 0.25rem;
 }
+@media (min-width: 750px) { .eap-timeline__year { font-size: 1.375rem; margin-bottom: 0.375rem; } }
 .eap-timeline__event {
   font-family: var(--elanvi-font-serif);
-  font-size: 1.125rem;
+  font-size: 1rem;
   color: var(--elanvi-text);
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.375rem;
 }
+@media (min-width: 750px) { .eap-timeline__event { font-size: 1.125rem; margin-bottom: 0.5rem; } }
 .eap-timeline__desc {
   font-size: 0.9rem;
   color: var(--elanvi-text-muted);
@@ -651,60 +761,209 @@
    ================================================================== */
 .eap-stats {
   background-color: var(--elanvi-text);
-  padding: 4rem 1.25rem;
+  padding: 4rem 1.5rem;
+  position: relative;
+  overflow: hidden;
 }
-@media (min-width: 750px) { .eap-stats { padding: 5rem 2rem; } }
+.eap-stats::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(200, 157, 108, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 110%, rgba(200, 157, 108, 0.10) 0%, transparent 50%);
+  pointer-events: none;
+}
+@media (min-width: 750px) { .eap-stats { padding: 5.5rem 2.5rem; } }
+
+/* Header */
+.eap-stats__header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+.eap-stats__eyebrow {
+  color: var(--elanvi-gold) !important;
+  opacity: 0.8;
+}
+.eap-stats__heading {
+  font-family: var(--elanvi-font-serif);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  color: #fff;
+  margin: 0.75rem 0 0;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.eap-stats__heading::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--elanvi-gold), rgba(200, 157, 108, 0.2));
+  margin: 1rem auto 0;
+  border-radius: 2px;
+}
+
+/* Grid */
 .eap-stats__inner {
-  max-width: 1000px;
+  max-width: 1040px;
   margin-inline: auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2.5rem 1.5rem;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
 }
-@media (min-width: 600px) { .eap-stats__inner { grid-template-columns: repeat(4, 1fr); } }
-.eap-stat { text-align: center; }
+@media (min-width: 700px) {
+  .eap-stats__inner {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+}
+
+/* Stat card */
+.eap-stat {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(200, 157, 108, 0.18);
+  border-radius: var(--elanvi-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: background var(--elanvi-transition), border-color var(--elanvi-transition), transform var(--elanvi-transition);
+}
+@media (hover: hover) {
+  .eap-stat:hover {
+    background: rgba(200, 157, 108, 0.09);
+    border-color: rgba(200, 157, 108, 0.45);
+    transform: translateY(-4px);
+  }
+}
+@media (min-width: 700px) {
+  .eap-stat {
+    border-radius: 0;
+    border: none;
+    background: none;
+    padding: 1.5rem 2rem;
+    position: relative;
+  }
+  .eap-stat + .eap-stat::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20%;
+    bottom: 20%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(200, 157, 108, 0.35), transparent);
+  }
+}
+@media (hover: hover) and (min-width: 700px) {
+  .eap-stat:hover {
+    background: rgba(200, 157, 108, 0.06);
+    border-color: transparent;
+    border-radius: var(--elanvi-radius-sm);
+    transform: translateY(-3px);
+  }
+}
+
+/* Icon */
+.eap-stat__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(200, 157, 108, 0.3);
+  background: rgba(200, 157, 108, 0.08);
+  color: var(--elanvi-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* Number */
 .eap-stat__number {
   font-family: var(--elanvi-font-serif);
-  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-size: clamp(2rem, 8vw, 3.5rem);
   color: var(--elanvi-gold);
-  margin: 0 0 0.375rem;
-  line-height: 1;
-}
-.eap-stat__label {
-  font-size: 0.8rem;
-  color: rgba(232, 224, 214, 0.88);
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
   margin: 0;
+  line-height: 1;
+  text-shadow: 0 0 40px rgba(200, 157, 108, 0.4);
+  letter-spacing: -0.02em;
+}
+
+/* Gold divider line between number and label */
+.eap-stat__divider {
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--elanvi-gold), transparent);
+  margin: 0.875rem auto;
+  opacity: 0.6;
+}
+
+/* Label */
+.eap-stat__label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: rgba(232, 224, 214, 0.92);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+  line-height: 1.5;
+}
+@media (min-width: 700px) {
+  .eap-stat__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+  }
 }
 
 /* ==================================================================
    6. FOUNDER SPOTLIGHT
    ================================================================== */
 .eap-founder {
-  padding: 5.5rem 1.25rem;
+  padding: 4rem 1.5rem;
   background-color: var(--elanvi-bg);
+  position: relative;
+  overflow: hidden;
 }
-@media (min-width: 750px) { .eap-founder { padding: 7rem 2rem; } }
+.eap-founder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 75% 50%, rgba(200, 157, 108, 0.07) 0%, transparent 55%);
+  pointer-events: none;
+}
+@media (min-width: 750px) { .eap-founder { padding: 5.5rem 2.5rem; } }
 .eap-founder__inner {
   max-width: 1100px;
   margin-inline: auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3.5rem;
+  gap: 2.5rem;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 @media (min-width: 900px) {
   .eap-founder__inner {
-    grid-template-columns: 420px 1fr;
-    gap: 6rem;
+    grid-template-columns: 400px 1fr;
+    gap: 5rem;
   }
 }
 .eap-founder__media {
   border-radius: var(--elanvi-radius-lg);
   overflow: hidden;
-  aspect-ratio: 8 / 9;
-  box-shadow: 0 24px 64px rgba(35, 32, 27, 0.12);
+  aspect-ratio: 3 / 2;
+  box-shadow: 0 12px 40px rgba(35, 32, 27, 0.1);
+}
+@media (min-width: 900px) {
+  .eap-founder__media {
+    aspect-ratio: 8 / 9;
+    box-shadow: 0 24px 64px rgba(35, 32, 27, 0.12);
+  }
 }
 .eap-founder__img {
   width: 100%;
@@ -718,22 +977,31 @@
 .eap-founder__placeholder {
   width: 100%;
   height: 100%;
+  min-height: 220px;
   background: linear-gradient(150deg, var(--elanvi-bg-cream) 0%, #d9cfc6 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 420px;
+}
+@media (min-width: 900px) {
+  .eap-founder__placeholder { min-height: 420px; }
 }
 .eap-founder__quote {
   font-family: var(--elanvi-font-serif);
-  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
-  line-height: 1.5;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  line-height: 1.65;
   color: var(--elanvi-text);
   font-style: italic;
-  margin: 1.5rem 0 0;
-  padding: 0;
+  margin: 1.25rem 0 0;
+  padding: 1.25rem 1.25rem;
   border: none;
+  border-left: 3px solid var(--elanvi-gold);
+  border-radius: 0 var(--elanvi-radius-sm) var(--elanvi-radius-sm) 0;
+  background: linear-gradient(135deg, rgba(200, 157, 108, 0.08) 0%, rgba(200, 157, 108, 0.02) 100%);
   position: relative;
+}
+@media (min-width: 750px) {
+  .eap-founder__quote { padding: 1.5rem 1.75rem; margin-top: 1.5rem; }
 }
 .eap-founder__quote-mark {
   color: var(--elanvi-gold);
@@ -771,32 +1039,59 @@
    7. VALUES GRID
    ================================================================== */
 .eap-values {
-  padding: 5.5rem 1.25rem;
+  padding: 4rem 1.5rem;
   background-color: var(--elanvi-bg-cream);
   border-top: 1px solid var(--elanvi-border);
+  position: relative;
+  overflow: hidden;
 }
-@media (min-width: 750px) { .eap-values { padding: 7rem 2rem; } }
+.eap-values::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(200, 157, 108, 0.07) 0%, transparent 50%);
+  pointer-events: none;
+}
+@media (min-width: 750px) { .eap-values { padding: 5.5rem 2.5rem; } }
 .eap-values__inner { max-width: 1200px; margin-inline: auto; }
-.eap-values__header { text-align: center; margin-bottom: 3.5rem; }
+.eap-values__header { text-align: center; margin-bottom: 2.5rem; position: relative; z-index: 1; }
 .eap-values__heading { margin-top: 0.875rem !important; }
+.eap-values__heading::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--elanvi-gold), rgba(200, 157, 108, 0.25));
+  margin: 1rem auto 0;
+  border-radius: 2px;
+}
 .eap-values__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.25rem;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
 }
-@media (min-width: 600px) { .eap-values__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 600px) { .eap-values__grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; } }
 @media (min-width: 990px) { .eap-values__grid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
 .eap-value-card {
   background-color: var(--elanvi-bg-card);
   border: 1px solid var(--elanvi-border);
+  border-top: 3px solid var(--elanvi-gold);
   border-radius: var(--elanvi-radius);
-  padding: 2rem 1.5rem;
+  padding: 1.5rem 1.25rem 1.25rem;
   transition: box-shadow var(--elanvi-transition), transform var(--elanvi-transition), border-color var(--elanvi-transition);
 }
-.eap-value-card:hover {
-  box-shadow: 0 10px 36px rgba(35, 32, 27, 0.1);
-  transform: translateY(-4px);
-  border-color: rgba(200, 157, 108, 0.55);
+@media (min-width: 600px) {
+  .eap-value-card { padding: 2.25rem 1.5rem 2rem; }
+}
+@media (hover: hover) {
+  .eap-value-card:hover {
+    box-shadow: 0 12px 40px rgba(35, 32, 27, 0.11);
+    transform: translateY(-5px);
+    border-color: var(--elanvi-gold);
+    border-top-color: var(--elanvi-gold);
+  }
 }
 .eap-value-card__icon {
   width: 48px;
@@ -829,9 +1124,9 @@
   background-color: var(--elanvi-bg);
   border-top: 1px solid var(--elanvi-border);
   border-bottom: 1px solid var(--elanvi-border);
-  padding: 3rem 1.25rem;
+  padding: 2.5rem 1.5rem;
 }
-@media (min-width: 750px) { .eap-certs { padding: 3.5rem 2rem; } }
+@media (min-width: 750px) { .eap-certs { padding: 3.5rem 2.5rem; } }
 .eap-certs__inner {
   max-width: 1100px;
   margin-inline: auto;
@@ -841,10 +1136,10 @@
   gap: 1.75rem;
 }
 .eap-certs__label {
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.3em;
-  color: var(--elanvi-text-muted);
+  letter-spacing: 0.25em;
+  color: var(--elanvi-text-soft);
   font-weight: 600;
   margin: 0;
 }
@@ -883,11 +1178,35 @@
    ================================================================== */
 .eap-cta {
   background-color: var(--elanvi-text);
-  padding: 5.5rem 1.25rem;
+  padding: 4rem 1.5rem;
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
-@media (min-width: 750px) { .eap-cta { padding: 7rem 2rem; } }
-.eap-cta__inner { max-width: 640px; margin-inline: auto; }
+.eap-cta::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 640px;
+  height: 420px;
+  background: radial-gradient(ellipse at center, rgba(200, 157, 108, 0.16) 0%, transparent 70%);
+  pointer-events: none;
+}
+.eap-cta::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 200px;
+  background: radial-gradient(ellipse at center, rgba(200, 157, 108, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+@media (min-width: 750px) { .eap-cta { padding: 5.5rem 2.5rem; } }
+.eap-cta__inner { max-width: 640px; margin-inline: auto; position: relative; z-index: 1; }
 .eap-cta__eyebrow { color: var(--elanvi-gold) !important; margin-bottom: 1rem; }
 .eap-cta__heading {
   color: #fff !important;
@@ -901,9 +1220,23 @@
 }
 .eap-cta__buttons {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
+}
+.eap-cta__buttons .elanvi-btn {
+  width: 100%;
   justify-content: center;
-  gap: 0.875rem;
+}
+@media (min-width: 480px) {
+  .eap-cta__buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.875rem;
+  }
+  .eap-cta__buttons .elanvi-btn { width: auto; }
 }
 .eap-cta .elanvi-btn--outline {
   color: var(--elanvi-gold);
@@ -951,6 +1284,18 @@
     {
       "type": "header",
       "content": "2 — Mission Pillars"
+    },
+    {
+      "type": "text",
+      "id": "mission_eyebrow",
+      "label": "Mission section eyebrow",
+      "default": "The Elanvi Way"
+    },
+    {
+      "type": "text",
+      "id": "mission_heading",
+      "label": "Mission section heading",
+      "default": "Our Founding Principles"
     },
     {
       "type": "text",
@@ -1118,6 +1463,18 @@
     {
       "type": "header",
       "content": "5 — Stats Bar"
+    },
+    {
+      "type": "text",
+      "id": "stats_eyebrow",
+      "label": "Stats eyebrow",
+      "default": "By The Numbers"
+    },
+    {
+      "type": "text",
+      "id": "stats_heading",
+      "label": "Stats heading",
+      "default": "Trusted by Thousands"
     },
     {
       "type": "text",
