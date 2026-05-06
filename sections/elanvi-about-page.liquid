@@ -1,61 +1,82 @@
-{%- comment -%}
+﻿{%- comment -%}
   Section: elanvi-about-page
-  Full dedicated About Us page — hero, mission, journey timeline,
-  team / values grid, ingredients philosophy, and CTA strip.
+  Full dedicated About Us page:
+    1. Hero banner
+    2. Mission pillars strip
+    3. Brand story (text + image)
+    4. Journey timeline
+    5. Stats bar
+    6. Founder spotlight
+    7. Values grid
+    8. Certifications strip
+    9. CTA strip
 {%- endcomment -%}
 
-<div class="eap-page" id="elanvi-about-page">
+<div class="eap" id="elanvi-about-page">
 
-  {%- comment -%} ── HERO ─────────────────────────────────────── {%- endcomment -%}
+  {%- comment -%}──────────────────────────── 1. HERO ────────────────────────────{%- endcomment -%}
   <div class="eap-hero">
+    {%- if section.settings.hero_image != blank -%}
+      <div class="eap-hero__media">
+        <img
+          src="{{ section.settings.hero_image | image_url: width: 1600 }}"
+          alt="{{ section.settings.hero_image.alt | default: shop.name }}"
+          loading="eager"
+          fetchpriority="high"
+          width="1600"
+          height="640"
+          class="eap-hero__img"
+        >
+        <div class="eap-hero__overlay" aria-hidden="true"></div>
+      </div>
+    {%- else -%}
+      <div class="eap-hero__media eap-hero__media--placeholder" aria-hidden="true">
+        <div class="eap-hero__overlay" aria-hidden="true"></div>
+      </div>
+    {%- endif -%}
     <div class="eap-hero__inner">
       <span class="elanvi-eyebrow">{{ section.settings.eyebrow | default: 'Our Story' }}</span>
       <h1 class="elanvi-heading-xl eap-hero__title">
         {{ section.settings.hero_heading | default: 'Science Rooted in Ancient Wisdom' }}
       </h1>
-      <p class="elanvi-body-lg eap-hero__sub">
-        {{ section.settings.hero_body | default: 'Elanvi was born from a simple belief: that women above 30 deserve skincare that is as thoughtful and refined as they are. We weave centuries of Ayurvedic intelligence with cutting-edge dermatological science — creating rituals, not just products.' }}
+      <p class="eap-hero__sub">
+        {{ section.settings.hero_body | default: 'Elanvi was born from a simple belief: that women above 30 deserve skincare as thoughtful and refined as they are. We weave centuries of Ayurvedic intelligence with cutting-edge dermatological science — creating rituals, not just products.' }}
       </p>
+      <a href="#eap-story" class="eap-hero__scroll" aria-label="Scroll to our story">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v14M3 10l7 7 7-7"/></svg>
+      </a>
     </div>
-    {%- if section.settings.hero_image != blank -%}
-      <div class="eap-hero__media">
-        <img
-          src="{{ section.settings.hero_image | image_url: width: 1400 }}"
-          alt="{{ section.settings.hero_image.alt | default: shop.name }}"
-          loading="eager"
-          width="1400"
-          height="600"
-          class="eap-hero__img"
-        >
-      </div>
-    {%- else -%}
-      <div class="eap-hero__media eap-hero__media--placeholder" aria-hidden="true"></div>
-    {%- endif -%}
   </div>
 
-  {%- comment -%} ── MISSION STRIP ────────────────────────────── {%- endcomment -%}
+  {%- comment -%}──────────────────────────── 2. MISSION PILLARS ────────────────{%- endcomment -%}
   <div class="eap-mission">
     <div class="eap-mission__inner">
       <div class="eap-mission__block">
-        <div class="eap-mission__icon" aria-hidden="true">🌿</div>
+        <div class="eap-mission__icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a9 9 0 0 1 9 9c0 4.97-9 13-9 13S3 15.97 3 11a9 9 0 0 1 9-9z"/><circle cx="12" cy="11" r="3"/></svg>
+        </div>
         <h3 class="eap-mission__title">{{ section.settings.pillar_1_title | default: 'Ayurvedic Heritage' }}</h3>
         <p class="eap-mission__body">{{ section.settings.pillar_1_body | default: 'Every formula begins with time-honoured Ayurvedic botanicals — Ashwagandha, Kumkumadi, Saffron, and more — chosen for their proven efficacy on mature skin.' }}</p>
       </div>
       <div class="eap-mission__block">
-        <div class="eap-mission__icon" aria-hidden="true">🔬</div>
+        <div class="eap-mission__icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+        </div>
         <h3 class="eap-mission__title">{{ section.settings.pillar_2_title | default: 'Modern Science' }}</h3>
         <p class="eap-mission__body">{{ section.settings.pillar_2_body | default: 'Our R&D team pairs ancient actives with clinically validated peptides, retinoids, and hyaluronic acid complexes — delivering visible results without compromise.' }}</p>
       </div>
       <div class="eap-mission__block">
-        <div class="eap-mission__icon" aria-hidden="true">💎</div>
+        <div class="eap-mission__icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M8 12l2.5 2.5L16 9"/></svg>
+        </div>
         <h3 class="eap-mission__title">{{ section.settings.pillar_3_title | default: 'Luxury You Deserve' }}</h3>
         <p class="eap-mission__body">{{ section.settings.pillar_3_body | default: 'Premium textures, elegant packaging, and a sensorial ritual experience designed to make every morning and evening feel like a celebration of self.' }}</p>
       </div>
     </div>
   </div>
 
-  {%- comment -%} ── BRAND STORY ──────────────────────────────── {%- endcomment -%}
-  <div class="eap-story">
+  {%- comment -%}──────────────────────────── 3. BRAND STORY ────────────────────{%- endcomment -%}
+  <div class="eap-story" id="eap-story">
     <div class="eap-story__inner">
       <div class="eap-story__text">
         <span class="elanvi-eyebrow">{{ section.settings.story_eyebrow | default: 'Where it all began' }}</span>
@@ -72,24 +93,75 @@
           {{ section.settings.story_cta | default: 'Explore Our Products' }}
         </a>
       </div>
-      {%- if section.settings.story_image != blank -%}
-        <div class="eap-story__media">
+      <div class="eap-story__media">
+        {%- if section.settings.story_image != blank -%}
           <img
-            src="{{ section.settings.story_image | image_url: width: 700 }}"
+            src="{{ section.settings.story_image | image_url: width: 800 }}"
             alt="{{ section.settings.story_image.alt | default: 'Elanvi brand story' }}"
             loading="lazy"
-            width="700"
-            height="800"
+            width="800"
+            height="900"
             class="eap-story__img"
           >
-        </div>
-      {%- else -%}
-        <div class="eap-story__media eap-story__media--placeholder" aria-hidden="true"></div>
-      {%- endif -%}
+        {%- else -%}
+          <div class="eap-story__placeholder" aria-hidden="true"></div>
+        {%- endif -%}
+      </div>
     </div>
   </div>
 
-  {%- comment -%} ── NUMBERS / STATS ───────────────────────────── {%- endcomment -%}
+  {%- comment -%}──────────────────────────── 4. JOURNEY TIMELINE ───────────────{%- endcomment -%}
+  <div class="eap-timeline">
+    <div class="eap-timeline__inner">
+      <div class="eap-timeline__header">
+        <span class="elanvi-eyebrow">{{ section.settings.timeline_eyebrow | default: 'How we got here' }}</span>
+        <h2 class="elanvi-heading-lg eap-timeline__heading">
+          {{ section.settings.timeline_heading | default: 'Our Journey' }}
+        </h2>
+      </div>
+      <div class="eap-timeline__track">
+
+        <div class="eap-timeline__item">
+          <div class="eap-timeline__dot" aria-hidden="true"></div>
+          <div class="eap-timeline__card">
+            <span class="eap-timeline__year">{{ section.settings.tl_1_year | default: '2021' }}</span>
+            <h4 class="eap-timeline__event">{{ section.settings.tl_1_title | default: 'The Idea' }}</h4>
+            <p class="eap-timeline__desc">{{ section.settings.tl_1_desc | default: 'Founder Ananya identifies a glaring gap in skincare for women above 30 and begins her deep-dive into Ayurvedic formulations.' }}</p>
+          </div>
+        </div>
+
+        <div class="eap-timeline__item">
+          <div class="eap-timeline__dot" aria-hidden="true"></div>
+          <div class="eap-timeline__card">
+            <span class="eap-timeline__year">{{ section.settings.tl_2_year | default: '2022' }}</span>
+            <h4 class="eap-timeline__event">{{ section.settings.tl_2_title | default: 'Research & Formulation' }}</h4>
+            <p class="eap-timeline__desc">{{ section.settings.tl_2_desc | default: 'Two years of collaboration with Ayurvedic scholars in Kerala and dermatologists in Bengaluru to perfect the first formula.' }}</p>
+          </div>
+        </div>
+
+        <div class="eap-timeline__item">
+          <div class="eap-timeline__dot" aria-hidden="true"></div>
+          <div class="eap-timeline__card">
+            <span class="eap-timeline__year">{{ section.settings.tl_3_year | default: '2023' }}</span>
+            <h4 class="eap-timeline__event">{{ section.settings.tl_3_title | default: 'Launch' }}</h4>
+            <p class="eap-timeline__desc">{{ section.settings.tl_3_desc | default: "Elanvi launches with the Neck &amp; Jawline Firming Cream — India's first premium Ayurvedic neck-care ritual for mature skin." }}</p>
+          </div>
+        </div>
+
+        <div class="eap-timeline__item">
+          <div class="eap-timeline__dot" aria-hidden="true"></div>
+          <div class="eap-timeline__card">
+            <span class="eap-timeline__year">{{ section.settings.tl_4_year | default: 'Today' }}</span>
+            <h4 class="eap-timeline__event">{{ section.settings.tl_4_title | default: '50,000+ Women &amp; Growing' }}</h4>
+            <p class="eap-timeline__desc">{{ section.settings.tl_4_desc | default: 'Stocked on Amazon, Nykaa, and available across India — with new formulations and a full ritual range on the horizon.' }}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%}──────────────────────────── 5. STATS BAR ──────────────────────{%- endcomment -%}
   <div class="eap-stats">
     <div class="eap-stats__inner">
       <div class="eap-stat">
@@ -111,7 +183,43 @@
     </div>
   </div>
 
-  {%- comment -%} ── VALUES GRID ───────────────────────────────── {%- endcomment -%}
+  {%- comment -%}──────────────────────────── 6. FOUNDER SPOTLIGHT ──────────────{%- endcomment -%}
+  <div class="eap-founder">
+    <div class="eap-founder__inner">
+      <div class="eap-founder__media">
+        {%- if section.settings.founder_image != blank -%}
+          <img
+            src="{{ section.settings.founder_image | image_url: width: 640 }}"
+            alt="{{ section.settings.founder_image.alt | default: 'Founder of Elanvi' }}"
+            loading="lazy"
+            width="640"
+            height="720"
+            class="eap-founder__img"
+          >
+        {%- else -%}
+          <div class="eap-founder__placeholder" aria-hidden="true">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="opacity:.3;color:#c89d6c"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+        {%- endif -%}
+      </div>
+      <div class="eap-founder__text">
+        <span class="elanvi-eyebrow">{{ section.settings.founder_eyebrow | default: 'Meet the Founder' }}</span>
+        <blockquote class="eap-founder__quote">
+          <svg class="eap-founder__quote-mark" width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true"><text x="0" y="32" font-family="Georgia, serif" font-size="52" fill="currentColor" opacity=".15">"</text></svg>
+          {{ section.settings.founder_quote | default: 'I built Elanvi because I believe every woman above 30 deserves skincare that honours who she is today — not who she was at 20. This is not anti-ageing. This is pro-living.' }}
+        </blockquote>
+        <div class="eap-founder__attribution">
+          <strong class="eap-founder__name">{{ section.settings.founder_name | default: 'Ananya Krishnan' }}</strong>
+          <span class="eap-founder__role">{{ section.settings.founder_role | default: 'Founder &amp; CEO, Elanvi' }}</span>
+        </div>
+        <p class="eap-founder__bio">
+          {{ section.settings.founder_bio | default: "With a background in biochemistry and a lifelong passion for Ayurveda, Ananya bridges two worlds most brands treat as separate. She leads Elanvi's product development and is personally involved in every formula that reaches your hands." }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%}──────────────────────────── 7. VALUES GRID ────────────────────{%- endcomment -%}
   <div class="eap-values">
     <div class="eap-values__inner">
       <div class="eap-values__header">
@@ -124,7 +232,7 @@
 
         <div class="eap-value-card">
           <div class="eap-value-card__icon" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
           <h3 class="eap-value-card__title">{{ section.settings.val_1_title | default: 'Safety First' }}</h3>
           <p class="eap-value-card__body">{{ section.settings.val_1_body | default: 'Dermatologically tested on Indian skin tones. Free from parabens, sulfates, mineral oil, and artificial colourants.' }}</p>
@@ -132,7 +240,7 @@
 
         <div class="eap-value-card">
           <div class="eap-value-card__icon" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
           </div>
           <h3 class="eap-value-card__title">{{ section.settings.val_2_title | default: 'Sustainably Crafted' }}</h3>
           <p class="eap-value-card__body">{{ section.settings.val_2_body | default: 'Recyclable packaging, ethically sourced botanicals, and carbon-conscious manufacturing — because beauty should not cost the planet.' }}</p>
@@ -140,7 +248,7 @@
 
         <div class="eap-value-card">
           <div class="eap-value-card__icon" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </div>
           <h3 class="eap-value-card__title">{{ section.settings.val_3_title | default: 'Women-First Philosophy' }}</h3>
           <p class="eap-value-card__body">{{ section.settings.val_3_body | default: 'Built by women, for women. We celebrate the beauty of ageing gracefully and reject the narrative that skin must be "fixed."' }}</p>
@@ -148,7 +256,7 @@
 
         <div class="eap-value-card">
           <div class="eap-value-card__icon" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.14z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-1.14z"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.14z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-1.14z"/></svg>
           </div>
           <h3 class="eap-value-card__title">{{ section.settings.val_4_title | default: 'Transparent Ingredients' }}</h3>
           <p class="eap-value-card__body">{{ section.settings.val_4_body | default: 'Full ingredient transparency on every product. No hidden chemicals. No misleading claims. Just honest, effective skincare.' }}</p>
@@ -158,11 +266,64 @@
     </div>
   </div>
 
-  {%- comment -%} ── CTA STRIP ─────────────────────────────────── {%- endcomment -%}
+  {%- comment -%}──────────────────────────── 8. CERTIFICATIONS STRIP ────────────{%- endcomment -%}
+  <div class="eap-certs">
+    <div class="eap-certs__inner">
+      <p class="eap-certs__label">{{ section.settings.certs_label | default: 'Our Commitments' }}</p>
+      <div class="eap-certs__badges">
+
+        <div class="eap-cert">
+          <div class="eap-cert__icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <span>{{ section.settings.cert_1 | default: 'Dermatologically Tested' }}</span>
+        </div>
+
+        <div class="eap-cert">
+          <div class="eap-cert__icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <span>{{ section.settings.cert_2 | default: 'Cruelty-Free' }}</span>
+        </div>
+
+        <div class="eap-cert">
+          <div class="eap-cert__icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+          </div>
+          <span>{{ section.settings.cert_3 | default: 'Eco-Conscious Packaging' }}</span>
+        </div>
+
+        <div class="eap-cert">
+          <div class="eap-cert__icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a9 9 0 0 1 9 9c0 4.97-9 13-9 13S3 15.97 3 11a9 9 0 0 1 9-9z"/><circle cx="12" cy="11" r="3"/></svg>
+          </div>
+          <span>{{ section.settings.cert_4 | default: 'India-Made' }}</span>
+        </div>
+
+        <div class="eap-cert">
+          <div class="eap-cert__icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <span>{{ section.settings.cert_5 | default: 'Women-Led Brand' }}</span>
+        </div>
+
+        <div class="eap-cert">
+          <div class="eap-cert__icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.14z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-1.14z"/></svg>
+          </div>
+          <span>{{ section.settings.cert_6 | default: 'Paraben-Free Formula' }}</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%}──────────────────────────── 9. CTA STRIP ──────────────────────{%- endcomment -%}
   <div class="eap-cta">
     <div class="eap-cta__inner">
+      <span class="elanvi-eyebrow eap-cta__eyebrow">{{ section.settings.cta_eyebrow | default: 'Begin Your Ritual' }}</span>
       <h2 class="elanvi-heading-md eap-cta__heading">
-        {{ section.settings.cta_heading | default: 'Ready to begin your ritual?' }}
+        {{ section.settings.cta_heading | default: 'Ready to experience the Elanvi difference?' }}
       </h2>
       <p class="eap-cta__sub">
         {{ section.settings.cta_sub | default: 'Join over 50,000 women who have made Elanvi part of their daily self-care practice.' }}
@@ -179,165 +340,308 @@
   </div>
 
 </div>
-
 {% stylesheet %}
 /* =================================================================
    ELANVI ABOUT PAGE  (BEM: eap-)
+   Uses global --elanvi-* tokens from elanvi-theme.css
    ================================================================= */
-.eap-page {
-  --eap-bg:      #fdf9f8;
-  --eap-bg-alt:  #fefefb;
-  --eap-strip:   #ebe6e1;
-  --eap-dark:    #23201b;
-  --eap-muted:   #4a4540;
-  --eap-accent:  #c89d6c;
-  --eap-acc-dk:  #b08857;
-  --eap-border:  #D8D0C5;
-  --eap-green:   #5C7A52;
-  --eap-trans:   0.22s ease;
-  --eap-sans:    system-ui, -apple-system, 'Inter', 'Segoe UI', Helvetica, sans-serif;
-  --eap-serif:   'Times New Roman', Georgia, serif;
-  background-color: var(--eap-bg);
-  color: var(--eap-dark);
-  font-family: var(--eap-sans);
+
+/* -- Page wrapper ------------------------------------------------- */
+.eap {
+  background-color: var(--elanvi-bg);
+  color: var(--elanvi-text);
+  font-family: var(--elanvi-font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Hero ──────────────────────────────────────────────────────── */
-.eap-hero { position: relative; overflow: hidden; }
-
-.eap-hero__inner {
+/* ==================================================================
+   1. HERO
+   ================================================================== */
+.eap-hero {
   position: relative;
-  z-index: 2;
-  max-width: 700px;
-  margin-inline: auto;
-  text-align: center;
-  padding: 4.5rem 1.25rem 3.5rem;
+  overflow: hidden;
+  min-height: 480px;
+  display: flex;
+  align-items: flex-end;
 }
-@media (min-width: 750px) { .eap-hero__inner { padding: 6rem 2rem 4.5rem; } }
-
-.eap-hero__title { margin-top: 0.75rem !important; }
-
-.eap-hero__sub {
-  margin-top: 1.125rem !important;
-  max-width: 560px;
-  margin-inline: auto;
-  color: var(--eap-muted);
-}
+@media (min-width: 750px)  { .eap-hero { min-height: 600px; } }
+@media (min-width: 1100px) { .eap-hero { min-height: 680px; } }
 
 .eap-hero__media {
-  width: 100%;
-  height: 260px;
+  position: absolute;
+  inset: 0;
 }
-@media (min-width: 750px) { .eap-hero__media { height: 360px; } }
-@media (min-width: 990px) { .eap-hero__media { height: 440px; } }
-
 .eap-hero__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-
 .eap-hero__media--placeholder {
-  background: linear-gradient(135deg, var(--eap-strip) 0%, #d9cec4 100%);
+  background: linear-gradient(160deg, #ebe6e1 0%, #c8bbb0 100%);
+}
+.eap-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(25, 20, 14, 0.82) 0%,
+    rgba(25, 20, 14, 0.45) 45%,
+    rgba(25, 20, 14, 0.12) 100%
+  );
+}
+.eap-hero__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 720px;
+  margin-inline: auto;
+  text-align: center;
+  padding: 3rem 1.25rem 4rem;
+}
+@media (min-width: 750px) { .eap-hero__inner { padding: 3rem 2rem 5.5rem; } }
+.eap-hero__inner .elanvi-eyebrow { color: var(--elanvi-gold); }
+.eap-hero__title {
+  color: #fff;
+  margin-top: 0.75rem !important;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+.eap-hero__sub {
+  margin-top: 1.25rem;
+  font-size: clamp(0.9375rem, 1.5vw, 1.125rem);
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.75;
+  max-width: 580px;
+  margin-inline: auto;
+}
+.eap-hero__scroll {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
+  margin-top: 2rem;
+  text-decoration: none;
+  transition: border-color var(--elanvi-transition), background-color var(--elanvi-transition);
+  animation: eap-bob 2.2s ease-in-out infinite;
+}
+.eap-hero__scroll:hover {
+  border-color: var(--elanvi-gold);
+  background-color: rgba(200, 157, 108, 0.15);
+}
+@keyframes eap-bob {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
 }
 
-/* ── Mission 3-col strip ───────────────────────────────────────── */
+/* ==================================================================
+   2. MISSION PILLARS
+   ================================================================== */
 .eap-mission {
-  background-color: var(--eap-strip);
-  border-top: 1px solid var(--eap-border);
-  border-bottom: 1px solid var(--eap-border);
+  background-color: var(--elanvi-bg-cream);
+  border-top: 1px solid var(--elanvi-border);
+  border-bottom: 1px solid var(--elanvi-border);
 }
-
 .eap-mission__inner {
   max-width: 1200px;
   margin-inline: auto;
   padding: 3.5rem 1.25rem;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: 2.5rem;
 }
-@media (min-width: 750px) { .eap-mission__inner { grid-template-columns: repeat(3, 1fr); padding: 4.5rem 2rem; gap: 2.5rem; } }
-
-.eap-mission__block { text-align: center; }
-
+@media (min-width: 750px) {
+  .eap-mission__inner {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 5rem 2rem;
+    gap: 3rem;
+  }
+}
+.eap-mission__block {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: var(--elanvi-bg-card);
+  border-radius: var(--elanvi-radius);
+  border: 1px solid var(--elanvi-border);
+  transition: box-shadow var(--elanvi-transition), transform var(--elanvi-transition);
+}
+.eap-mission__block:hover {
+  box-shadow: 0 8px 28px rgba(35, 32, 27, 0.07);
+  transform: translateY(-4px);
+}
 .eap-mission__icon {
-  font-size: 2.25rem;
-  margin-bottom: 0.875rem;
-  display: block;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: rgba(200, 157, 108, 0.12);
+  color: var(--elanvi-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
 }
-
 .eap-mission__title {
-  font-family: var(--eap-serif);
+  font-family: var(--elanvi-font-serif);
   font-size: 1.25rem;
-  color: var(--eap-dark);
-  margin: 0 0 0.5rem;
+  color: var(--elanvi-text);
+  margin: 0 0 0.625rem;
 }
-@media (min-width: 750px) { .eap-mission__title { font-size: 1.5rem; } }
-
+@media (min-width: 750px) { .eap-mission__title { font-size: 1.375rem; } }
 .eap-mission__body {
   font-size: 0.9375rem;
-  color: var(--eap-muted);
-  line-height: 1.7;
+  color: var(--elanvi-text-muted);
+  line-height: 1.72;
   margin: 0;
-  max-width: 28rem;
-  margin-inline: auto;
 }
 
-/* ── Brand Story ───────────────────────────────────────────────── */
-.eap-story { padding: 5rem 1.25rem; }
-@media (min-width: 750px) { .eap-story { padding: 6rem 2rem; } }
-
+/* ==================================================================
+   3. BRAND STORY
+   ================================================================== */
+.eap-story { padding: 5.5rem 1.25rem; }
+@media (min-width: 750px) { .eap-story { padding: 7rem 2rem; } }
 .eap-story__inner {
   max-width: 1200px;
   margin-inline: auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3.5rem;
+  gap: 3rem;
   align-items: center;
 }
-@media (min-width: 900px) { .eap-story__inner { grid-template-columns: 1fr 1fr; gap: 6rem; } }
-
-.eap-story__heading { margin-top: 0.75rem !important; }
-
+@media (min-width: 900px) {
+  .eap-story__inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+  }
+}
+.eap-story__heading { margin-top: 0.875rem !important; }
 .eap-story__body {
-  margin-top: 1.25rem;
+  margin-top: 1.375rem;
   font-size: 1rem;
-  color: var(--eap-muted);
-  line-height: 1.8;
+  color: var(--elanvi-text-muted);
+  line-height: 1.82;
 }
 @media (min-width: 750px) { .eap-story__body { font-size: 1.0625rem; } }
-
-.eap-story__cta { margin-top: 2rem; }
-
+.eap-story__cta { margin-top: 2.25rem; }
 .eap-story__media {
-  border-radius: 16px;
+  border-radius: var(--elanvi-radius-lg);
   overflow: hidden;
-  aspect-ratio: 7 / 8;
+  aspect-ratio: 4 / 5;
+  box-shadow: 0 20px 60px rgba(35, 32, 27, 0.1);
 }
-
 .eap-story__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s ease;
 }
-.eap-story__media:hover .eap-story__img { transform: scale(1.03); }
-
-.eap-story__media--placeholder {
-  background: linear-gradient(160deg, var(--eap-strip) 0%, #c8bbb0 100%);
-  min-height: 420px;
+.eap-story__media:hover .eap-story__img { transform: scale(1.04); }
+.eap-story__placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(155deg, var(--elanvi-bg-cream) 0%, #c8bbb0 100%);
+  min-height: 440px;
 }
 
-/* ── Stats ─────────────────────────────────────────────────────── */
+/* ==================================================================
+   4. JOURNEY TIMELINE
+   ================================================================== */
+.eap-timeline {
+  background-color: var(--elanvi-bg-card);
+  padding: 5.5rem 1.25rem;
+  border-top: 1px solid var(--elanvi-border);
+  border-bottom: 1px solid var(--elanvi-border);
+}
+@media (min-width: 750px) { .eap-timeline { padding: 7rem 2rem; } }
+.eap-timeline__inner { max-width: 1100px; margin-inline: auto; }
+.eap-timeline__header { text-align: center; margin-bottom: 4rem; }
+.eap-timeline__heading { margin-top: 0.875rem !important; }
+.eap-timeline__track {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+.eap-timeline__track::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--elanvi-gold), transparent);
+}
+@media (min-width: 750px) {
+  .eap-timeline__track { flex-direction: row; align-items: flex-start; }
+  .eap-timeline__track::before {
+    left: 0; right: 0; top: 18px; bottom: auto;
+    width: auto; height: 2px;
+    background: linear-gradient(to right, var(--elanvi-gold), rgba(200,157,108,0.2));
+  }
+}
+.eap-timeline__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding-bottom: 2.5rem;
+  flex: 1;
+  position: relative;
+}
+@media (min-width: 750px) {
+  .eap-timeline__item {
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 0;
+    text-align: center;
+    padding-inline: 1rem;
+  }
+}
+.eap-timeline__dot {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: var(--elanvi-gold);
+  border: 3px solid var(--elanvi-bg-card);
+  box-shadow: 0 0 0 2px var(--elanvi-gold);
+  position: relative;
+  z-index: 1;
+}
+@media (min-width: 750px) { .eap-timeline__dot { margin-bottom: 1.5rem; } }
+.eap-timeline__card { flex: 1; }
+@media (min-width: 750px) { .eap-timeline__card { flex: none; } }
+.eap-timeline__year {
+  font-family: var(--elanvi-font-serif);
+  font-size: 1.375rem;
+  color: var(--elanvi-gold);
+  font-style: italic;
+  display: block;
+  margin-bottom: 0.375rem;
+}
+.eap-timeline__event {
+  font-family: var(--elanvi-font-serif);
+  font-size: 1.125rem;
+  color: var(--elanvi-text);
+  margin: 0 0 0.5rem;
+}
+.eap-timeline__desc {
+  font-size: 0.9rem;
+  color: var(--elanvi-text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ==================================================================
+   5. STATS BAR
+   ================================================================== */
 .eap-stats {
-  background-color: var(--eap-dark);
-  padding: 3.5rem 1.25rem;
+  background-color: var(--elanvi-text);
+  padding: 4rem 1.25rem;
 }
-@media (min-width: 750px) { .eap-stats { padding: 4.5rem 2rem; } }
-
+@media (min-width: 750px) { .eap-stats { padding: 5rem 2rem; } }
 .eap-stats__inner {
   max-width: 1000px;
   margin-inline: auto;
@@ -346,148 +650,294 @@
   gap: 2.5rem 1.5rem;
 }
 @media (min-width: 600px) { .eap-stats__inner { grid-template-columns: repeat(4, 1fr); } }
-
 .eap-stat { text-align: center; }
-
 .eap-stat__number {
-  font-family: var(--eap-serif);
-  font-size: clamp(2rem, 5vw, 3rem);
-  color: var(--eap-accent);
-  margin: 0 0 0.25rem;
+  font-family: var(--elanvi-font-serif);
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  color: var(--elanvi-gold);
+  margin: 0 0 0.375rem;
   line-height: 1;
 }
-
 .eap-stat__label {
-  font-size: 0.8125rem;
-  color: rgba(232, 224, 214, 0.65);
+  font-size: 0.8rem;
+  color: rgba(232, 224, 214, 0.6);
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.15em;
   margin: 0;
 }
 
-/* ── Values grid ───────────────────────────────────────────────── */
-.eap-values {
-  padding: 5rem 1.25rem;
-  background-color: var(--eap-bg-alt);
+/* ==================================================================
+   6. FOUNDER SPOTLIGHT
+   ================================================================== */
+.eap-founder {
+  padding: 5.5rem 1.25rem;
+  background-color: var(--elanvi-bg);
 }
-@media (min-width: 750px) { .eap-values { padding: 6rem 2rem; } }
+@media (min-width: 750px) { .eap-founder { padding: 7rem 2rem; } }
+.eap-founder__inner {
+  max-width: 1100px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .eap-founder__inner {
+    grid-template-columns: 420px 1fr;
+    gap: 6rem;
+  }
+}
+.eap-founder__media {
+  border-radius: var(--elanvi-radius-lg);
+  overflow: hidden;
+  aspect-ratio: 8 / 9;
+  box-shadow: 0 24px 64px rgba(35, 32, 27, 0.12);
+}
+.eap-founder__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.eap-founder__media:hover .eap-founder__img { transform: scale(1.03); }
+.eap-founder__placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(150deg, var(--elanvi-bg-cream) 0%, #d9cfc6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 420px;
+}
+.eap-founder__quote {
+  font-family: var(--elanvi-font-serif);
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  line-height: 1.5;
+  color: var(--elanvi-text);
+  font-style: italic;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  border: none;
+  position: relative;
+}
+.eap-founder__quote-mark {
+  color: var(--elanvi-gold);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.eap-founder__attribution {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--elanvi-border);
+}
+.eap-founder__name {
+  font-family: var(--elanvi-font-serif);
+  font-size: 1.0625rem;
+  color: var(--elanvi-text);
+  font-weight: 600;
+}
+.eap-founder__role {
+  font-size: 0.8125rem;
+  color: var(--elanvi-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.eap-founder__bio {
+  margin-top: 1.375rem;
+  font-size: 0.9375rem;
+  color: var(--elanvi-text-muted);
+  line-height: 1.78;
+}
 
+/* ==================================================================
+   7. VALUES GRID
+   ================================================================== */
+.eap-values {
+  padding: 5.5rem 1.25rem;
+  background-color: var(--elanvi-bg-card);
+  border-top: 1px solid var(--elanvi-border);
+}
+@media (min-width: 750px) { .eap-values { padding: 7rem 2rem; } }
 .eap-values__inner { max-width: 1200px; margin-inline: auto; }
-
-.eap-values__header { text-align: center; margin-bottom: 3rem; }
-
-.eap-values__heading { margin-top: 0.75rem !important; }
-
+.eap-values__header { text-align: center; margin-bottom: 3.5rem; }
+.eap-values__heading { margin-top: 0.875rem !important; }
 .eap-values__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 @media (min-width: 600px) { .eap-values__grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 990px) { .eap-values__grid { grid-template-columns: repeat(4, 1fr); gap: 1.75rem; } }
-
+@media (min-width: 990px) { .eap-values__grid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
 .eap-value-card {
-  background-color: var(--eap-bg);
-  border: 1px solid var(--eap-border);
-  border-radius: 14px;
-  padding: 1.75rem 1.5rem;
-  transition: box-shadow var(--eap-trans), transform var(--eap-trans);
+  background-color: var(--elanvi-bg);
+  border: 1px solid var(--elanvi-border);
+  border-radius: var(--elanvi-radius);
+  padding: 2rem 1.5rem;
+  transition: box-shadow var(--elanvi-transition), transform var(--elanvi-transition);
 }
 .eap-value-card:hover {
-  box-shadow: 0 8px 32px rgba(35, 32, 27, 0.08);
-  transform: translateY(-3px);
+  box-shadow: 0 10px 36px rgba(35, 32, 27, 0.08);
+  transform: translateY(-4px);
 }
-
 .eap-value-card__icon {
   width: 48px;
   height: 48px;
   border-radius: 50%;
   background-color: rgba(200, 157, 108, 0.1);
-  color: var(--eap-accent);
+  color: var(--elanvi-gold);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.125rem;
+  margin-bottom: 1.25rem;
 }
-
 .eap-value-card__title {
-  font-family: var(--eap-serif);
-  font-size: 1.1875rem;
-  color: var(--eap-dark);
+  font-family: var(--elanvi-font-serif);
+  font-size: 1.125rem;
+  color: var(--elanvi-text);
   margin: 0 0 0.625rem;
 }
-
 .eap-value-card__body {
   font-size: 0.9375rem;
-  color: var(--eap-muted);
-  line-height: 1.7;
+  color: var(--elanvi-text-muted);
+  line-height: 1.72;
   margin: 0;
 }
 
-/* ── CTA strip ─────────────────────────────────────────────────── */
-.eap-cta {
-  background-color: var(--eap-strip);
-  padding: 5rem 1.25rem;
-  text-align: center;
-  border-top: 1px solid var(--eap-border);
+/* ==================================================================
+   8. CERTIFICATIONS STRIP
+   ================================================================== */
+.eap-certs {
+  background-color: var(--elanvi-bg-cream);
+  border-top: 1px solid var(--elanvi-border);
+  border-bottom: 1px solid var(--elanvi-border);
+  padding: 3rem 1.25rem;
 }
-@media (min-width: 750px) { .eap-cta { padding: 6rem 2rem; } }
+@media (min-width: 750px) { .eap-certs { padding: 3.5rem 2rem; } }
+.eap-certs__inner {
+  max-width: 1100px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+}
+.eap-certs__label {
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--elanvi-text-muted);
+  font-weight: 600;
+  margin: 0;
+}
+.eap-certs__badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.875rem;
+}
+.eap-cert {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--elanvi-bg-card);
+  border: 1px solid var(--elanvi-border);
+  border-radius: 100px;
+  padding: 0.5rem 1.125rem;
+  font-size: 0.8125rem;
+  color: var(--elanvi-text-soft);
+  transition: border-color var(--elanvi-transition), box-shadow var(--elanvi-transition);
+  white-space: nowrap;
+}
+.eap-cert:hover {
+  border-color: var(--elanvi-gold);
+  box-shadow: 0 2px 12px rgba(200, 157, 108, 0.15);
+}
+.eap-cert__icon {
+  color: var(--elanvi-gold);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
 
+/* ==================================================================
+   9. CTA STRIP
+   ================================================================== */
+.eap-cta {
+  background-color: var(--elanvi-text);
+  padding: 5.5rem 1.25rem;
+  text-align: center;
+}
+@media (min-width: 750px) { .eap-cta { padding: 7rem 2rem; } }
 .eap-cta__inner { max-width: 640px; margin-inline: auto; }
-
-.eap-cta__heading { margin: 0 0 1rem !important; }
-
+.eap-cta__eyebrow { color: var(--elanvi-gold) !important; margin-bottom: 1rem; }
+.eap-cta__heading {
+  color: #fff !important;
+  margin: 0 0 1.25rem !important;
+}
 .eap-cta__sub {
   font-size: 1rem;
-  color: var(--eap-muted);
-  line-height: 1.7;
-  margin: 0 0 2rem;
+  color: rgba(232, 224, 214, 0.72);
+  line-height: 1.75;
+  margin: 0 0 2.5rem;
 }
-
 .eap-cta__buttons {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.875rem;
 }
+.eap-cta .elanvi-btn--outline {
+  color: var(--elanvi-gold);
+  border-color: rgba(200, 157, 108, 0.5);
+}
+.eap-cta .elanvi-btn--outline:hover {
+  border-color: var(--elanvi-gold);
+  background-color: rgba(200, 157, 108, 0.08);
+}
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Elanvi — About Us",
-  "tag": "div",
-  "class": "elanvi-section",
+  "name": "About Page",
+  "tag": "section",
+  "class": "elanvi-about-page-section",
   "settings": [
     {
       "type": "header",
-      "content": "Hero"
+      "content": "1 — Hero Banner"
     },
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow",
+      "label": "Eyebrow text",
       "default": "Our Story"
     },
     {
-      "type": "textarea",
+      "type": "text",
       "id": "hero_heading",
-      "label": "Hero heading",
+      "label": "Heading",
       "default": "Science Rooted in Ancient Wisdom"
     },
     {
       "type": "textarea",
       "id": "hero_body",
-      "label": "Hero subheading",
-      "default": "Elanvi was born from a simple belief: that women above 30 deserve skincare that is as thoughtful and refined as they are."
+      "label": "Subheading",
+      "default": "Elanvi was born from a simple belief: that women above 30 deserve skincare as thoughtful and refined as they are."
     },
     {
       "type": "image_picker",
       "id": "hero_image",
-      "label": "Hero banner image"
+      "label": "Hero image"
     },
     {
       "type": "header",
-      "content": "Mission Pillars"
+      "content": "2 — Mission Pillars"
     },
     {
       "type": "text",
@@ -498,8 +948,8 @@
     {
       "type": "textarea",
       "id": "pillar_1_body",
-      "label": "Pillar 1 description",
-      "default": "Every formula begins with time-honoured Ayurvedic botanicals chosen for their proven efficacy on mature skin."
+      "label": "Pillar 1 body",
+      "default": "Every formula begins with time-honoured Ayurvedic botanicals — Ashwagandha, Kumkumadi, Saffron, and more."
     },
     {
       "type": "text",
@@ -510,7 +960,7 @@
     {
       "type": "textarea",
       "id": "pillar_2_body",
-      "label": "Pillar 2 description",
+      "label": "Pillar 2 body",
       "default": "Our R&D team pairs ancient actives with clinically validated peptides, retinoids, and hyaluronic acid complexes."
     },
     {
@@ -522,51 +972,139 @@
     {
       "type": "textarea",
       "id": "pillar_3_body",
-      "label": "Pillar 3 description",
-      "default": "Premium textures, elegant packaging, and a sensorial ritual experience designed to celebrate self."
+      "label": "Pillar 3 body",
+      "default": "Premium textures, elegant packaging, and a sensorial ritual experience designed to make every day a celebration."
     },
     {
       "type": "header",
-      "content": "Brand Story"
+      "content": "3 — Brand Story"
     },
     {
       "type": "text",
       "id": "story_eyebrow",
-      "label": "Story eyebrow",
+      "label": "Eyebrow",
       "default": "Where it all began"
     },
     {
-      "type": "textarea",
+      "type": "text",
       "id": "story_heading",
-      "label": "Story heading",
+      "label": "Heading",
       "default": "A Kitchen Counter. A Real Problem. A Purpose."
     },
     {
       "type": "textarea",
       "id": "story_body_1",
-      "label": "Story paragraph 1",
+      "label": "Paragraph 1",
       "default": "In 2021, our founder Ananya noticed something most skincare brands were ignoring: women in their 30s, 40s, and 50s were being offered the same products as teenagers."
     },
     {
       "type": "textarea",
       "id": "story_body_2",
-      "label": "Story paragraph 2",
-      "default": "She spent two years working with Ayurvedic scholars in Kerala and dermatologists in Bengaluru — blending the two worlds into Elanvi."
+      "label": "Paragraph 2",
+      "default": "She spent two years working with Ayurvedic scholars in Kerala and dermatologists in Bengaluru, blending the two worlds into what is now Elanvi."
     },
     {
       "type": "text",
       "id": "story_cta",
-      "label": "Story CTA button text",
+      "label": "Button label",
       "default": "Explore Our Products"
     },
     {
       "type": "image_picker",
       "id": "story_image",
-      "label": "Story section image"
+      "label": "Story image"
     },
     {
       "type": "header",
-      "content": "Stats"
+      "content": "4 — Journey Timeline"
+    },
+    {
+      "type": "text",
+      "id": "timeline_eyebrow",
+      "label": "Eyebrow",
+      "default": "How we got here"
+    },
+    {
+      "type": "text",
+      "id": "timeline_heading",
+      "label": "Heading",
+      "default": "Our Journey"
+    },
+    {
+      "type": "text",
+      "id": "tl_1_year",
+      "label": "Milestone 1 year",
+      "default": "2021"
+    },
+    {
+      "type": "text",
+      "id": "tl_1_title",
+      "label": "Milestone 1 title",
+      "default": "The Idea"
+    },
+    {
+      "type": "textarea",
+      "id": "tl_1_desc",
+      "label": "Milestone 1 description",
+      "default": "Founder Ananya identifies a gap in skincare for women above 30 and begins her deep-dive into Ayurvedic formulations."
+    },
+    {
+      "type": "text",
+      "id": "tl_2_year",
+      "label": "Milestone 2 year",
+      "default": "2022"
+    },
+    {
+      "type": "text",
+      "id": "tl_2_title",
+      "label": "Milestone 2 title",
+      "default": "Research & Formulation"
+    },
+    {
+      "type": "textarea",
+      "id": "tl_2_desc",
+      "label": "Milestone 2 description",
+      "default": "Two years of collaboration with Ayurvedic scholars in Kerala and dermatologists in Bengaluru."
+    },
+    {
+      "type": "text",
+      "id": "tl_3_year",
+      "label": "Milestone 3 year",
+      "default": "2023"
+    },
+    {
+      "type": "text",
+      "id": "tl_3_title",
+      "label": "Milestone 3 title",
+      "default": "Launch"
+    },
+    {
+      "type": "textarea",
+      "id": "tl_3_desc",
+      "label": "Milestone 3 description",
+      "default": "Elanvi launches with the Neck & Jawline Firming Cream — India's first premium Ayurvedic neck-care ritual for mature skin."
+    },
+    {
+      "type": "text",
+      "id": "tl_4_year",
+      "label": "Milestone 4 year",
+      "default": "Today"
+    },
+    {
+      "type": "text",
+      "id": "tl_4_title",
+      "label": "Milestone 4 title",
+      "default": "50,000+ Women & Growing"
+    },
+    {
+      "type": "textarea",
+      "id": "tl_4_desc",
+      "label": "Milestone 4 description",
+      "default": "Stocked on Amazon, Nykaa, and available across India — with new formulations and a full ritual range on the horizon."
+    },
+    {
+      "type": "header",
+      "content": "5 — Stats Bar"
     },
     {
       "type": "text",
@@ -618,18 +1156,57 @@
     },
     {
       "type": "header",
-      "content": "Values Section"
+      "content": "6 — Founder Spotlight"
+    },
+    {
+      "type": "text",
+      "id": "founder_eyebrow",
+      "label": "Eyebrow",
+      "default": "Meet the Founder"
+    },
+    {
+      "type": "image_picker",
+      "id": "founder_image",
+      "label": "Founder photo"
+    },
+    {
+      "type": "textarea",
+      "id": "founder_quote",
+      "label": "Pull quote",
+      "default": "I built Elanvi because I believe every woman above 30 deserves skincare that honours who she is today — not who she was at 20."
+    },
+    {
+      "type": "text",
+      "id": "founder_name",
+      "label": "Founder name",
+      "default": "Ananya Krishnan"
+    },
+    {
+      "type": "text",
+      "id": "founder_role",
+      "label": "Founder role",
+      "default": "Founder & CEO, Elanvi"
+    },
+    {
+      "type": "textarea",
+      "id": "founder_bio",
+      "label": "Short bio",
+      "default": "With a background in biochemistry and a lifelong passion for Ayurveda, Ananya bridges two worlds most brands treat as separate."
+    },
+    {
+      "type": "header",
+      "content": "7 — Core Values"
     },
     {
       "type": "text",
       "id": "values_eyebrow",
-      "label": "Values eyebrow",
+      "label": "Eyebrow",
       "default": "What we stand for"
     },
     {
       "type": "text",
       "id": "values_heading",
-      "label": "Values heading",
+      "label": "Heading",
       "default": "Our Core Values"
     },
     {
@@ -641,8 +1218,8 @@
     {
       "type": "textarea",
       "id": "val_1_body",
-      "label": "Value 1 description",
-      "default": "Dermatologically tested on Indian skin tones. Free from parabens, sulfates, and mineral oil."
+      "label": "Value 1 body",
+      "default": "Dermatologically tested on Indian skin tones. Free from parabens, sulfates, mineral oil, and artificial colourants."
     },
     {
       "type": "text",
@@ -653,7 +1230,7 @@
     {
       "type": "textarea",
       "id": "val_2_body",
-      "label": "Value 2 description",
+      "label": "Value 2 body",
       "default": "Recyclable packaging, ethically sourced botanicals, and carbon-conscious manufacturing."
     },
     {
@@ -665,7 +1242,7 @@
     {
       "type": "textarea",
       "id": "val_3_body",
-      "label": "Value 3 description",
+      "label": "Value 3 body",
       "default": "Built by women, for women. We celebrate the beauty of ageing gracefully."
     },
     {
@@ -677,41 +1254,93 @@
     {
       "type": "textarea",
       "id": "val_4_body",
-      "label": "Value 4 description",
+      "label": "Value 4 body",
       "default": "Full ingredient transparency on every product. No hidden chemicals. No misleading claims."
     },
     {
       "type": "header",
-      "content": "CTA Strip"
+      "content": "8 — Certifications Strip"
+    },
+    {
+      "type": "text",
+      "id": "certs_label",
+      "label": "Label text",
+      "default": "Our Commitments"
+    },
+    {
+      "type": "text",
+      "id": "cert_1",
+      "label": "Badge 1",
+      "default": "Dermatologically Tested"
+    },
+    {
+      "type": "text",
+      "id": "cert_2",
+      "label": "Badge 2",
+      "default": "Cruelty-Free"
+    },
+    {
+      "type": "text",
+      "id": "cert_3",
+      "label": "Badge 3",
+      "default": "Eco-Conscious Packaging"
+    },
+    {
+      "type": "text",
+      "id": "cert_4",
+      "label": "Badge 4",
+      "default": "India-Made"
+    },
+    {
+      "type": "text",
+      "id": "cert_5",
+      "label": "Badge 5",
+      "default": "Women-Led Brand"
+    },
+    {
+      "type": "text",
+      "id": "cert_6",
+      "label": "Badge 6",
+      "default": "Paraben-Free Formula"
+    },
+    {
+      "type": "header",
+      "content": "9 — CTA Strip"
+    },
+    {
+      "type": "text",
+      "id": "cta_eyebrow",
+      "label": "Eyebrow",
+      "default": "Begin Your Ritual"
     },
     {
       "type": "text",
       "id": "cta_heading",
-      "label": "CTA heading",
-      "default": "Ready to begin your ritual?"
+      "label": "Heading",
+      "default": "Ready to experience the Elanvi difference?"
     },
     {
       "type": "textarea",
       "id": "cta_sub",
-      "label": "CTA subtext",
+      "label": "Subtext",
       "default": "Join over 50,000 women who have made Elanvi part of their daily self-care practice."
     },
     {
       "type": "text",
       "id": "cta_btn_1",
-      "label": "Primary button text",
+      "label": "Button 1 label",
       "default": "Shop Now"
     },
     {
       "type": "text",
       "id": "cta_btn_2",
-      "label": "Secondary button text",
+      "label": "Button 2 label",
       "default": "Contact Us"
     }
   ],
   "presets": [
     {
-      "name": "Elanvi — About Us"
+      "name": "About Page"
     }
   ]
 }
